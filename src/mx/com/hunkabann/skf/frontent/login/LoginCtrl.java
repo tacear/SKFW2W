@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.io.Serializable;
 import java.io.StringReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -13,49 +12,29 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
+import java.util.Map;
 
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.HttpSessionListener;
 
-import main.java.skf.client.CatalogoBase;
-import main.java.skf.client.Response;
-import main.java.skf.client.client;
 import mx.com.hunkabann.skf.backend.UsuarioService;
-import mx.com.hunkabann.skf.frontent.util.ComboFactoryModelItemRenderer;
 import mx.com.hunkabann.skf.frontent.util.FDDateFormat;
 import mx.com.hunkabann.skf.frontent.util.GFCBaseCtrl;
-import mx.com.hunkabann.skf.frontent.util.GFCBaseListCtrl;
 import mx.com.hunkabann.skf.frontent.util.MultiLineMessageBox;
-import mx.com.hunkabann.skf.frontent.util.WindowBaseCtrl;
-//import mx.com.hunkabann.skf.mapeo.TbCorporativo;
 
 import org.apache.log4j.Logger;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.SuspendNotAllowedException;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.http.SimpleSession;
-import org.zkoss.zul.Button;
 import org.zkoss.zul.Hbox;
 import org.zkoss.zul.Image;
 import org.zkoss.zul.Label;
-import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
-import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
-
-import com.google.gson.Gson;
-
-import java.util.Map;
 
 
 public class LoginCtrl extends GFCBaseCtrl {
@@ -449,125 +428,125 @@ public class LoginCtrl extends GFCBaseCtrl {
 				
 				
 				
-					BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream(), "utf-8"));
-					StringBuilder response = new StringBuilder();
-					String responseLine = null;
-					while ((responseLine = br.readLine()) != null) {
-						response.append(responseLine.trim());
-					}
-					System.out.println(response.toString());
-
-					Gson g = new Gson();                                             
-					                                                                 
-					Response objResponse = g.fromJson(response.toString(), Response.class);
-					if (!objResponse.success) {
-						 System.out.println("información obtenida con Gson");
-						 System.out.println(objResponse.message);
-						 MultiLineMessageBox.show(objResponse.message, "Error", MultiLineMessageBox.OK, "ERROR", true);
-						 return objResponse.message;
-						 }
-					else {
-					System.out.println("informacón obtenida con Gson");
-					System.out.println(objResponse.data.name);
-					label_User.setVisible(true);
-					
-					String Empleado = "Empleado: "+ objResponse.data.name.toUpperCase() +" / ROL: " +objResponse.data.perfil.descripcion;
-					label_User.setValue(Empleado);
-					session.setAttribute("Empleado",Empleado);
-					
-					System.out.println("*****roles");
-					Iterator itr=objResponse.data.roles.iterator();
-
-	                while(itr.hasNext()){
-
-	                        Object e = itr.next();
-
-	                        CatalogoBase s=(CatalogoBase)e;
-
-	                        System.out.println("Valor de Id: " + s.id);
-
-	                        System.out.println("Valor Descripción: " + s.descripcion);
-	                        
-	                        
-	                        hbox_Salir.setVisible(true);
-							
-							
-							
-							
-							
-	                        
-	                           if(s.descripcion.equals("ORDEN MANUFACTURA")){
-	                        	   hbox_OrdenManu.setVisible(true);
-		                       }
-		                       if(s.descripcion.equals("TRAZABILIDAD")){
-		                    	   hbox_Trazabilidad.setVisible(true);               	   
-							   }
-		                       if(s.descripcion.equals("REPORTES")){
-		                    	   hbox_Reporte.setVisible(true); 
-		                       }
-		                       if(s.descripcion.equals("OPERACION")){
-		                    	   hbox_Operacion.setVisible(true);
-		                       }
-		                       if(s.descripcion.equals("ENTREGA RECEPCION")){
-		                    	   hbox_EntregaRecepcion.setVisible(true);
-		                       }
-		                       
-		                       hbox_Salir.setVisible(true);
-
-	                }
-					
-	                System.out.println("*****perfil");
-					System.out.println(objResponse.data.perfil.id);
-					System.out.println(objResponse.data.perfil.descripcion);
-					}
-					System.out.println("información obtenida con Json");
-//					System.out.println(ExtractResponse(response.toString()));
-					
-					Res =response.toString();
-				                        
-//					return ExtractResponse(response.toString()).toString();
-					
-//					if(Usuario.equals("GPCarbajal")){
-//						label_User.setVisible(true);
-//						label_User.setValue("Empleado: "+ "Gerardo Perez Carbajal");
-//						
-//						hbox_Salir.setVisible(true);
-//						hbox_OrdenManu.setVisible(true);
-//						hbox_EntregaRecepcion.setVisible(true);
-//						hbox_Operacion.setVisible(true);
-//						hbox_Reporte.setVisible(true);
-//						hbox_Trazabilidad.setVisible(true);
+//					BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream(), "utf-8"));
+//					StringBuilder response = new StringBuilder();
+//					String responseLine = null;
+//					while ((responseLine = br.readLine()) != null) {
+//						response.append(responseLine.trim());
 //					}
-//					if(Usuario.equals("IDBarcenas")){
-//						label_User.setVisible(true);
-//						label_User.setValue("Empleado: "+ "Ivan Daniel Barcenas Gomez");
-//						
-//						hbox_Salir.setVisible(true);
-//						hbox_OrdenManu.setVisible(false);
-//						hbox_EntregaRecepcion.setVisible(true);
-//						hbox_Operacion.setVisible(true);
-//						hbox_Reporte.setVisible(false);
-//						hbox_Trazabilidad.setVisible(false);
+//					System.out.println(response.toString());
+//
+//					Gson g = new Gson();                                             
+//					                                                                 
+//					Response objResponse = g.fromJson(response.toString(), Response.class);
+//					if (!objResponse.success) {
+//						 System.out.println("información obtenida con Gson");
+//						 System.out.println(objResponse.message);
+//						 MultiLineMessageBox.show(objResponse.message, "Error", MultiLineMessageBox.OK, "ERROR", true);
+//						 return objResponse.message;
+//						 }
+//					else {
+//					System.out.println("informacón obtenida con Gson");
+//					System.out.println(objResponse.data.name);
+//					label_User.setVisible(true);
+//					
+//					String Empleado = "Empleado: "+ objResponse.data.name.toUpperCase() +" / ROL: " +objResponse.data.perfil.descripcion;
+//					label_User.setValue(Empleado);
+//					session.setAttribute("Empleado",Empleado);
+//					
+//					System.out.println("*****roles");
+//					Iterator itr=objResponse.data.roles.iterator();
+//
+//	                while(itr.hasNext()){
+//
+//	                        Object e = itr.next();
+//
+//	                        CatalogoBase s=(CatalogoBase)e;
+//
+//	                        System.out.println("Valor de Id: " + s.id);
+//
+//	                        System.out.println("Valor Descripción: " + s.descripcion);
+//	                        
+//	                        
+//	                        hbox_Salir.setVisible(true);
+//							
+//							
+//							
+//							
+//							
+//	                        
+//	                           if(s.descripcion.equals("ORDEN MANUFACTURA")){
+//	                        	   hbox_OrdenManu.setVisible(true);
+//		                       }
+//		                       if(s.descripcion.equals("TRAZABILIDAD")){
+//		                    	   hbox_Trazabilidad.setVisible(true);               	   
+//							   }
+//		                       if(s.descripcion.equals("REPORTES")){
+//		                    	   hbox_Reporte.setVisible(true); 
+//		                       }
+//		                       if(s.descripcion.equals("OPERACION")){
+//		                    	   hbox_Operacion.setVisible(true);
+//		                       }
+//		                       if(s.descripcion.equals("ENTREGA RECEPCION")){
+//		                    	   hbox_EntregaRecepcion.setVisible(true);
+//		                       }
+//		                       
+//		                       hbox_Salir.setVisible(true);
+//
+//	                }
+//					
+//	                System.out.println("*****perfil");
+//					System.out.println(objResponse.data.perfil.id);
+//					System.out.println(objResponse.data.perfil.descripcion);
 //					}
-//					if(Usuario.equals("VAOrtega")){
-//						label_User.setVisible(true);
-//						label_User.setValue("Empleado: "+ "Victor Alfonso Alfaro Ortega");
-//						
-//						hbox_Salir.setVisible(true);
-//						hbox_OrdenManu.setVisible(true);
-//						hbox_EntregaRecepcion.setVisible(false);
-//						hbox_Operacion.setVisible(false);
-//						hbox_Reporte.setVisible(true);
-//						hbox_Trazabilidad.setVisible(false);
-//					}
-					
-					
-					
-					
-					
-					
-//					Sesion_User =  ((SecurityContext)session.getAttribute("SPRING_SECURITY_CONTEXT")).getAuthentication().getName();
-					 session.setAttribute("SesionesSKF",Usuario);
+//					System.out.println("información obtenida con Json");
+////					System.out.println(ExtractResponse(response.toString()));
+//					
+//					Res =response.toString();
+//				                        
+////					return ExtractResponse(response.toString()).toString();
+//					
+////					if(Usuario.equals("GPCarbajal")){
+////						label_User.setVisible(true);
+////						label_User.setValue("Empleado: "+ "Gerardo Perez Carbajal");
+////						
+////						hbox_Salir.setVisible(true);
+////						hbox_OrdenManu.setVisible(true);
+////						hbox_EntregaRecepcion.setVisible(true);
+////						hbox_Operacion.setVisible(true);
+////						hbox_Reporte.setVisible(true);
+////						hbox_Trazabilidad.setVisible(true);
+////					}
+////					if(Usuario.equals("IDBarcenas")){
+////						label_User.setVisible(true);
+////						label_User.setValue("Empleado: "+ "Ivan Daniel Barcenas Gomez");
+////						
+////						hbox_Salir.setVisible(true);
+////						hbox_OrdenManu.setVisible(false);
+////						hbox_EntregaRecepcion.setVisible(true);
+////						hbox_Operacion.setVisible(true);
+////						hbox_Reporte.setVisible(false);
+////						hbox_Trazabilidad.setVisible(false);
+////					}
+////					if(Usuario.equals("VAOrtega")){
+////						label_User.setVisible(true);
+////						label_User.setValue("Empleado: "+ "Victor Alfonso Alfaro Ortega");
+////						
+////						hbox_Salir.setVisible(true);
+////						hbox_OrdenManu.setVisible(true);
+////						hbox_EntregaRecepcion.setVisible(false);
+////						hbox_Operacion.setVisible(false);
+////						hbox_Reporte.setVisible(true);
+////						hbox_Trazabilidad.setVisible(false);
+////					}
+//					
+//					
+//					
+//					
+//					
+//					
+////					Sesion_User =  ((SecurityContext)session.getAttribute("SPRING_SECURITY_CONTEXT")).getAuthentication().getName();
+//					 session.setAttribute("SesionesSKF",Usuario);
 					 
 				
 			} else {

@@ -2,9 +2,7 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/javax.json-1.1.4.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/DeTecno.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/Filters.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/Ws_Consulta_Estado.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/gson-2.8.2.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/activation.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/aopalliance-1.0.jar"/>
@@ -112,7 +110,6 @@
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/spring-security-config-3.0.3.RELEASE.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/spring-security-core-3.0.3.RELEASE.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/spring-security-ldap-3.0.3.RELEASE.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/WsClient.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/spring-security-openid-3.0.3.RELEASE.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/spring-security-taglibs-3.0.3.RELEASE.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/spring-security-web-3.0.3.RELEASE.jar"/>

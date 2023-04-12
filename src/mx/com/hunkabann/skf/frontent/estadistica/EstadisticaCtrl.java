@@ -1,39 +1,23 @@
 package mx.com.hunkabann.skf.frontent.estadistica;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.StringReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
 
-
-import javax.json.Json;
-//import javax.json.JsonObject;
-//import javax.json.JsonReader;
 import javax.servlet.http.HttpSession;
 
-import main.java.skf.client.CatalogoBase;
-import main.java.skf.client.Response;
 import mx.com.hunkabann.skf.backend.UsuarioService;
 import mx.com.hunkabann.skf.frontent.estadistica.model.PieSemiCircleData;
 import mx.com.hunkabann.skf.frontent.util.FDDateFormat;
 import mx.com.hunkabann.skf.frontent.util.GFCBaseCtrl;
-import mx.com.hunkabann.skf.frontent.util.MultiLineMessageBox;
 
 import org.apache.log4j.Logger;
 import org.zkoss.chart.Charts;
 import org.zkoss.chart.Color;
 import org.zkoss.chart.Title;
-//import org.zkoss.chart.Series;
 import org.zkoss.chart.plotOptions.DataLabels;
 import org.zkoss.chart.plotOptions.PiePlotOptions;
 import org.zkoss.zk.ui.Executions;
@@ -46,8 +30,6 @@ import org.zkoss.zul.Label;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
-
-import com.google.gson.Gson;
 
 
 public class EstadisticaCtrl extends GFCBaseCtrl {
