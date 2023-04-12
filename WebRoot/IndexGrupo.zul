@@ -1,0 +1,13 @@
+<zk>
+	<groupbox id="gb" mold="3d" width="300px">
+	  <caption image="/img/Centigrade-Widget-Icons/FileDrawer-16x16.png" label="Enable Backups"/>
+	  <hbox>
+	    <label value="Directory:"/>
+	    <textbox/>
+	  </hbox>
+	  <checkbox label="Compress archived files"/>
+	</groupbox>
+	<checkbox label="Use 3d groupbox" checked="true" if="true"
+		onCheck='gb.mold=self.checked? "3d": "default"'/>
+</zk>
+		

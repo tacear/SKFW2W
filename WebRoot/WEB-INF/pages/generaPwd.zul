@@ -1,0 +1,50 @@
+<?page title="Genera Password"?>
+
+<zk>
+	<window apply="mx.com.hunkabann.skf.frontent.login.GeneraPwdCtrl" id="generaPwdWindow" width="280px" 
+		position="center,center" action="show: slideDown;hide: slideUp" closable="true" border="none">
+		<panel title="Genera nueva contraseña" height="180px">
+			<panelchildren>
+				<vbox>
+					<space />
+					
+					<grid>
+						<columns sizable="true">
+					            <column align="right" />
+					            <column align="left" />
+						</columns>
+						<rows>
+							<row>
+								<label value = "Usuario:" />
+								<textbox id = "txUsuario"  width="200px"  />
+							</row>
+							<row>
+								<label value = "email:" />
+								<textbox id = "txEmail"  width="200px"  type="password"/>
+							</row>
+							<!--row>
+								<label value = "contraseña nueva:" />
+								<textbox id = "txNewPwd"  width="200px" type="password" />
+							</row>
+							<row>
+						<label value = "reteclee contraseña nueva:" />
+						<textbox id = "txNewPwdAgain"  width="200px" type="password" />
+							</row-->
+						</rows>
+					</grid>
+				
+					
+					<space />
+					
+					<hbox>
+						<space /><space /><space /><space /><space />
+						<button label = "Aceptar" id = "btnAceptar" />
+						<space />
+						<button label = "Cancelar"  id = "btnCancelar" />
+					</hbox>
+			
+				</vbox>
+			</panelchildren>
+		</panel>
+	</window>
+</zk>

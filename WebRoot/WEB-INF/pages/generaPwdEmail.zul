@@ -1,0 +1,30 @@
+<?page title="Genera Password"?>
+
+<zk>
+	<window apply="mx.com.hunkabann.skf.frontent.login.SendMailCtrl" id="sendMailWindow" width="340px" 
+		position="center,center" action="show: slideDown;hide: slideUp" closable="true" border="none">
+		<panel title="Correo al que se envía la nueva contraseña" height="140px">
+			<panelchildren>
+				<vbox>
+					<space />
+				
+					<hbox>
+						<space /><space /><space />
+						<label value = "correo:" />
+						<textbox id = "txEmail"  width="200px"  constraint="no empty,/.+@.+\.[a-z]+/: Formato de dirección de correo electónico no válido"/>
+					</hbox>
+					
+					<space />
+					
+					<hbox>
+						<space /><space /><space /><space /><space /><space />
+						<button label = "Aceptar" id = "btnAceptar" />
+						<space />
+						<button label = "Cancelar"  id = "btnCancelar" />
+					</hbox>
+			
+				</vbox>
+			</panelchildren>
+		</panel>
+	</window>
+</zk>

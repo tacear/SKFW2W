@@ -1,0 +1,4 @@
+<window id="EntregaRecepListWindow" use="mx.com.hunkabann.skf.frontent.estadistica.EstadisticaCtrl"  height="50%" width="80%" position="center,center">
+ 	<charts type="pie" id="chart"/>
+</window>
+

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<zk xmlns="http://www.zkoss.org/2005/zul"
+	xmlns:h="http://www.w3.org/1999/xhtml"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+
+	<window id="welcomeWindow" border="none" width="60%"
+		use="mx.com.hunkabann.skf.frontent.TermCond.TermCondCtrl"
+		height="100%" mode="modal" style="overflow: scroll;">
+
+		<style>
+			body { padding: 0 0; /* 0 padding on top and bottom and 0
+			padding on right and left */ }
+
+			.newsPanelTitle .z-panel-header { color: #FF0000; font:
+			bold; }
+
+		</style>
+			
+			
+			<tablelayout columns="1">
+    
+    <tablechildren >
+        <panel height="750px" width="906px" title="Carta de Aceptación de Politicas"  >
+            <panelchildren >
+                <html><![CDATA[
+                    <h4>ACEPTACIÓN DE LOS TÉRMINOS Y CONDICIONES</h4>
+                    <p>Al ingresar y utilizar este portal, el Proveedor está aceptando los Términos y Condiciones de Uso contenidos y declara expresamente su aceptación </p>
+                    <p>En caso de no aceptar en forma absoluta y completa los Términos y Condiciones de uso, el Usuario no podrá acceder al portal.</p>
+                    <ul>
+                        <li><strong>Asignación del número de Proveedor.</strong>  Se asignará un número de identificación (Clave de Proveedor) el cual deberá tener presente para cualquier trámite de entrega de mercancía, para aclaraciones de pago, etc.
+							<br><br>Es responsabilidad exclusiva del Proveedor mantener la confidencialidad de su clave de Proveedor y contraseña.
+						</li>
+                        <li><strong>Actualización de expediente. </strong>  En caso de algún cambio en su información de alta como: cambio de domicilio, cuenta bancaria, datos de contacto, razón social etc. favor de mandar su información al siguiente email 
+						</li>
+						<li><strong>Orden de compra.</strong>  Todas las órdenes de compra autorizadas le llegaran a su correo electrónico o las podrá consultar en este portal, para que usted pueda realizar las facturas correspondientes.
+						</li>
+						<li><strong>Requisitos de facturación:  </strong>  La factura deberá contener los siguientes requisitos:
+							<ul>
+		                        <li>Datos del emisor: Razón Social, domicilio Fiscal y Registro Federal de Contribuyentes.</li>
+		                        <li>Número de factura. </li>
+		                        <li>Precio unitario de cada artículo, </li>
+		                        <li>Traslado de IVA cuando corresponda </li>
+		                        <li>Impuestos retenidos cuando corresponda</li>
+		                        <li>Estar facturada a nombre de algunas de las siguientes Compañías según sea el caso: Rolex de México S.A de C, V. o Servicios especializados RM SA DE CV, con domicilio Fiscal para ambas: Lago Zurich 245 Torre Frisco piso 5- 501, Colonia Ampliación Granada, Alcaldía Miguel Hidalgo C.P. 11529, Cuida de México</li>
+		                        <li>Forma de pago:99 por definir</li>
+		                        <li>Método de pago: PPD Pago en parcialidades o diferido</li>
+		                        <li>Uso del CFDI: De acuerdo a lo convenido con su contacto</li>
+	                   		 </ul>
+						</li>
+						<li><strong>Ingreso de facturas: </strong>  Todas las facturas que cuenten con una orden de compra, usted deberá ingresarlas a través de esta plataforma
+						</li>
+						<li><strong>Pago de facturas: </strong>  Nuestra compañía tiene la política de pagar a nuestros proveedores a través de Transferencia Electrónica de Fondos, permitiendo abonar a su cuenta de cheques previamente proporcionada por Usted a nuestro contacto. 
+						</li>
+						<li><strong>Crédito: </strong>  Es importante recordarle que el plazo para el pago de sus facturas es de acuerdo al crédito otorgado, que comienza a partir de la fecha en que nuestro contacto autorice el pago de la factura.
+						</li>
+						<li><strong>Día de pago: </strong>  Nuestra compañía realiza el pago de sus proveedores el día jueves.
+						</li>
+						<li><strong>Consulta de pagos. </strong>  El Proveedor podrá ver en esta plataforma, el día en que se le realizo el pago, la cantidad, número de factura, banco emisor y los últimos cuatro dígitos de la cuenta bancaria con la que se realizó la transferencia.
+						</li>
+						<li><strong>Recibo electrónico de pago. </strong>  Es responsabilidad del proveedor de ingresar a esta plataforma los REP a más tardar el día 11 del seguimiento mes en que se realizó su pago. En caso de no contar con este CFDI, en la fecha establecida, no podrá ingresar al portal ninguna otra factura.
+						</li>
+						
+					    
+                    </ul>
+                ]]></html>
+            </panelchildren>
+            
+         </panel>
+         
+    </tablechildren>
+   <tablechildren >
+        <panel height="40px">
+            <panelchildren>
+                <grid style="border: none;">
+							<columns sizable="true" height="20px" style="border: none;">
+		
+								<column width="100%" align="center" style="border: none;"/>
+							
+							</columns>
+							<rows style="border: none;">
+									<row style="border: none;">
+									
+										<checkbox id="usrEnabled" label="Aceptas los Terminos y Condiciones"/>
+									
+									</row>
+									
+									
+								</rows>
+						</grid>
+            </panelchildren>
+        </panel>
+    </tablechildren>
+   
+</tablelayout>
+
+
+
+
+	</window>
+</zk>
+

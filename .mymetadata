@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="SKFW2W"
+  id="myeclipse.1677088837786"
+  context-root="/SKFW2W"
+  j2ee-spec="5.0"
+  archive="SKFW2W.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+

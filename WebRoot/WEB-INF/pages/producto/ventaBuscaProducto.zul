@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+
+<zk xmlns="http://www.zkoss.org/2005/zul"
+	xmlns:h="http://www.w3.org/1999/xhtml"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+
+	<window id="ventaBuscaProductoListWindow"
+		border="none"
+		use="mx.com.hunkabann.skf.frontent.producto.VentaBuscaProductoCtrl" closable="true" width="920px"
+		sizable="false" >
+
+		<style>
+			body { padding: 0 0; /* 0 padding on top and bottom and 0
+			padding on right and left */ }
+		</style>
+
+		<panel title="BUSCA PRODUCTO" height="500px" >
+			<panelchildren>
+
+				<hbox width="100%">
+					<panel >
+						<panelchildren>
+							<grid fixedLayout="true"	style="border:0px" width="100%">
+								<columns>
+									<column width="9%" />
+									<column width="15%" />
+									<column width="8%" />
+									<column width="13%" />
+									<column width="12%" />
+								</columns>
+								<rows>
+									<row>
+										<label value="Descripci�n"/>
+										<textbox id="tb_DescripcionProducto" width="95%"/>
+
+										<label value="Clave"/>
+										<textbox id="tb_CveProducto"  width="95%"/>
+
+										<button id="button_ExitProducto"
+											image="/images/icons/stop.gif"
+											label="Salir"
+											tooltiptext="Cerrar" />
+									</row>
+
+									<row>
+										<label value="L�nea Producto"/>
+										<listbox id="lb_LineaProducto" width="90%" mold="select" rows="1"/>
+										<space></space>
+										<space></space>
+
+										<button id="button_SearchProducto"
+											image="/images/icons/search.gif"
+											label="Buscar"
+											tooltiptext="Buscar" />
+									</row>
+								</rows>
+							</grid>
+						</panelchildren>
+					</panel>
+				</hbox>
+
+				<borderlayout id="borderLayout_Producto">
+					<north border="none" height="26px">
+						<paging id="paging_Producto" />
+					</north>
+
+					<center border="normal" autoscroll="true">
+						<listbox id="listBoxProducto" vflex="true"  fixedLayout="true" width="99.5%"
+							tooltiptext="Hacer Doble Click para Seleccionar" height="99%"
+							multiple="false">
+							<listhead sizable="true">
+								<listheader id="listheader_ClaveProducto"
+									sort="none" width="20%"
+									label="Clave" />
+								<listheader id="listheader_DecripcionProducto"
+									sort="none" width="55%"
+									label="Descripci�n" />
+								<listheader id="listheader_LineaProducto"
+									sort="none" width="25%"
+									label="Linea" />
+							</listhead>
+						</listbox>
+					</center>
+
+					<south border="none">
+						<separator />
+					</south>
+
+				</borderlayout>
+			</panelchildren>
+		</panel>
+	</window>
+</zk>
+
+

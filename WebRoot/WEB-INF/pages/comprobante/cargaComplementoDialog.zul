@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+
+<zk xmlns="http://www.zkoss.org/2005/zul"
+	xmlns:h="http://www.w3.org/1999/xhtml"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+
+
+	<window id="cargaComplementoDialogWindow"
+		border="none"
+		use="mx.com.hunkabann.skf.frontent.comprobante.CargaComplementoDialogCtrl" closable="true" width="80%" mode="modal"
+		sizable="false" style="border: none; background-color: #EEECE7;">
+
+		<style>
+			body { padding: 0 0; /* 0 padding on top and bottom and 0
+			padding on right and left */ }
+
+			.pageWindowTitle .z-window-embedded-header {color: #FF0000;
+			font-weight:bold; }
+
+		</style>
+		<div style="background-image: url('images/Img_Rolex/grises/001.png'); border:none; background-size:100% 100%; width: 100%; height: 510px; background-color: #EEECE7;">
+			<hbox>
+				<panel width="92%" height="300px" style="margin-top:50px; margin-left:40px; background-color: #EEECE7; border: none;">
+					<panelchildren style="border: none; background-color: #EEECE7;">
+					<grid style="border: none; background-color: #EEECE7;">
+						<columns sizable="true" height="20px" style="border: none; background-color: #EEECE7;">
+							<column width="100%" align="center" style="border: none; background-color: #EEECE7;"/>
+							</columns>
+							<rows style="border: none; background-color: #EEECE7;">
+								<row style="border: none; background-color: #EEECE7;">
+								<label id="label_Nombre_Titulo"
+									value="Carga Complemento de Pago" style="color:black; font-size:25px; background-color: #EEECE7;"/>
+								</row>
+							</rows>
+						</grid>
+					<grid style="border: none; background-color: #EEECE7;" >
+							<columns sizable="true" height="20px" style="border: none;">
+								<column width="50%" align="left" style="border: none;"/>
+								<column width="50%" align="left" style="border: none;" />
+							</columns>
+							<rows style="border: none; background-color: #EEECE7;">
+									<row style="border: none; background-color: #EEECE7;">
+										<image id="btn_Cerrar" src="/images/Img_Rolex/botones/Cerrar/cerrarpixel.png" width="71px" height="30px" />			
+										<image id="btn_CargarComplemento" src="/images/Img_Rolex/botones/Cargar CRP/carga_crp.png" width="102px" height="30px" />
+									</row>
+								</rows>
+						</grid>
+		
+						<grid fixedLayout="true" style="border: none; background-color: #EEECE7;" width="100%">
+							<columns width="100%" style="border: none; background-color: #EEECE7;">
+								<column width="40%" style="border: none;"/>
+								<column width="40%" style="border: none;"/>
+								<column width="20%" style="border: none;"/>
+							</columns>
+							<rows>
+								<row style="border: none; background-color: #EEECE7;">
+									<label
+										id="label_Proveedor"
+										value="Proveedor" />
+									<textbox
+										id="txt_Proveedor" width="70%" />	
+									<space/>																        
+								</row>
+								
+								<row style="border: none; background-color: #EEECE7;">
+									<label
+										id="label_Fecha"
+										value="Fecha de Pago" style="color:red"/>
+									<textbox id="txt_FechaPago" width="70%" />
+									<space/>
+								</row>
+								
+	
+								
+								<row style="border: none; background-color: #EEECE7;">
+									<label
+										id="label_UserDialog_XML"
+										value="Subir XML" />
+									<textbox
+										id="txt_xml" width="70%" />
+										<button id="bt_upload_xml" label="Seleccionar XML"/>  
+								</row>	
+								
+								<row style="border: none; background-color: #EEECE7;">
+									<label
+										id="label_UserDialog_PDF"
+										value="Subir PDF" />
+									<textbox
+										id="txt_pdf" width="70%" />
+										<button id="bt_upload_pdf" label="Seleccionar PDF"/>  
+								</row>						
+							</rows>			
+						</grid>
+						<div height="30px" width="100%"></div>	
+							<textbox id="listBoxErrores" width="95%" rows="10" style="overflow:auto;" />									
+					</panelchildren>
+				</panel>				
+			</hbox>
+		</div>
+	</window>
+</zk>
+			

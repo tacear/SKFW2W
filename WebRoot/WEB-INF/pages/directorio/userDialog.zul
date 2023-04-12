@@ -1,0 +1,442 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+
+<zk xmlns="http://www.zkoss.org/2005/zul"
+	xmlns:h="http://www.w3.org/1999/xhtml"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+
+
+	<window id="userDialogWindow"
+		border="none"
+		use="mx.com.hunkabann.skf.frontent.directorio.UsuarioDialogCtrl" closable="true" width="600px" mode="modal"
+		sizable="false" style="border: none;">
+
+		<style>
+			body { padding: 0 0; /* 0 padding on top and bottom and 0
+			padding on right and left */ }
+
+			.pageWindowTitle .z-window-embedded-header {color: #FF0000;
+			font-weight:bold; }
+
+		</style>
+		
+		<div>
+		<hbox >
+		<panel width="92%" height="250px" style="margin-top:50px;  margin-left:40px; border: none;">
+		
+						<panelchildren style="border: none;">
+						<grid style="border: none;">
+							<columns sizable="true" height="20px" style="border: none;">
+		
+								<column width="70%" align="right" style="border: none;"/>
+								<!-- column width="30%" align="right" />
+								<column width="20%" align="right" />
+								<column align="right" width="30%" style="border: none;">		
+								</column>-->
+								
+								
+								
+							</columns>
+							<rows style="border: none;">
+									<row style="border: none;">
+									
+							<!--		<image id="button_UserList_NewUser" src="/images/Img_Rolex/botones/Nuevo/NUEVO 001.png" width="130px" height="40px" /> -->
+									
+										<!--image id="btn_Guardar" src="/images/Img_Rolex/botones/Guardar/guardarpixel.png" width="71px" height="30px" /-->
+										<button id="btn_Guardar" height="20"
+											label="Guardar"
+											tooltiptext="Guarda registro" />
+										<!--image id="btn_Modificar" src="/images/Img_Rolex/botones/modificar/modificar.png" width="71px" height="30px" /-->
+										<button id="btn_Modificar" height="20"
+											label="Modificar"
+											tooltiptext="Modificar" />
+										<!--image id="btn_Actualizar" src="/images/Img_Rolex/botones/actualizar/Actualizar.png" width="71px" height="30px" /-->
+										<button id="btn_Actualizar" height="20"
+											label="Actualizar"
+											tooltiptext="Actualiza el Registro" />
+										<!--image id="btn_Cerrar" src="/images/Img_Rolex/botones/Cerrar/cerrarpixel.png" width="71px" height="30px" /-->
+										<button id="btn_Cerrar" height="20"
+											label="Cerrar"
+											tooltiptext="Cerrar" />
+										
+<!--										<button id="btn_Guardar" height="20"
+											label="Guardar"
+											tooltiptext="Guarda registro" />
+										<button id="btn_Modificar" height="20"
+											label="Modificar"
+											tooltiptext="Modificar" />
+										<button id="btn_Actualizar" height="20"
+											label="Actualizar"
+											tooltiptext="Actualiza el Registro" />
+										<button id="btn_Cerrar" height="20"
+											label="Cerrar"
+											tooltiptext="Cerrar" /> -->
+								
+									</row>
+								</rows>
+						</grid>
+						
+							<grid  fixedLayout="true" style="border: none;" width="100%">
+								<columns width="100%">
+							<column width="23%"/>
+							<column width="66%" align="left" />
+							<column width="13%" align="rigth" />
+							<column width="13%" align="rigth" />
+							
+						</columns>
+						<rows >
+																<row style="border: none;">
+																	<label
+																		id="label_UserDialog_usrLoginname"
+																		value="Login" />
+																	<textbox
+																		id="txt_UserName" width="95%" />
+																		<space></space>
+																		<space></space>
+																</row>
+																
+																<row style="border: none;" visible="false">
+																	<label
+																		id="label_ClienteArea"
+																		value="Area" style="color:red"/>
+																	<listbox id="lb_ClienteArea" mold="select"/>
+																	<space></space>
+																	<space></space>	
+																	
+																</row>
+																<row style="border: none;">
+																	<label
+																		id="label_ClienteRol"
+																		value="Rol" style="color:red"/>
+																		
+																	<listbox id="lb_ClienteRol" mold="select"/>
+																	<space></space>	
+																	<space></space>
+																</row>
+																
+																<row id="row_Persona" visible="false" style="border: none;">
+																	<label
+																		id="label_ClienteDialogTipoPersona"
+																		value="Tipo_Persona" style="color:red"/>
+																	<listbox id="lb_ClienteDialogTipoPersona" mold="select">
+																		<listitem value="-1" label="SELECCIONE"/>
+																		<listitem value="1" label="FISICA"/>
+																		<listitem value="2" label="MORAL"/>
+																	</listbox>
+																	<space></space>
+																	<space></space>
+																</row>
+																
+																
+																<!-- row>
+																	<label
+																		id="label_UserDialog_usrPassword"
+																		value="Password" style="color:red"/>
+																	<textbox
+																		id="txt_password" type="password" width="95%" />
+																</row> -->
+																<row id="row_nombre" style="border: none;">
+																	<label
+																		id="label_UserNombre"
+																		value="Nombre" />
+																	<textbox
+																		id="txt_nombre" width="95%" />
+																		<space></space>
+																		<space></space>
+																</row>
+																<row id="row_appaterno" style="border: none;">
+																	<label
+																		id="label_UserPaterno"
+																		value="Apellido Paterno" />
+																	<textbox
+																		id="txt_Ap_Paterno" width="95%" />
+																		<space></space>
+																		<space></space>
+																</row>
+																<row id="row_apMaterno" style="border: none;">
+																	<label
+																		id="label_UserMaterno"
+																		value="Apellido Materno" />
+																	<textbox
+																		id="txt_ApMaterno" width="95%" />
+																		<space></space>
+																		<space></space>
+																</row>
+																<row id="row_Razon" visible="false" style="border: none;">
+																	<label
+																		id="label_UserRzSocial"
+																		value="Razon Social" />
+																	<textbox
+																		id="txt_RazonSocial" width="95%" />
+																		<space></space>
+																		<space></space>
+																</row>
+																<row style="border: none;">
+																	<label
+																		id="label_UserDialog_usrFirstname"
+																		value="E-Mail" />
+																	<textbox
+																		id="txt_mail" width="95%" />
+																		<space></space>
+																		<space></space>
+																</row>
+																<row id="row_RFC" visible="false" style="border: none;">
+																	<label
+																		id="label_UserDialog_RFC"
+																		value="RFC" />
+																	<textbox
+																		id="txt_RFC" width="95%" />
+																		<space></space>
+																		<space></space>
+																</row>
+																<row id="row_Telefono" visible="false" style="border: none;">
+																	<label
+																		id="label_UserDialog_Tel"
+																		value="Telefono" />
+																	<textbox
+																		id="txt_Telefono" width="95%" />
+																		<space></space>
+																		<space></space>
+																</row>
+																<row id="row_NoSAP" visible="false" style="border: none;">
+																	<label
+																		id="label_UserDialog_SAP"
+																		value="No. SAP" />
+																	<textbox
+																		id="txt_SAP" width="95%" />
+																		<space></space>
+																		<space></space>
+																</row>
+																<row id="row_Credito" visible="false" style="border: none;">
+																	<label
+																		id="label_UserDialog_Credito"
+																		value="Credito" />
+																	<textbox
+																		id="txt_Credito" width="70%">
+																		
+																	</textbox>
+																	<label value="Dias" />
+																	<space></space>
+																</row>
+																<row id="row_ContactoInt" visible="false" style="border: none;">
+																	<label
+																		id="label_UserDialog_Contacto_Int"
+																		value="ContactoInterno" />
+																	<textbox
+																		id="txt_Contacto_Int" width="95%" />
+																	<space></space>
+																	<space></space>
+																</row>
+																<row id="row_Contacto" visible="false" style="border: none;">
+																	<label
+																		id="label_UserDialog_Contacto"
+																		value="Contacto Externo" />
+																	<textbox
+																		id="txt_Contacto" width="95%" />
+																	<space></space>
+																	<space></space>
+																</row>
+																<row id="row_Domicilio" visible="false" style="border: none;">
+																	<label
+																		id="label_UserDialog_Domicilio"
+																		value="Domicilio" />
+																	<textbox
+																		id="txt_Domicilio" width="95%" />
+																		<space></space>
+																		<space></space>
+																</row>
+																<row id="row_activo" style="border: none;">
+																	<label
+																		id="label_UserDialog_usrEnabled"
+																		value="Usuario Activo" />
+																	<checkbox
+																		id="usrEnabled" />
+																	 <button id="btn_ActivaProv" visible="false" height="20"
+																		label="Activar"
+																		tooltiptext="Activa Proveedor" />
+																	<space></space>
+																</row>
+																
+																<!--row id="row_ck_admin" visible="false" style="border: none;">
+																	<label
+																		id="label_UserDialog_Administrator"
+																		value="Administrador" />
+																	<checkbox
+																		id="check_admin" />
+																		<space></space>
+																		<space></space>
+																</row-->
+																<row id="row_ck_Autoriza" visible="false" style="border: none;">
+													                Autorizador:
+													                <radiogroup id="transmissionRadiogroup">
+													                    
+													                        <radio id="automaticRadio" label="Autorizador 1er. Nivel"
+													                            selected="false"/>
+													                        <radio id="manualRadio" label="Autorizador 2do. Nivel"
+													                            selected="false" />
+													                   
+													                </radiogroup>
+													                <space></space>
+													                <space></space>
+													            </row>
+													            
+													            <row id="row_ck_dfCorreo" visible="false" style="border: none;">
+																	<label
+																		id="label_UserDialog_dfCorreo"
+																		value="Activa Correo" />
+																	<checkbox
+																		id="check_dfCorreo" />
+																		<space></space>
+																		<space></space>
+																</row>
+													            <row id="row_actaCons" visible="false" style="border: none;">
+																	<label
+																		id="label_Acta_Consti"
+																		value="Acta Constitutiva" />
+																	<textbox
+																		id="txt_actaCons" width="95%" />
+																	<button id="btn_actaCons" height="20"
+																		label="Carga"
+																		tooltiptext="Carga Acta Constitutiva" />
+																	<button id="btn_download_actaCons" height="20"
+																		label="Descarga"
+																		tooltiptext="Descarga Acta Constitutiva" visible="false"/>
+																</row>
+																<row id="row_poderNota" visible="false" style="border: none;">
+																	<label
+																		id="label_poderNota"
+																		value="Poder Notarial" />
+																	<textbox
+																		id="txt_poderNota" width="95%" />
+																	<button id="btn_poderNota" height="20"
+																		label="Carga"
+																		tooltiptext="Carga Poder Notarial" />
+																	<button id="btn_download_poderNota" height="20"
+																		label="Descarga"
+																		tooltiptext="Descarga Poder Notarial" visible="false" />
+																</row>
+																<row id="row_INE" visible="false" style="border: none;">
+																	<label
+																		id="label_INE"
+																		value="INE" />
+																	<textbox
+																		id="txt_INE" width="95%" />
+																	<button id="btn_INE" height="20"
+																		label="Carga"
+																		tooltiptext="Carga INE" />
+																	<button id="btn_download_INE" height="20"
+																		label="Descarga"
+																		tooltiptext="Descarga INE"  visible="false"/>
+																</row>
+																<row id="row_CURP" visible="false" style="border: none;">
+																	<label
+																		id="label_CURP"
+																		value="CURP" />
+																	<textbox
+																		id="txt_CURP" width="95%" />
+																	<button id="btn_CURP" height="20"
+																		label="Carga"
+																		tooltiptext="Carga CURP" />
+																	<button id="btn_download_CURP" height="20"
+																		label="Descarga"
+																		tooltiptext="Descarga CURP"  visible="false"/>
+																</row>
+																<row id="row_ceduProf" visible="false" style="border: none;">
+																	<label
+																		id="label_ceduProf"
+																		value="Cedula Profecional" />
+																	<textbox
+																		id="txt_ceduProf" width="95%" />
+																	<button id="btn_ceduProf" height="20"
+																		label="Carga"
+																		tooltiptext="Carga Cedula Profecional" />
+																	<button id="btn_download_ceduProf" height="20"
+																		label="Descarga"
+																		tooltiptext="Descarga Cedula Profecional"  visible="false"/>
+																</row>
+																
+																<row id="row_constSituFis" visible="false" style="border: none;">
+																	<label
+																		id="label_constSituFis"
+																		value="Const. Situacion Fiscal" />
+																	<textbox
+																		id="txt_constSituFis" width="95%" />
+																	<button id="btn_constSituFis" height="20"
+																		label="Carga"
+																		tooltiptext="Carga Constalcia de Situacion Fiscal" />
+																	<button id="btn_download_constSituFis" height="20"
+																		label="Descarga"
+																		tooltiptext="Descarga Constalcia de Situacion Fiscal" visible="false" />
+																</row>
+																<row id="row_optCumpliSAT" visible="false" style="border: none;">
+																	<label
+																		id="label_optCumpliSAT"
+																		value="Opcion de Cumplimiento" />
+																	<textbox
+																		id="txt_optCumpliSAT" width="95%" />
+																	<button id="btn_optCumpliSAT" height="20"
+																		label="Carga"
+																		tooltiptext="Carga Opcion de Cumplimiento SAT" />
+																	<button id="btn_download_optCumpliSAT" height="20"
+																		label="Descarga"
+																		tooltiptext="Descarga Opcion de Cumplimiento SAT" visible="false" />
+																</row>
+																<row id="row_comproDomi" visible="false" style="border: none;">
+																	<label
+																		id="label_comproDomi"
+																		value="Comprobante de Domicilio" />
+																	<textbox
+																		id="txt_comproDomi" width="95%" />
+																	<button id="btn_comproDomi" height="20"
+																		label="Carga"
+																		tooltiptext="Carga Comprobante de Domicilio" />
+																	<button id="btn_download_comproDomi" height="20"
+																		label="Descarga"
+																		tooltiptext="Descarga Comprobante de Domicilio"  visible="false"/>
+																</row>
+																<row id="row_edoCuenta" visible="false" style="border: none;">
+																	<label
+																		id="label_edoCuenta"
+																		value="Estado de Cuenta" />
+																	<textbox
+																		id="txt_edoCuenta" width="95%" />
+																	<button id="btn_edoCuenta" height="20"
+																		label="Carga"
+																		tooltiptext="Carga Estado de Cuenta" />
+																	<button id="btn_download_edoCuenta" height="20"
+																		label="Descarga"
+																		tooltiptext="Descarga Estado de Cuenta"  visible="false"/>
+																</row>
+																<row id="row_fomatAltaAcre" visible="false" style="border: none;">
+																	<label
+																		id="label_fomatAltaAcre"
+																		value="Formato Alta Acredor" />
+																	<textbox
+																		id="txt_fomatAltaAcre" width="95%" />
+																	<button id="btn_fomatAltaAcre" height="20"
+																		label="Carga"
+																		tooltiptext="Carga Formato Alta Acredor" />
+																	<button id="btn_download_fomatAltaAcre" height="20"
+																		label="Descarga"
+																		tooltiptext="Descarga Formato Alta Acredor"  visible="false"/>
+																</row>
+		
+															</rows>
+							</grid>
+							
+							
+						</panelchildren>
+					</panel>	
+			
+			
+		</hbox>
+	</div>
+		
+		
+
+	</window>
+</zk>
+
+

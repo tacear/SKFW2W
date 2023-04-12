@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<zk xmlns="http://www.zkoss.org/2005/zul" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+	<window id="tipopermisoListWindow" use="mx.com.hunkabann.skf.frontent.catalogos.tipopermiso.TipoPermisoListCtrl" border="none" height="90%" width="80%" position="center,center">
+		<style>body { padding: 0 0; /* 0 padding on top and bottom and 0 padding on right and left */ }</style>
+		<borderlayout id="borderLayout_tipopermisoList" width="100%" height="90%">
+			<center border="none" autoscroll="true">
+				<div width="100%" height="65%">
+					<div>
+						<hbox>
+							<panel width="95%" height="85%" style="margin-top:10px; margin-left:30px;  border: none;">
+								<panelchildren style="border: none; ">
+									<grid style="border: none; ">
+										<columns sizable="true" height="20px" style="border: none; ">
+											<column width="100%" align="center" style="border: none; "/>
+										</columns>
+										<rows style="border: none; ">
+											<row style="border: none; ">
+												<label id="label_Nombre_Titulo" value="BUSQUEDA DEL TIPO DE PERMISO" style="color:black; font-size:20px; "/>
+											</row>
+										</rows>
+									</grid>
+									<grid style="border: none; ">
+										<columns sizable="true" height="20px" style="border: none; ">
+											<column width="50%" align="right" style="border: none; "/>
+											<column width="40.5%" align="right" style="border: none; "/>
+											<column width="9.5%" style="border: none; "/>
+											
+										</columns>
+										<rows style="border: none; ">
+											<row style="border: none; ">
+												
+												<space/>
+												
+												
+												<button id="btnClose" label=" SALIR "/>
+												
+												<space/>
+											</row>
+										</rows>
+									</grid>
+									<grid fixedLayout="true" style="border:0px" width="100%">
+										<columns width="100%">
+											<column width="5%"/>
+											<column width="13%" align="right"/>
+											<column width="15%"/>
+											<column width="13%" align="right"/>
+											<column width="15%"/>
+											<column width="10%" align="right"/>
+											<column width="15%" align="left"/>
+											<column width="14%" align="left"/>
+										</columns>
+										<rows>
+											<row height="30px" style="border: none; ">
+												<checkbox id="checkbox_tipopermiso_ShowAll" label="Todos" tooltiptext="Mostrar Todos"/>
+												<label id="label_UserList_Empleado" value="CLAVE"/>
+												<textbox id="tb_Clave" width="96%"/>
+												<label id="label_UserList_Nombre" value="DESCRIPCION"/>
+												<textbox id="tb_Descripcion" width="96%"/>
+												<space/>
+												<space/>
+												<button id="button_tipopermiso_Search" label="BUSCAR"/>
+												<space/>
+											</row>
+											
+											<row style="border: none; ">	
+													<space></space>		
+													<space></space>
+													<space></space>	
+													<space></space>
+													<space></space>		
+													<space></space>
+													<space></space>	
+													<space></space>	
+													
+											</row>
+										</rows>
+									</grid>
+								</panelchildren>
+							</panel>
+						</hbox>
+					</div>
+					<div height="95%">
+						<listbox id="listBox_tipopermiso" vflex="true" width="95%" tooltiptext="${c:l('listbox.tooltiptext')}" height="95%" multiple="false" style="margin-left:30px; overflow:auto;">
+							<listhead>
+								<listheader id="listheader_Clave" sort="none" width="15%" label="CLAVE" style="margin-top:30px; margin-left:30px;  font-size:15px;"/>
+								<listheader id="listheader_desc" sort="none" width="70%" label="DESCRIPCION" style="margin-top:30px; margin-left:30px;  font-size:15px;"/>
+								<listheader id="listheader_Estatus" sort="none" width="15%" label="ESTATUS" style="margin-top:30px; margin-left:30px;  font-size:15px;"/>
+							</listhead>
+						</listbox>
+						<div height="20px" width="95%">
+							<paging id="paging_tipopermiso" width="100%" style="margin-left:30px;  font-size:15px;"/>
+						</div>
+					</div>
+				</div>
+			</center>
+		</borderlayout>
+		<!-- value="Account &#10;&#13; none&#10;&#13; expired" width="85%" -->
+	</window>
+</zk>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cfdi:Comprobante xmlns:cfdi="http://www.sat.gob.mx/cfd/3" xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="3.3" Serie="FSATA" Folio="200219-000000180497" Fecha="2020-08-04T11:48:31" Sello="" FormaPago="99" NoCertificado="00000000000000000000" Certificado="" SubTotal="602.58" Moneda="MXN" TipoCambio="1" Total="699.00" TipoDeComprobante="I" MetodoPago="PPD" LugarExpedicion="54030" xsi:schemaLocation="http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv33.xsd http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/TimbreFiscalDigital/TimbreFiscalDigitalv11.xsd">
+
+   <cfdi:Emisor Rfc="AAA010101AAA" Nombre="AT&amp;T Comunicaciones Digitales, S de RL de CV" RegimenFiscal="601" />
+
+   <cfdi:Receptor Rfc="XAXX010101000" Nombre="DENTAL KARE SA DE CV" UsoCFDI="G03" />
+
+   <cfdi:Conceptos>
+
+      <cfdi:Concepto ClaveProdServ="83111603" Cantidad="1" ClaveUnidad="E48" Unidad="Servicio" Descripcion="ATT v2 Con Todo NEG 699" ValorUnitario="559.48" Importe="559.48">
+
+         <cfdi:Impuestos>
+
+            <cfdi:Traslados>
+
+               <cfdi:Traslado Base="559.48" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="89.52" />
+
+            </cfdi:Traslados>
+
+         </cfdi:Impuestos>
+
+      </cfdi:Concepto>
+
+      <cfdi:Concepto ClaveProdServ="83111603" Cantidad="1" ClaveUnidad="E48" Unidad="Servicio" Descripcion="ATT v2 Con Todo NEG 699" ValorUnitario="4.31" Importe="4.31">
+
+         <cfdi:Impuestos>
+
+            <cfdi:Traslados>
+
+               <cfdi:Traslado Base="4.31" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="0.69" />
+
+            </cfdi:Traslados>
+
+         </cfdi:Impuestos>
+
+      </cfdi:Concepto>
+
+      <cfdi:Concepto ClaveProdServ="83111603" Cantidad="1" ClaveUnidad="E48" Unidad="Servicio" Descripcion="ATT v2 Con Todo NEG 699" ValorUnitario="38.79" Importe="38.79">
+
+         <cfdi:Impuestos>
+
+            <cfdi:Traslados>
+
+               <cfdi:Traslado Base="38.79" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="6.21" />
+
+            </cfdi:Traslados>
+
+         </cfdi:Impuestos>
+
+      </cfdi:Concepto>
+
+   </cfdi:Conceptos>
+
+   <cfdi:Impuestos TotalImpuestosTrasladados="96.42">
+
+      <cfdi:Traslados>
+
+         <cfdi:Traslado Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="96.42" />
+
+      </cfdi:Traslados>
+
+   </cfdi:Impuestos>
+
+   <cfdi:Complemento>
+
+      </cfdi:Complemento>
+
+</cfdi:Comprobante>

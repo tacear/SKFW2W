@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<zk xmlns="http://www.zkoss.org/2005/zul" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+	<window id="ordenCompraDialogWindow" border="none" use="mx.com.hunkabann.skf.frontent.invProdTerm.InvProdTermDialogCtrl" closable="true" width="90%" sizable="false">
+		<style>
+			body { 
+				padding: 0 0; /* 0 padding on top and bottom and 0 padding on right and left */ 
+				} 
+				.pageWindowTitle .z-window-embedded-header 
+				{
+					color: #FF0000; 
+					font-weight:bold; 
+				}
+				.z-label
+				{
+					color: #000000; 
+					font-size: 20px;
+				}
+		</style>
+		<panel title="CREACION INVENTARIO PRODUCTOS TERMINADOS" height="650px" style="margin-top:50px; margin-left:40px;  border: none; font-size:19pt;">
+			<panelchildren>
+				<borderlayout id="borderlayoutUser">
+					<north border="none" margins="0,0,0,0">
+						<grid>
+							<columns sizable="true" height="20px">
+								<!-- CRUD Buttons -->
+								<column align="right">
+									<hbox spacing="5px" style="padding:1px" align="end">
+										<button id="button_PrintCFD" image="/images/icons/btn_print2_16x16.gif" tooltiptext="Imprimir Orden de Compra"/>
+										<button id="btn_Guardar" height="20" label="Guardar" tooltiptext="Guarda registro"/>
+										<button id="btn_Modificar" height="20" label="Modificar" tooltiptext="Modificar" visible="false"/>
+										<button id="btn_Actualizar" height="20" label="Actualizar" tooltiptext="Actualiza el Registro" visible="false"/>
+										<button id="btn_Cerrar" height="20" label="Cerrar" tooltiptext="Cerrar" style="margin-rigth:20px"/>
+									</hbox>
+								</column>
+							</columns>
+						</grid>
+					</north>
+					<center flex="true" border="none" margins="0,0,0,0" style="overflow:auto">
+						<tabbox id="tb" height="640px" >
+							<tabs id="tabs">
+								<tab id="A" label="INVENTARIO PRODUCTOS TERMINADOS"  />								
+							</tabs>
+							<tabpanels>
+								<tabpanel style="overflow:auto">
+									<div id="divCenterDatos">
+										
+												<grid fixedLayout="true" style="border:0px">
+													<columns>
+														<column width="40%"/>
+														<column width="60%"/>														
+													</columns>
+													<rows>
+														<row height="50px">
+															<label value="SKU PRODUCTO" style="color:red !important;  font-size:13pt"/>
+															<textbox id="txt_sku_Prod" width="90%" tooltiptext="Se debe de ingresar el SKU del producto" height="30px" style="font-size:13pt"/>
+															
+														</row>
+														<row height="50px">
+															<label value="CANTIDAD" style="color:red !important;  font-size:13pt"/>
+															<intbox id="txt_sku_cantidad" width="90%" tooltiptext="Se debe de ingresar La cantidad del producto" height="30px" style="font-size:13pt"/>
+															
+														</row>
+														<row height="50px">
+															<label value="FOLIO" style="color:red !important; font-size:13pt"/>
+															<textbox id="txt_sku_Parte" width="90%" tooltiptext="Se debe de ingresar el folio unico" height="30px" style="font-size:13pt"/>
+															
+														</row>
+														<row height="50px">
+															<label value="SKU UBICACION" style="color:red !important;  font-size:13pt"/>
+															<textbox id="txt_sku_ubica" width="90%" tooltiptext="Se debe de ingresar el SKU de la ubicacion" height="30px" style="font-size:13pt"/>
+															
+														</row>
+														<row height="50px">
+															<label value="EMPAQUE" style="color:red !important; font-size:13pt"/>
+															<!--listbox id="lb_Empaque" width="90%" mold="select" rows="1" tooltiptext="La clave del Empaque del Producto Terminado" style="font-size:13pt">
+																<listitem value="-1" label="SELECCIONE"/>
+															</listbox-->
+															<textbox id="lb_Empaque" width="90%" tooltiptext="La clave del Empaque del Producto Terminado" style="font-size:13pt"/>
+															
+														</row>
+														<row height="50px">
+															<label value="OBSERVACIONES" style="font-size:13pt"/>
+															<textbox id="txt_sku_observa" rows="5" multiline="true" width="90%" tooltiptext="se puede ingresar alguna observacion" style="font-size:13pt"/>
+															
+														</row>
+														<row height="50px">
+															<space/>
+															<space/>
+															
+														</row>
+														
+													</rows>
+												</grid>
+												<grid  fixedLayout="true" style="border:0px">
+																	<columns sizable="true" height="100%">
+																		<!-- CRUD Buttons -->
+																		<column width="45%"/>
+																		<column width="40%"/>
+																		<column width="20%"/>
+																	</columns>
+																	<rows>
+																		<row id="row_ck_Autoriza" visible="TRUE" style="border: none;" height="50px">
+																		
+																		<label value=" SCRAP/MERMA:" style="font-size:13pt"/>
+													               
+													                <radiogroup id="transmissionRadiogroup">
+													                    
+													                        <radio id="r_Scrap" label="SCRAP"
+													                            selected="false"/>
+													                        <radio id="r_Merma" label="MERMA"
+													                            selected="false" />
+													                   
+													                </radiogroup>
+													                <button id="btnLimpiaScrap"
+																		label="Limpia Scrap  Merma"
+																		tooltiptext="Limpia Scrap  Merma" style="font-size:13pt" /> 
+													     </row>
+																	</rows>
+																</grid>
+																				
+									</div>
+								</tabpanel>
+							</tabpanels>
+						</tabbox>
+					</center>
+					<east border="none"/>
+					<west border="none"/>
+					<south border="none"/>
+				</borderlayout>
+			</panelchildren>
+		</panel>
+	</window>
+</zk>

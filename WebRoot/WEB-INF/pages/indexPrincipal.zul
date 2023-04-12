@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?page id="loginZul" title="PORTAL INVENTARIO SKF"?>
+<?link rel="shortcut icon" type="image/x-icon" href="/images/skf/800px-SKF-Logo.svg.ico"?>
+<?link rel="icon" type="image/x-icon" href="/images/skf/800px-SKF-Logo.svg.ico"?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+
+
+<zk xmlns="http://www.zkoss.org/2005/zul"
+	xmlns:h="http://www.w3.org/1999/xhtml"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+
+
+	<window id="IndexPrincipalWindow" use="mx.com.hunkabann.skf.frontent.principal.PrincipalCtrl" border="none" width="100%" height="100%" >
+		<style>
+			body { padding: 0 0; /* 0 padding on top and bottom and 0
+			padding on right and left */ }
+		</style>
+		
+		
+		
+		
+		<borderlayout id="border_layout_Index" width="100%" height="100%">
+
+			<north>
+				
+				<div width="100%" height="100%">
+<panel>
+		<panelchildren>
+		<div id="div1" style="background-color:#9C1830" width="100%">
+					<hbox width="100%">
+					
+					<div width="100%" height="100px" style="background-image: url('images/skf/images/Superior.png'); text-align: center; bordr:none; background-size:100% 100%; width: 100%; height: 90px; ">
+				
+					
+						<div width="100%" height="20px">
+						</div>
+						<label id="label_PiePagina1" style="color:#5A5656; font-size:40px; padding:1px; margin-top:60px; font-weight: bold;" value="SISTEMA DE INVENTARIO SKF" />
+		
+					</div>
+		
+		
+<!--						<div align="left" width="120px">
+							<image id="logo" style="cursor:pointer;" src="/images/Rolex.jpg" width="140px" height="80px"/-->
+<!--							<button id="btnLogout"-->
+<!--								image="/images/icons/btn_exitdoor2_16x16.gif"-->
+<!--								label="${c:l('btnLogout.label')}"-->
+<!--								tooltiptext="${c:l('btnLogout.tooltiptext')}" visible="false"/>-->
+<!--						</div-->
+<!--						<div align="center" width="100%"
+							style="padding:17px">
+							<label id="label_TituloCentral"/>
+						</div>
+						<div align="right">
+							<image id="imgCorporativo"/>
+						</div> -->
+					</hbox>
+					
+					
+<!--					<separator bar="true"
+						style="background-color:silver" /> -->
+
+					
+
+				</div>
+				</panelchildren>
+		
+		</panel>
+</div>
+				
+						
+					</north>
+					
+
+<center border="none" autoscroll="true" >
+   
+				
+			</center>
+			
+
+			
+			<!--east border="none" margins="0,0,0,0" size="150px" flex="true">
+				<div id="divEast">EAST</div>
+			</east-->
+			
+			<!--west border="none" margins="0,0,0,0" style="background-image: url('images/Img_Rolex/banner_lateral/menu.png'); border:none; background-size:100% 100%; width: 250px; height: 70px; " flex="true"-->
+			<west border="none" margins="0,0,0,0" style="background-image: url('images/skf/SKF_menu.png'); border:none; background-size:100% 100%; width: 250px; height: 80px; " flex="true">
+				<div id="divWest">
+				
+				<!-- WEST -->
+				
+				
+							<hbox  spacing="5px" style="padding:1px; margin-top:40px; margin-left:20px; cursor:pointer;"
+										align="center" visible="false">
+										
+									<!--	<button id="btnOrden_Compra"
+											label="Orden de Compra"
+											tooltiptext="Orden de compra" visible="true" /> -->
+											
+										<image id="img_Orden_Compra"  src="/images/imagenes/menu/buscar.png" width="180px" height="60px" />
+									</hbox>
+				
+				
+							<hbox id="hbox_New_OC" spacing="5px" style="padding:1px; margin-top:80px; margin-left:20px; cursor:pointer;"
+										align="center">
+										
+									<!--button id="new_Orden_Compra"
+											label="CARGA INICIAL"
+											tooltiptext="CARGA CATALOGOS, PRODUCTOS, USUARIOS Y UBICACIONES" visible="true" /-->
+											
+										<image id="new_Orden_Compra" src="/images/skf/Inicial.png" width="180px" height="60px" />
+									</hbox>
+									
+													
+									<hbox id="hbox_InvProdFisc" spacing="5px" style="padding:1px; margin-top:8px; margin-left:20px; cursor:pointer;"
+										align="center">
+										
+										<image id="btnInvProdFisc" src="/images/skf/fisico.png" width="200px" height="60px" />
+											
+										<!--button id="btnInvProdFisc"
+												label="INVENTARIO PROD FISICO"
+												tooltiptext="INVENTARIO PROD FISICO" visible="true" /--> 
+									</hbox>
+									
+									<hbox id="hbox_InvProdTerm" spacing="5px" style="padding:1px; margin-top:8px; margin-left:20px; cursor:pointer;"
+										align="center">
+										
+										<image id="btnInvProdTerm" src="/images/skf/terminado.png" width="200px" height="60px" />
+											
+										<!--button id="btnInvProdTerm"
+												label="INVENTARIO PROD TERMINADO"
+												tooltiptext="INVENTARIO PROD TERMINADO" visible="true" /--> 
+									</hbox>
+									
+															
+									<hbox id="hbox_Usuarios" spacing="5px" style="padding:1px; margin-top:8px; margin-left:20px; cursor:pointer;"
+										align="center">
+										
+										<image id="img_Usuario" src="/images/imagenes/menu/usuarios.png" width="200px" height="60px" />
+											
+									<!--	<button id="btnPerfil"
+											label="Perfil"
+											tooltiptext="Perfil" visible="true" /> -->
+									</hbox>
+									
+									<hbox id="hbox_busque" spacing="5px" style="padding:1px; margin-top:8px; margin-left:20px; cursor:pointer;"
+										align="center" visible="true">
+										
+									<!--	<button id="btnOrden_Compra"
+											label="Orden de Compra"
+											tooltiptext="Orden de compra" visible="true" /> -->
+											
+										<image id="img_Buscar"  src="/images/skf/buscarMP.png" width="180px" height="60px" />
+									</hbox>
+									
+									<hbox id="hbox_BuscarPT"  spacing="5px" style="padding:1px; margin-top:8px; margin-left:22px; cursor:pointer;"
+										align="center" >
+										
+									<!--button id="btnPlantilla_CartaPorte"
+											label="Plantillas"
+											tooltiptext="Plantillas" visible="true" /--> 
+											
+										<image id="btn_BuscarPT"  src="/images/skf/buscarPT.png" width="180px" height="60px" />
+									</hbox>
+									
+									<hbox id="hbox_ComparaXaMp"  spacing="5px" style="padding:1px; margin-top:8px; margin-left:22px; cursor:pointer;"
+										align="center" >
+										
+									<!--button id="btnComparaXaMp"
+											label="ComparaXaMP"
+											tooltiptext="Compra Materia Prima con Xa" visible="true" /--> 
+											
+										<image id="btnComparaXaMp"  src="/images/skf/compararXAMP.png" width="180px" height="60px" />
+									</hbox>
+									
+									<hbox id="hbox_ComparaXaPt"  spacing="5px" style="padding:1px; margin-top:8px; margin-left:22px; cursor:pointer;"
+										align="center" >
+										
+									<!--button id="btnComparaXaPt"
+											label="ComparaXaPT"
+											tooltiptext="Compra Producto Terminado con Xa" visible="true" /--> 
+											
+										<image id="btnComparaXaPt"  src="/images/skf/compararXAPT.png" width="180px" height="60px" />
+									</hbox>
+									
+									<hbox spacing="5px" style="padding:1px; margin-top:8px; margin-left:15px; cursor:pointer;"
+										align="center">
+										
+										<image id="img_salir" src="/images/imagenes/menu/salir.png" width="130px" height="60px"  />
+											
+									<!--	<button id="btnSalir"
+											label="Salir"
+											tooltiptext="Salir" visible="true" /> -->
+									</hbox>
+										
+				
+				</div>
+			</west>
+
+		</borderlayout>
+
+	
+	</window>
+	
+	
+	 <zscript><![CDATA[
+    void addItem() {
+        org.zkoss.util.media.Media media = event.getMedia();
+        Hlayout hl = new Hlayout();
+        hl.setSpacing("6px");
+        hl.setClass("newFile");
+        hl.appendChild(new Label(media.getName()));
+        A rm = new A("remove");
+        rm.addEventListener(Events.ON_CLICK,new org.zkoss.zk.ui.event.EventListener(){
+            public void onEvent(Event event) throws Exception {
+                hl.detach();
+            }
+        });
+        hl.appendChild(rm);
+        flist.appendChild(hl);
+    }
+    ]]></zscript>
+    <script type="text/javascript" src="${dir}/UPMSamples.js" />
+    
+</zk>
+

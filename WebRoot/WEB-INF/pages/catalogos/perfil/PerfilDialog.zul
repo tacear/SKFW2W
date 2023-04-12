@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+
+<zk xmlns="http://www.zkoss.org/2005/zul"
+	xmlns:h="http://www.w3.org/1999/xhtml"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+
+	<window id="puestoDialogWindow"
+		border="none"
+		apply="${puestoDialogCtrl}" closable="true" width="350px"
+		sizable="false">
+
+		<style>
+			body { padding: 0 0; /* 0 padding on top and bottom and 0
+			padding on right and left */ }
+		</style>
+		
+		<panel title="PUESTO" height="215px">
+			<panelchildren>
+
+				<borderlayout >
+		
+					<north border="none" margins="0,0,0,0">
+						<grid>
+							<columns sizable="true" height="100%">
+								<!-- CRUD Buttons -->
+								<column align="right">
+									<hbox spacing="5px" style="padding:1px"
+										align="end">
+										<button id="btnNew" height="20"
+											tooltiptext="${c:l('btnNew.tooltiptext')}" />
+										<!-- label="${c:l('btnNew.label')}"	 -->
+										<button id="btnEdit" height="20"
+											tooltiptext="${c:l('btnEdit.tooltiptext')}" />
+										<button id="btnDelete" height="20"
+											tooltiptext="${c:l('btnDelete.tooltiptext')}"/>
+										<button id="btnSave" height="20"
+											tooltiptext="${c:l('btnSave.tooltiptext')}" />
+										<button id="btnClose" height="20"
+											tooltiptext="${c:l('btnClose.tooltiptext')}" />
+									</hbox>
+		
+								</column>
+							</columns>
+						</grid>
+					</north>
+					<center border="none" margins="0,0,0,0">
+						<div >
+		
+							<panel title="Detalle" style="margin-bottom:10px" border="normal">
+								<panelchildren>
+									<grid fixedLayout="true" style="border:0px">
+										<columns>
+											<column width="150px" />
+											<column width="100%" />
+										</columns>
+										<rows>
+											<row>
+												<label value="Nombre" style="color:red"/>
+												<textbox id="tb_CatPuestoDialog"/>
+											</row>
+											<row>
+												<label value="Descripción" />
+												<textbox id="tb_CatPuestoDescDialog" rows="4" multiline="true" width="98%"/>
+											</row>
+											<row>
+												<label
+													
+													value="Activo" style="color:red"/>
+												<checkbox id="check_CatPuestoActivo" />
+											</row>
+										</rows>
+									</grid>
+								</panelchildren>
+							</panel>
+						</div>
+					</center>
+		
+					<east border="none"></east>
+					<west border="none"></west>
+					<south border="none"></south>
+		
+				</borderlayout>
+			</panelchildren>
+		</panel>
+
+
+	</window>
+</zk>
+
+

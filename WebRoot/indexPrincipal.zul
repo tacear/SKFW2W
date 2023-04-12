@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?page id="loginZul" title="PORTAL W2W"?>
+<?link rel="shortcut icon" type="image/x-icon" href="/images/skf/800px-SKF-Logo.svg.ico"?>
+<?link rel="icon" type="image/x-icon" href="/images/skf/800px-SKF-Logo.svg.ico"?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<zk xmlns="http://www.zkoss.org/2005/zul" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+	<window id="IndexPrincipalWindow" use="mx.com.hunkabann.skf.frontent.principal.PrincipalCtrl" border="none" width="100%" height="100%">
+		<style>body { padding: 0 0; /* 0 padding on top and bottom and 0 padding on right and left */ }</style>
+		<borderlayout id="border_layout_Index" width="100%" height="100%">
+			<north border="none">
+				<div width="100%" height="100%" >
+					<panel >
+						<panelchildren>
+							<div id="div1" width="100%" align="right">
+							<grid fixedLayout="true">
+								<columns>
+									<column width="11.9%" align="center"/>									
+									<column width="40%" align="right"/>
+									<column width="45%" align="center"/>
+									<column width="5%" align="right"/>
+									
+								</columns>
+								<rows>
+		
+									<row style="background-color:#0f58d6; border:none;">
+										
+												<image id="img_Home"  src="/images/skf/images/SKF_Menu.png" width="180px" height="80px" style="padding:1px;  margin-left:20px; cursor:pointer;" align="center"/>
+												
+												<label id="label_PiePagina1" style="color:#FFFFFF; font-size:40px; padding:1px;  font-weight: bold;" value="SISTEMA W2W"/>
+												<label id="label_User" visible="false" style="color:#FFFFFF; font-size:20px; padding:1px;  font-weight: bold;" />
+												<image id="button_Usuario" src="/images/skf/images/usuario.png" width="80px" height="80px" style="padding:1px; margin-left:20px; cursor:pointer;" align="right"/>
+											
+										
+									</row>
+									
+								</rows>
+							</grid>
+								
+						
+						
+								<!--					<separator bar="true"
+						style="background-color:silver" /> -->
+							</div>
+						</panelchildren>
+					</panel>
+				</div>
+			</north>
+			<center border="none" autoscroll="true"/>
+			<!--east border="none" margins="0,0,0,0" size="150px" flex="true">
+				<div id="divEast">EAST</div>
+			</east-->
+			<west border="none" margins="0,0,0,0" style="background-image: url('images/skf/images/Menu.png'); border:none; background-size:100% 100%; width: 250px; height: 80px; " flex="true" splittable="true" collapsible="true">
+				<div id="divWest">
+					<!-- WEST -->
+					<hbox id="hbox_OrdenManu" spacing="5px" style="padding:1px; margin-top:40px; margin-left:20px; cursor:pointer;" align="center" visible="true">
+						
+						<image id="img_OrdenMan" src="/images/skf/menu/OM_00.png" width="200px" height="50px"/>
+					</hbox>
+					<hbox id="hbox_EntregaRecepcion" spacing="5px" style="padding:1px; margin-top:5px; margin-left:20px; cursor:pointer;" align="center" visible="true">
+						
+						<image id="img_EntregaRecepcion" src="/images/skf/menu/ER_00.png" width="200px" height="50px"/>
+					</hbox>
+					
+					<hbox id="hbox_Operacion" spacing="5px" style="padding:1px; margin-top:5px; margin-left:20px; cursor:pointer;" align="center" visible="true">
+						
+						<image id="img_Operacion" src="/images/skf/menu/Operacion00.png" width="200px" height="50px"/>
+					</hbox>
+					
+					<hbox id="hbox_Reporte" spacing="5px" style="padding:1px; margin-top:5px; margin-left:20px; cursor:pointer;" align="center" visible="true">
+						
+						<image id="img_Reporte" src="/images/skf/menu/Reporte00.png" width="200px" height="50px"/>
+					</hbox>
+					
+					<hbox id="hbox_Trazabilidad" spacing="5px" style="padding:1px; margin-top:5px; margin-left:20px; cursor:pointer;" align="center" visible="false">
+						
+						<image id="img_Trazabilidad" src="/images/skf/menu/Trazabilidad00.png" width="200px" height="50px"/>
+					</hbox>
+					
+					<hbox id="hbox_Salir" spacing="5px" style="padding:1px; margin-top:8px; margin-left:15px; cursor:pointer;" align="center" visible="false">
+						<image id="img_salir" src="/images/skf/menu/Salir.png" width="200px" height="70px"/>
+							
+					</hbox>
+				</div>
+			</west>
+		</borderlayout>
+	</window>
+	<zscript>
+		<![CDATA[
+    void addItem() {
+        org.zkoss.util.media.Media media = event.getMedia();
+        Hlayout hl = new Hlayout();
+        hl.setSpacing("6px");
+        hl.setClass("newFile");
+        hl.appendChild(new Label(media.getName()));
+        A rm = new A("remove");
+        rm.addEventListener(Events.ON_CLICK,new org.zkoss.zk.ui.event.EventListener(){
+            public void onEvent(Event event) throws Exception {
+                hl.detach();
+            }
+        });
+        hl.appendChild(rm);
+        flist.appendChild(hl);
+    }
+    ]]></zscript>
+	<script type="text/javascript" src="${dir}/UPMSamples.js"/>
+</zk>

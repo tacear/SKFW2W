@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?page id="loginZul" title="PORTAL DE NOMINA"?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<!--
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+-->
+
+<zk xmlns="http://www.zkoss.org/2005/zul"
+	xmlns:h="http://www.w3.org/1999/xhtml"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+
+	
+<window id="nominaListWindow" use="mx.com.hunkabann.skf.frontent.NominaListCtrl" border="none" width="100%">
+		<style>
+			body { padding: 0 0; /* 0 padding on top and bottom and 0
+			padding on right and left */ }
+		</style>
+
+		<panel>
+		<panelchildren>
+		<div id="div1" style="background-color:#9C1830">
+					<hbox width="100%">
+						<div align="left" width="120px">
+							<image id="logo" style="cursor:pointer;" src="/images/NMP_logo.jpg"/>
+<!--							<button id="btnLogout"-->
+<!--								image="/images/icons/btn_exitdoor2_16x16.gif"-->
+<!--								label="${c:l('btnLogout.label')}"-->
+<!--								tooltiptext="${c:l('btnLogout.tooltiptext')}" visible="false"/>-->
+						</div>
+						<div align="center" width="100%"
+							style="padding:17px">
+							<label id="label_TituloCentral"/>
+						</div>
+						<div align="right">
+							<image id="imgCorporativo"/>
+						</div>
+					</hbox>
+					<separator bar="true"
+						style="background-color:silver" />
+
+					
+
+				</div>
+				</panelchildren>
+		
+		</panel>
+	
+	<panel title="Proveedores" border="none" />
+	
+	
+	<div align="left" style="margin-top:20px;"  height="50px">
+	
+		<button label="Upload">
+        <attribute name="onClick">{
+            Object media = Fileupload.get();
+            if (media instanceof org.zkoss.image.Image)
+                image.setContent(media);
+            else if (media != null)
+                Messagebox.show("Not an image: "+media, "Error",
+                Messagebox.OK, Messagebox.ERROR);
+            }
+        </attribute>
+    </button>	   
+	
+		
+	</div>
+	
+	
+		<hbox style="padding: 3px">
+		<panel >
+		
+						<panelchildren>
+						<grid>
+							<columns sizable="true" height="20px">
+		
+								<column width="50%" align="left" >
+								
+								<hbox spacing="5px" style="padding:1px"
+										align="center">
+										
+										<button id="btnUsuario"
+											label="Usuarios"
+											tooltiptext="Usuarios" visible="true" />
+											
+										<button id="btnPassword"
+											label="Cambiar Password"
+											tooltiptext="Cambiar Password" visible="true" />
+									</hbox>
+								
+								</column>
+		
+								<!-- CRUD Buttons -->
+								<column align="right" width="50%">
+									<hbox spacing="5px" style="padding:1px"
+										align="end">
+										
+										<button id="btnLogout"
+								label="Salir"
+								tooltiptext="${c:l('btnLogout.tooltiptext')}" visible="true"/>
+									</hbox>
+		
+								</column>
+								
+								
+								
+							</columns>
+						</grid>
+						
+							<grid fixedLayout="true" 	style="border:0px" width="100%">
+								<columns>
+									<column width="20%" />
+									<column width="30%" />
+									<column width="20%" />
+									<column width="30%" />
+									<!--column width="9%" />
+									<column width="16%" />
+									<column width="9%" />
+									<column width="16%" /> -->
+								</columns>
+								<rows>
+									<row>
+										<label value="Folio"/>
+										<textbox id="tb_folio" width="95%"/>
+
+										<label value="UUID"/>
+										<textbox id="tb_uuid" width="95%"/>
+
+										<space/>
+									</row>
+
+									<row>
+
+										<label value="Fecha Ini."/>
+										<datebox id="bd_FechaIni" width="70%" format="dd/MM/yyyy"/>
+
+										<label value="Fecha Fin"/>
+										<datebox id="bd_FechaFin" width="70%" format="dd/MM/yyyy"/>
+
+										
+									</row>
+									<row>
+									<label id="Label_RFC" value="RFC"/>
+										<textbox id="tb_rfc" width="95%"/>
+										
+									<button id="button_Search"
+											label="Buscar"
+											tooltiptext="Buscar" />
+									</row>
+								</rows>
+							</grid>
+							
+							
+						</panelchildren>
+					</panel>	
+			
+			
+		</hbox>
+		<hbox>
+			<button id="button_downloadXML"
+				label="Descarga Archivos"
+				tooltiptext="Descarga XML" />
+			<!--button id="button_downloadPDF"
+				label="Descarga PDF"
+				tooltiptext="Descarga PDF" />
+			<button id="button_downloadPDF2"
+				label="Descarga PDF2"
+				tooltiptext="Descarga PDF2" /-->		
+		</hbox>
+
+		<borderlayout id="borderLayout_Puesto">
+
+			<north  border="none" margins="0,0,0,0">
+				<paging id="paging_Puesto" />
+				
+						
+					</north>
+
+			<center border="normal">
+
+				<listbox id="listBoxPuesto" vflex="true" width="99.5%"
+					tooltiptext="${c:l('listbox.tooltiptext')}" height="100%"
+					multiple="false">
+					<listhead sizable="true">
+					                    
+						<listheader id="listheader_fecha"
+							sort="none" width="15%"
+							label="Fecha" />
+						<listheader id="listheader_Nombre"
+							sort="none" width="15%"
+							label="Nombre" />
+						<listheader id="listheader_Folio"
+							sort="none" width="15%"
+							label="Folio" />
+						<listheader id="listheader_Subtotal"
+							sort="none" width="10%"
+							label="Bruto" />
+						<listheader id="listheader_Total"
+							sort="none" width="10%"
+							label="Neto" />
+							<listheader id="listheader_RFC"
+							sort="none" width="14%"
+							label="RFC Empleado" />
+							
+						<listheader id="listheader_uuid"
+							sort="none" width="10%"
+							label="UUID" />
+							
+					</listhead>
+				</listbox>
+
+			</center>
+
+			<south border="none">
+				<separator />
+			</south>
+
+		</borderlayout>
+
+		<!-- value="Account &#10;&#13; none&#10;&#13; expired" width="85%" -->
+
+
+	</window>
+	
+	
+	 <zscript><![CDATA[
+    void addItem() {
+        org.zkoss.util.media.Media media = event.getMedia();
+        Hlayout hl = new Hlayout();
+        hl.setSpacing("6px");
+        hl.setClass("newFile");
+        hl.appendChild(new Label(media.getName()));
+        A rm = new A("remove");
+        rm.addEventListener(Events.ON_CLICK,new org.zkoss.zk.ui.event.EventListener(){
+            public void onEvent(Event event) throws Exception {
+                hl.detach();
+            }
+        });
+        hl.appendChild(rm);
+        flist.appendChild(hl);
+    }
+    ]]></zscript>
+    <script type="text/javascript" src="${dir}/UPMSamples.js" />
+    
+</zk>
+

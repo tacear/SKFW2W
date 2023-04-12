@@ -1,0 +1,71 @@
+<?page title="Reportes"?>
+
+<zk>
+	<window apply="mx.com.hunkabann.skf.frontent.reportes.ReportesCtrl" id="ReportesWindow" width="30%" height="50%"
+		position="center,center" closable="true" border="none">
+		<panel title="REPORTES" height="100%" width="100%">
+			<panelchildren>
+				<vbox>
+					<grid style="border:none;">
+						<columns sizable="true" style="border:none;">
+					            <column align="left" style="border:none;" width="50%"/>
+					            <column align="right" style="border:none;" width="50%"/>
+						</columns>
+						<rows>
+							<row style="border:none;">
+								<space />
+								<button label = "SALIR" id = "btn_Salir" />
+							</row>
+							
+						</rows>
+					</grid>
+					
+					<grid>
+						<columns sizable="true">
+					            <column align="left" width="85%"/>
+					            <column align="left" width="15%"/>
+						</columns>
+						<rows>
+							<row>
+								<label value = "Reporte Informacion del Proveedor" />
+								<button label = "Reporte" id = "btn_Reporte_Prov" />
+							</row>
+							<row Style="background-color: #708c6c;">
+								<label value = "Reporte Facturas Pendientes de Pago" />
+								<button label = "Reporte" id = "btn_Reporte_PP" />
+							</row>
+							<row>
+								<label value = "Reporte Facturas Pagadas" />
+								<button label = "Reporte" id = "btn_Reporte_FP" />
+							</row>
+							<row Style = "background-color: #708c6c;">
+								<label value = "Reporte Autorizaciones Ordenes de Compra" />
+								<button label = "Reporte" id = "btn_Reporte_OC" />
+							</row>
+							
+							<row>
+								<label value = "Reporte Ordenes de Compra pendientes de Autorizar" />
+								<button label = "Reporte" id = "btn_Reporte_PA" />
+							</row>
+							<row Style = "background-color: #708c6c;">
+								<label value = "Reporte Complemento de Pago" />
+								<button label = "Reporte" id = "btn_Reporte_CP" />
+							</row>
+							<row>
+								<label value = "Reporte de Facturas pendientes de Complemento de Pago" />
+								<button label = "Reporte" id = "btn_Reporte_PCP" />
+							</row>
+							<row Style = "background-color: #708c6c;">
+								<label value = "Reporte de Pre-Poliza" />
+								<button label = "Reporte" id = "btn_Reporte_Pre_Poliza" />
+							</row>
+						</rows>
+					</grid>
+				
+					
+					
+				</vbox>
+			</panelchildren>
+		</panel>
+	</window>
+</zk>

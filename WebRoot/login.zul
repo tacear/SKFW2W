@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?page id="loginZul" title="LOGIN"?>
+<?link rel="shortcut icon" type="image/x-icon" href="/images/skf/800px-SKF-Logo.svg.ico"?>
+<?link rel="icon" type="image/x-icon" href="/images/skf/800px-SKF-Logo.svg.ico"?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+
+<zk xmlns="http://www.zkoss.org/2005/zul"
+	xmlns:h="http://www.w3.org/1999/xhtml"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+
+	<window id="loginwin" border="none" width="450px"
+		use="mx.com.hunkabann.skf.frontent.login.LoginCtrl">
+		
+		
+		<style>
+			body { padding: 0 0; /* 0 padding on top and bottom and 0
+			padding on right and left */ }
+		</style>
+		
+
+		<div style="background-color:#0f58d6;">
+			<image src="/images/skf/images/Superior.png" width="100%" height="60px"></image>
+			
+			
+			<separator bar="true" style="background-color:silver" />
+		</div>
+
+
+
+		<groupbox>
+			<caption>Login</caption>
+
+			<div align="right" style="padding: 1px">
+				<hbox width="95%">
+					<div align="left">
+						<label id="lbl_ServerTime" value="."/>
+					</div>
+						<timer id="timer2" delay="1000" repeats="true">
+							<attribute name="onTimer">
+								Locale locale = org.zkoss.util.Locales.getCurrent();
+								java.text.DateFormat dateFormat = java.text.DateFormat.getDateTimeInstance(java.text.DateFormat.MEDIUM, java.text.DateFormat.MEDIUM, locale);
+								String strTime = dateFormat.format(java.util.Calendar.getInstance(locale).getTime());
+								lbl_ServerTime.setValue(strTime);
+							</attribute>
+						</timer>
+
+				</hbox>
+				<separator bar="true" />
+			</div>
+
+			<div>
+				
+
+					<grid fixedLayout="true" style="border:0px">
+						<columns>
+							<column width="30%" />
+							<column width="50%" />
+						</columns>
+						<rows>
+							<!--row>
+								<label id="label_Corporativo" value="Compañia"/>
+								<listbox id="lb_Corporativo" mold="select" width="90%"/>
+							</row-->
+							<row>
+								<label id="label_ZKLoginDialog_user"
+									value="Usuario" />
+								<textbox id="u" name="j_username"
+									width="90%" />
+							</row>
+							<row>
+								<label id="label_ZKLoginDialog_pwd"
+									value="Contraseña" />
+								<textbox id="p" type="password"
+									name="j_password" width="90%" />
+							</row>
+
+							<row align="center" spans="2">
+								<hbox>
+								    
+									
+									<button id="btnEntrar" label="Entrar" height="22px"/>
+									<button onClick="limpiar()" label="Limpiar" height="22px"/>
+									<button id="btnCerrar" label="Cerrar" height="22px"/>
+									<!--image src="/images/Img_Rolex/botones/LIMPIAR/LimpiarPixel.png" width="100px" height="30px" onClick="limpiar()" /-->
+									
+									<!--button id="btnRegenera" label="Regenera Pwd" height="22px"/-->
+									<!--image id="btnRegenera" src="/images/Img_Rolex/botones/Password/Reg_PWD.png" width="138px" height="30px" /-->
+								</hbox>
+							</row>
+							
+							
+						</rows>
+					</grid>
+					<grid fixedLayout="true" style="border:0px">
+						<columns>
+							<column width="100%" align="center"/>
+							
+						</columns>
+						<rows>
+
+							<row>
+								<label id="label_Rege" style="cursor:pointer; text-decoration-line: underline; text-decoration-color: blue; color:blue;"
+									value="Regenera Contraseña" />
+								
+							</row>
+							
+						</rows>
+					</grid>
+				
+			</div>
+
+		</groupbox>
+
+		<zscript>
+			void limpiar()
+			{
+				p.setValue("");
+				u.setValue("");
+			}
+		</zscript>
+	</window>
+</zk>

@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<zk xmlns="http://www.zkoss.org/2005/zul" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+	<window id="operacionDialogWindow" border="none" use="mx.com.hunkabann.skf.frontent.operacion.OperacionDialogCtrl" closable="true" width="100%" sizable="false">
+		<style>body { padding: 0 0; /* 0 padding on top and bottom and 0 padding on right and left */ } .pageWindowTitle .z-window-embedded-header {color: #FF0000; font-weight:bold; }</style>
+		<panel title="OPERACION" height="100%">
+			<panelchildren>
+				<borderlayout id="borderlayoutUser">
+					<north border="none" margins="0,0,0,0">
+						<grid>
+							<columns sizable="true" height="20px">
+								<!-- CRUD Buttons -->
+								<column align="right">
+									<hbox spacing="5px" style="padding:1px" align="end">
+										<button id="button_PrintCFD" image="/images/icons/btn_print2_16x16.gif" tooltiptext="Imprimir Orden de Compra"/>
+										<button id="btn_Guardar" height="20" label="Guardar" tooltiptext="Guarda registro" visible="false"/>
+										<button id="btn_Modificar" height="20" label="Modificar" tooltiptext="Modificar" visible="false"/>
+										<button id="btn_Actualizar" height="20" label="Actualizar" tooltiptext="Actualiza el Registro" visible="false"/>
+										<!--button id="btn_Cerrar" height="20" label="Cerrar" tooltiptext="Cerrar" style="margin-rigth:20px"/-->
+										<image id="btn_Cerrar" src="/images/skf/botones/Salir.png" width="100px" height="40px" style="padding:1px; margin-left:20px; cursor:pointer;" align="right"/>
+									</hbox>
+								</column>
+							</columns>
+						</grid>
+					</north>
+					<center flex="true" border="none" margins="0,0,0,0" style="overflow:auto">
+						<tabbox id="tb" height="100%">
+							<tabs id="tabs">
+								<tab id="A" label="OPERACION"/>
+							</tabs>
+							<tabpanels>
+								<tabpanel style="overflow:auto">
+									<div id="divCenterDatos">
+											<div width="100%" height="100%">
+					
+											<div>
+												<hbox>
+													<panel width="100%" height="90%" style="margin-top:8px;  border: none;">
+														<panelchildren style="border: none;">
+															<grid style="border: none; ">
+																<columns sizable="true" height="5px" style="border: none; ">
+																	<column width="95%" align="center" style="border: none;"/>
+																</columns>
+																<rows style="border: none; ">
+																	<row style="border: none; ">
+																		<label id="label_Nombre_Titulo" value="OPERACION" style="color:#000000; font-size:26px; padding:1px;  font-weight: bold;"/>
+																	</row>
+																</rows>
+															</grid>
+															<grid style="border: none; ">
+																<columns sizable="true" height="100%" style="border: none; ">
+																	<column width="50%" align="center" style="border: none;"/>
+																	<column width="50%" align="center" style="border: none;"/>
+																</columns>
+																<rows style="border: none; ">
+																	<row style="border: none; ">
+																	<grid style="border: none; ">
+																		<columns sizable="true" height="5px" style="border: none; ">
+																			<column width="100%" align="left" style="border: none;"/>
+																			
+																		</columns>
+																		<rows style="border: none; ">
+																			<row style="border: none; ">
+																				<label value="UBICACION" style="color:#000000; font-size:16px; padding:1px;  font-weight: bold;"/>
+																					
+																			</row>
+																			<row style="border: none; ">
+																				
+																					<textbox id="tb_sku_Prod" width="85%" height="25px"/>
+																			</row>
+																			<row style="border: none; ">
+																				
+																					<space/>
+																			</row>
+																			
+																		</rows>
+																	</grid>
+																	</row>
+																
+																	<row style="border: none; ">
+																		<grid fixedLayout="true" style="border:0px" width="100%">
+																			<columns height="100%" >
+																				<column width="50%" align="left"/>
+																				<column width="50%" align="left"/>
+																			</columns>
+																			<rows>
+																				<row style="border: none;">
+																					
+																					<label value="OPERADOR" style="color:#000000; font-size:16px; padding:1px;  font-weight: bold;"/>
+																					
+																					<label value="OBJETIVO SCRAP" style="color:#000000; font-size:16px; padding:1px;  font-weight: bold;"/>
+																					
+																				</row>
+																				<row style="border: none; ">
+																					<textbox id="tb_Folio" width="85%" height="25px"/>
+																					<label value="ACTUAL" style="color:#000000; font-size:16px; padding:1px;  font-weight: bold;"/>
+																				
+																				</row>
+																				
+																				<row style="border: none; ">
+																					<space/>
+																					<space/>
+																				</row>
+																				
+																				<row style="border: none; ">
+																					<label id="Label_RFC" value="ORDEN" style="color:#000000; font-size:16px; padding:1px;  font-weight: bold;"/>												
+																					
+																					<label value="SKF" style="color:#000000; font-size:16px; padding:1px;  font-weight: bold;"/>
+																					
+																				</row>
+																				<row style="border: none; ">
+																																	
+																					<textbox id="tb_orden" width="85%" height="25px"/>
+																					
+																					<textbox id="tb_skf" width="85%" height="25px"/>
+																				</row>
+																				
+																				<row style="border: none; ">
+																					<space/>
+																					<space/>
+																				</row>
+																				
+																				<row style="border: none;">
+																					<label id="Label_OM" value="cantidad producida" style="color:#000000; font-size:16px; padding:1px;  font-weight: bold;"/>
+																					<label id="Label_PARTE" value="cantidad faltante" style="color:#000000; font-size:16px; padding:1px;  font-weight: bold;"/>
+																					
+																				</row>
+																				<row style="border: none;">
+																					<textbox id="tb_CantProd" width="85%" height="25px"/>
+																					
+																					<textbox id="tb_CantFalt" width="85%" height="25px"/>
+																				</row>
+																				
+																				<row style="border: none; ">
+																					<space/>
+																					<space/>
+																				</row>
+																				
+																				<row style="border: none;">
+																					<div height="90%">
+											
+												
+																						<listbox id="listBoxBOM" vflex="true" width="93%" tooltiptext="${c:l('listbox.tooltiptext')}" height="50%" multiple="true" style=" overflow:auto;" >
+																							<listhead sizable="true">
+																								<listheader id="listheader_BOM" sort="none" width="15%" label="BOM" style="margin-top:30px; margin-left:90px;  font-size:15px;"/>
+																								<listheader id="listheader_CANTIDAD" sort="none" width="25%" label="CANTIDAD" style="margin-top:30px; margin-left:90px;  font-size:15px;"/>
+																							</listhead>
+																						</listbox>
+																						<div height="20px" width="93%">
+																							<paging id="paging_BOM" width="100%" style=" font-size:15px;"/>
+																						</div>
+																					</div>
+																					
+																					<grid style="border: none; ">
+																						<columns sizable="true" height="5px" style="border: none; ">
+																							<column width="100%" align="left" style="border: none;"/>
+																							
+																						</columns>
+																						<rows style="border: none; ">
+																							<row style="background-color:#0f58d6;">
+																								<label value="TIEMPO MUERTO" style="color:#FFFFFF; font-size:16px; padding:1px;  font-weight: bold;"/>
+																									
+																							</row>
+																							<row style="border: none; ">
+																								
+																									<grid style="border: none; ">
+																										<columns sizable="true" height="5px" style="border: none; ">
+																											<column width="50%" align="left" style="border: none;"/>
+																											<column width="50%" align="left" style="border: none;"/>
+																											
+																										</columns>
+																										<rows style="border: none; ">
+																											
+																											<row style="border: none; ">
+																												
+																													<label value="CODIGO" style="color:#000000; font-size:16px; padding:1px;  font-weight: bold;"/>
+																													<label value="MINUTOS" style="color:#000000; font-size:16px; padding:1px;  font-weight: bold;"/>
+																											</row>
+																											
+																											<row style="border: none;">
+																												<listbox id="lb_CatTiempoMuerto" width="90%" mold="select" rows="1" height="25px">
+																													<listitem value="-1" label="SELECCIONE"/>
+																												</listbox>
+																												
+																												<textbox id="tb_TM_MINUTOS" width="85%" height="25px"/>
+																											</row>
+																											
+																											
+																										</rows>
+																									</grid>
+																							</row>
+																							<row style="background-color:#0f58d6;">
+																								<label value="SCRAP" style="color:#FFFFFF; font-size:16px; padding:1px;  font-weight: bold;"/>
+																									
+																							</row>
+																							<row style="border: none; ">
+																								
+																									<grid style="border: none; ">
+																										<columns sizable="true" height="5px" style="border: none; ">
+																											<column width="50%" align="left" style="border: none;"/>
+																											<column width="50%" align="left" style="border: none;"/>
+																											
+																										</columns>
+																										<rows style="border: none; ">
+																											
+																											<row style="border: none; ">
+																												
+																													<label value="CODIGO" style="color:#000000; font-size:16px; padding:1px;  font-weight: bold;"/>
+																													<label value="MINUTOS" style="color:#000000; font-size:16px; padding:1px;  font-weight: bold;"/>
+																											</row>
+																											
+																											<row style="border: none;">
+																												<listbox id="lb_CatScrap" width="90%" mold="select" rows="1" height="25px">
+																													<listitem value="-1" label="SELECCIONE"/>
+																												</listbox>
+																												
+																												<textbox id="tb_SC_MINUTOS" width="85%" height="25px"/>
+																											</row>
+																											
+																											
+																										</rows>
+																									</grid>
+																							</row>
+																							<row style="background-color:#0f58d6;">
+																								<label value="FTQ" style="color:#FFFFFF; font-size:16px; padding:1px;  font-weight: bold;"/>
+																									
+																							</row>
+																							<row style="border: none; ">
+																								
+																									<grid style="border: none; ">
+																										<columns sizable="true" height="5px" style="border: none; ">
+																											<column width="50%" align="left" style="border: none;"/>
+																											<column width="50%" align="left" style="border: none;"/>
+																											
+																										</columns>
+																										<rows style="border: none; ">
+																											
+																											<row style="border: none; ">
+																												
+																													<label value="CODIGO" style="color:#000000; font-size:16px; padding:1px;  font-weight: bold;"/>
+																													<label value="MINUTOS" style="color:#000000; font-size:16px; padding:1px;  font-weight: bold;"/>
+																											</row>
+																											
+																											<row style="border: none;">
+																												<textbox id="tb_FTQ_CODIGO" width="85%" height="25px"/>
+																												
+																												<textbox id="tb_FTQ_MINUTOS" width="85%" height="25px"/>
+																											</row>
+																											
+																										</rows>
+																									</grid>
+																							</row>
+																						</rows>
+																					</grid>
+																				
+																				</row>
+																				
+																				
+																				
+																			</rows>
+																		</grid>
+																		<div height="90%">
+											
+												
+																			<listbox id="listBoxHoras" vflex="true" width="93%" tooltiptext="${c:l('listbox.tooltiptext')}" height="50%" multiple="true" style=" overflow:auto;" >
+																				<listhead sizable="true">
+																					<listheader id="listheader_IdOrden" sort="none" width="15%" label="HORA" style="margin-top:30px; margin-left:90px;  font-size:15px;"/>
+																					<listheader id="listheader_Proveedor" sort="none" width="25%" label="PIEZAS OK" style="margin-top:30px; margin-left:90px;  font-size:15px;"/>
+																					<listheader id="listheader_fecha" sort="none" width="20%" label="TIEMPO MUERTO" style="margin-top:30px; margin-left:90px;  font-size:15px;"/>
+																					<listheader id="listheader_Identificador" sort="none" width="10%" label="SCRAP" style="margin-top:30px; margin-left:90px;  font-size:15px;"/>
+																					<listheader id="listheader_Total" sort="none" width="10%" label="CODIGO FTQ" style="margin-top:30px; margin-left:90px; font-size:15px;"/>
+																					</listhead>
+																			</listbox>
+																			<div height="20px" width="93%">
+																				<paging id="paging_Horas" width="100%" style=" font-size:15px;"/>
+																			</div>
+																		</div>
+																	</row>
+																</rows>
+															</grid>
+															
+															
+														</panelchildren>
+													</panel>
+												</hbox>
+											</div>
+										
+											
+										</div>										
+									</div>
+								</tabpanel>
+								
+							</tabpanels>
+						</tabbox>
+					</center>
+					<east border="none"/>
+					<west border="none"/>
+					<south border="none"/>
+				</borderlayout>
+			</panelchildren>
+		</panel>
+	</window>
+</zk>

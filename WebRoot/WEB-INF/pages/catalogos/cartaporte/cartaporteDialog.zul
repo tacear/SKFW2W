@@ -1,0 +1,1345 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<zk xmlns="http://www.zkoss.org/2005/zul" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+	<window id="cartaPorteDialogWindow" border="none" use="mx.com.hunkabann.skf.frontent.catalogos.cartaporte.CartaPorteDialogCtrl" closable="true" width="98%" sizable="false" position="center,center">
+		<style>body { padding: 0 0; /* 0 padding on top and bottom and 0 padding on right and left */ } .pageWindowTitle .z-window-embedded-header {color: #FF0000; font-weight:bold; }</style>
+		<panel title="PLANTILLAS" height="650px">
+			<panelchildren>
+				<borderlayout id="borderlayoutUser">
+					<north border="none" margins="0,0,0,0">
+						<grid>
+							<columns sizable="true" height="20px">
+								<!-- CRUD Buttons -->
+								<column align="right">
+									<hbox spacing="5px" style="padding:1px" align="end">
+										<!--button id="button_PrintCFD" image="/images/icons/btn_print2_16x16.gif" tooltiptext="Imprimir Orden de Compra"/-->
+										<button id="btn_Guardar" height="20" label="Guardar" tooltiptext="Guarda registro"/>
+										<button id="btn_Modificar" height="20" label="Modificar" tooltiptext="Modificar" visible="false"/>
+										<button id="btn_Actualizar" height="20" label="Actualizar" tooltiptext="Actualiza el Registro" visible="false"/>
+										<button id="btn_Cerrar" height="20" label="Cerrar" tooltiptext="Cerrar" style="margin-rigth:20px"/>
+									</hbox>
+								</column>
+							</columns>
+						</grid>
+					</north>
+					<center flex="true" border="none" margins="0,0,0,0" style="overflow:auto">
+						<tabbox id="tb" height="640px">
+							<tabs id="tabs">
+								<tab id="A" label="Plantilla Complemento Carta Porte"/>
+							</tabs>
+							<tabpanels>
+								<tabpanel style="overflow:auto">
+									<div id="divCenterDatosComplemento">
+										<groupbox id="gb_Comple_CP" mold="3d" width="100%" onOpen="false" visible="false">
+											<caption image="/images/imagenes/Icono/Carta_Porte/CO_CP.png" label="Carta Porte"/>
+											<hbox>
+												<grid fixedLayout="true" style="border:0px">
+													<columns>
+														<column width="100%" align="right"/>
+													</columns>
+													<rows>
+														<row align="right">
+															<button id="btn_Plantilla" height="20" label="Plantilla" tooltiptext="Modificar" visible="false"/>
+														</row>
+														<row>
+														<hbox>
+																	<grid fixedLayout="true" style="border:0px">
+																		<columns>
+																			<column width="10%"/>
+																			<column width="15%"/>
+																			<column width="10%"/>
+																			<column width="15%"/>
+																			<column width="10%"/>
+																			<column width="15%"/>
+																			
+																		</columns>
+																		<rows>
+																			<row>
+																				<label value="CLAVE PLANTILLA" style="color:red"/>
+																				<textbox id="txt_CatPort_Clave" width="90%" tooltiptext="Clave Interna para Identificar la Plantilla"/>
+																				<label value="NOMBRE PLANTILLA" style="color:red"/>
+																				<textbox id="txt_CatPort_Nombre" width="90%" tooltiptext="Nombre de la plantilla"/>
+																				<label value="DESCRIPCION PLANTILLA" style="color:red"/>
+																				<textbox id="txt_CatPort_Descripcion" width="90%" tooltiptext="Descripcion de la Plantilla"/>
+																				
+																			</row>
+																			
+																		</rows>
+																	</grid>
+																</hbox>
+													</row>
+														<row>
+															<groupbox id="gb_00_CP" mold="3d" width="100%">
+																<caption image="/images/imagenes/Icono/Carta_Porte/CO_CP_00.png" label="00 Carta Porte"/>
+																<hbox>
+																	<grid fixedLayout="true" style="border:0px">
+																		<columns>
+																			<column width="10%"/>
+																			<column width="12%"/>
+																			<column width="10%"/>
+																			<column width="12%"/>
+																			<column width="10%"/>
+																			<column width="15%"/>
+																			<column width="12%"/>
+																			<column width="10%"/>
+																		</columns>
+																		<rows>
+																			<row>
+																				<label value="Version" style="color:red"/>
+																				<textbox id="txt_CatPort_00_Version" width="90%" tooltiptext="Valor prefijado en el cual se indica la versión del complemento Carta Porte, (2.0)."/>
+																				<label value="TranspInternac" style="color:red"/>
+																				<!--textbox id="txt_CatPort_00_TranspInternac" width="90%" tooltiptext="Expresa si los bienes o mercancÃ­as que son transportadas ingresan o salen del territorio nacional."/-->
+																				<listbox id="lb_CatPort_00_TranspInternac" mold="select" width="90%" tooltiptext=" Atributo para expresar si los bienes y/o mercancías que son transportadas ingresan o salen del territorio nacional.">
+																					<listitem value="-1" label="SELECCIONE"/>
+																					<listitem value="1" label="Si"/>
+																					<listitem value="2" label="No"/>
+																				</listbox>
+																				<label value="EntradaSalidaMerc"/>
+																				<!--textbox id="txt_CatPort_00_EntradaSalidaMerc" width="90%" tooltiptext="Precisa si los bienes o mercancÃ­as ingresan o salen del territorio nacional."/-->
+																				<listbox id="lb_CatPort_00_EntradaSalidaMerc" mold="select" width="90%" tooltiptext="Atributo para precisar si los bienes y/o mercancías ingresan o salen del territorio nacional.">
+																					<listitem value="-1" label="SELECCIONE"/>
+																					<listitem value="1" label="Entrada"/>
+																					<listitem value="2" label="Salida"/>
+																				</listbox>
+																				<label value="PaisOrigenDestino"/>
+																				<textbox id="txt_PaisOrigenDestino" width="90%" tooltiptext="Atributo para registrar la clave del país de origen o destino de los bienes y/o mercancías que se trasladan a través de los distintos medios de transporte."/>
+																			</row>
+																			<row>
+																				<label value="ViaEntradaSalida"/>
+																				<listbox id="lb_CatPort_00_ViaEntradaSalida" mold="select" width="90%" tooltiptext="Atributo para registrar la vía de ingreso o salida de los bienes y/o mercancías en territorio nacional.">
+																					<listitem value="-1" label="SELECCIONE"/>
+																					<listitem value="1" label="01-Autotransporte Federal"/>
+																					<listitem value="2" label="02-Transporte Marítimo"/>
+																					<listitem value="3" label="03-Transporte Aéreo"/>
+																					<listitem value="4" label="04-Transporte Ferroviario"/>
+																					<listitem value="5" label="05-Ducto"/>
+																				</listbox>
+																				<label value="TotalDistRec"/>
+																				<textbox id="dbb_CatPort_00_TotalDistRec" width="90%" tooltiptext="Atributo para indicar en kilómetros, la suma de las distancias recorridas, registradas en el atributo “DistanciaRecorrida”, para el traslado de los bienes y/o mercancías.. (Valor Minimo=0.01 - Valor Maximo=99999)"/>
+																				<space/>
+																				<space/>
+																				<space/>
+																				<space/>
+																			</row>
+																		</rows>
+																	</grid>
+																</hbox>
+															</groupbox>
+														</row>
+														<row>
+															<groupbox id="gb_01_CP" mold="3d" width="100%">
+																<caption image="/images/imagenes/Icono/Carta_Porte/CO_CP_01.png" label="01 Carta Porte Ubicacion"/>
+																<hbox>
+																	<grid fixedLayout="true" style="border:0px">
+																		<columns>
+																			<column width="15%"/>
+																			<column width="15%"/>
+																			<column width="15%"/>
+																			<column width="15%"/>
+																			<column width="13%"/>
+																			<column width="15%"/>
+																			<column width="12%"/>
+																		</columns>
+																		<rows>
+																			<row>
+																				<label value="TipoUbicacion"  style="color:red"/>
+																				<!--textbox id="txt_CatPort_01_TipoUbicacion" width="90%"/-->
+																				<listbox id="lb_CatPort_01_TipoUbicacion" mold="select" width="90%" tooltiptext="Atributo para precisar si el tipo de ubicación corresponde al ORIGEN o DESTINO de las ubicaciones para el traslado de los bienes y/o mercancías en los distintos medios de transporte.">
+																					<listitem value="-1" label="SELECCIONE"/>
+																					<listitem value="1" label="Origen"/>
+																					<listitem value="2" label="Destino"/>
+																				</listbox>
+																				<label value="IDUbicacion"/>
+																				<textbox id="txt_CatPort_01_IDUbicacion" width="90%" tooltiptext="Atributo para registrar una clave que sirva para identificar el punto de salida o entrada de los bienes y/o mercancías que se trasladan a través de los distintos medios de transporte, la cual estará integrada de la siguiente forma: para origen el acrónimo “OR” o para destino el acrónimo “DE” seguido de 6 dígitos numéricos asignados por el contribuyente que emite el comprobante para su identificación."/>
+																				<label value="RFCRemitenteDestinatario" style="color:red"/>
+																				<textbox id="txt_CatPort_01_RFCRemitenteDestinatario" width="90%" tooltiptext="Atributo para registrar el RFC del remitente o destinatario de los bienes y/o mercancías que se trasladan a través de los distintos medios de transporte."/>
+																				<space/>
+																			</row>
+																			<row>
+																				<label value="NombreRemitenteDestinatario"/>
+																				<textbox id="txt_CatPort_01_NombreRemitenteDestinatario" width="90%" tooltiptext="Atributo para registrar el nombre del remitente o destinatario de los bienes y/o mercancías que se trasladan a través de los distintos medios de transporte."/>
+																				<label value="NumRegIdTrib"/>
+																				<textbox id="txt_CatPort_01_NumRegIdTrib" width="90%" tooltiptext="Atributo para registrar el número de identificación o registro fiscal del país de residencia, para los efectos fiscales del remitente o destinatario de los bienes y/o mercancías que se trasladan cuando se trate de residentes en el extranjero."/>
+																				<label value="ResidenciaFiscal"/>
+																				<textbox id="txt_CatPort_01_ResidenciaFiscal" width="90%" tooltiptext="Atributo para registrar la clave del país de residencia para efectos fiscales del remitente o destinatario de los bienes y/o mercancías, conforme el catálogo de CFDI c_Pais publicado en el portal del SAT en Internet de acuerdo a la especificación ISO 3166-1."/>
+																				<space/>
+																			</row>
+																			<row>
+																				<label value="NombreEstacion"/>
+																				<textbox id="txt_CatPort_01_NombreEstacion" width="90%" tooltiptext="Atributo para registrar el nombre de la estación de origen o destino por la que se pasa para efectuar el traslado de los bienes y/o mercancías a través de los distintos medios de transporte, conforme al catálogo c_Estaciones del complemento Carta Porte."/>
+																				<label value="NavegacionTrafico"/>
+																				<!--textbox id="txt_CatPort_01_NavegacionTrafico" width="90%" /-->
+																				<listbox id="lb_CatPort_01_NavegacionTrafico" mold="select" width="90%" tooltiptext="Atributo para registrar el tipo de puerto de origen o destino en el cual se documentan los bienes y/o mercancías que se trasladan vía marítima.">
+																					<listitem value="-1" label="SELECCIONE"/>
+																					<listitem value="1" label="Altura"/>
+																					<listitem value="2" label="Cabotaje"/>
+																				</listbox>
+																				<label value="NumEstacion"/>
+																				<textbox id="txt_CatPort_01_NumEstacion" width="90%"/>
+																				<button id="btn_Estaciones" label="AGREGA" tooltiptext="Atributo para registrar la clave de la estación de origen o destino para el traslado de los bienes y/o mercancías que se realiza a través de los distintos medios de transporte, esto de acuerdo al valor de la columna “Clave identificación” del catálogo c_Estaciones del complemento Carta Porte que permita asociarla al tipo de transporte."/>
+																			</row>
+																			<row>
+																				<label value="FechaHoraSalidaLlegada" style="color:red"/>
+																				<datebox id="dtb_CatPort_01_FechaHoraSalidaLlegada" cols="20" format="yyyy-MM-dd a HH:mm:ss" onCreate="self.value = new Date()" width="85%"/>
+																				<label value="TipoEstacion"/>
+																				<listbox id="lb_CatPort_01_TipoEstacion" mold="select" width="90%" tooltiptext="Atributo para registrar el tipo de estación por el que pasan los bienes y/o mercancías durante su traslado a través de los distintos medios de transporte.">
+																					<listitem value="-1" label="SELECCIONE"/>
+																					<listitem value="1" label="01-Origen Nacional"/>
+																					<listitem value="2" label="02-Intermedia "/>
+																					<listitem value="3" label="03-Destino Final Nacional"/>
+																				</listbox>
+																				<label value="DistanciaRecorrida"/>
+																				<textbox id="txt_CatPort_01_DistanciaRecorrida" width="90%" tooltiptext="Atributo para registrar en kilómetros la distancia recorrida entre la ubicación de origen y la de destino parcial o final, por los distintos medios de transporte que trasladan los bienes y/o mercancías."/>
+																				<space/>
+																			</row>
+																			<row>
+																				<space/>
+																				<space/>
+																				<space/>
+																				<space/>
+																				
+																				<button id="Agreegar_Ubica" label="Add Item"/>
+																				<button id="Borrar_Ubica" label="Delete Item"/>
+																				<space/>
+																			</row>
+																		</rows>
+																	</grid>
+																</hbox>
+																<hbox>
+																	<grid fixedLayout="true" style="border:0px">
+																		<columns>
+																			<column width="100%"/>
+																		</columns>
+																		<rows>
+																			<row>
+																				<groupbox id="gb_04_4_CP" mold="3d" width="100%">
+																					<caption image="/images/imagenes/Icono/Carta_Porte/CO_CP_04.png" label="01.1 Carta Porte Ubicacion Domicilio"/>
+																					<hbox>
+																						<grid fixedLayout="true" style="border:0px">
+																							<columns>
+																								<column width="13%"/>
+																								<column width="20%"/>
+																								<column width="13%"/>
+																								<column width="20%"/>
+																								<column width="13%"/>
+																								<column width="20%"/>
+																							</columns>
+																							<rows>
+																								<row>
+																									<label value="Calle"/>
+																									<textbox id="txt_CatPort_04_4_Ubi_Direc_Calle" width="90%" tooltiptext="Atributo para registrar la calle en la que está ubicado el domicilio de origen y/o destino de los bienes y/o mercancías que se trasladan en los distintos medios de transporte."/>
+																									<label value="NumeroExterior"/>
+																									<textbox id="txt_CatPort_04_4_Ubi_Direc_NumeroExterior" width="90%" tooltiptext="Atributo para registrar el número exterior del domicilio de origen y/o destino de los bienes y/o mercancías que se trasladan en los distintos medios del transporte."/>
+																									<label value="NumeroInterior"/>
+																									<textbox id="txt_CatPort_04_4_Ubi_Direc_NumeroInterior" width="90%" tooltiptext="Atributo para registrar el número interior, en caso de existir, del domicilio de origen y/o destino de los bienes y/o mercancías que se trasladan en los distintos medios de transporte."/>
+																								</row>
+																								<row>
+																									<label value="Colonia"/>
+																									<textbox id="txt_CatPort_04_4_Ubi_Direc_Colonia" width="90%" tooltiptext="Atributo para registrar la clave de la colonia o dato análogo, del domicilio de origen y/o destino de los bienes y/o mercancías que se trasladan en los distintos medios de transporte."/>
+																									<label value="Localidad"/>
+																									<textbox id="txt_CatPort_04_4_Ubi_Direc_Localidad" width="90%" tooltiptext="Atributo para registrar la ciudad, población, o dato análogo del domicilio de origen y/o destino de los bienes y/o mercancías que se trasladan en los distintos medios de transporte."/>
+																									<label value="Referencia"/>
+																									<textbox id="txt_CatPort_04_4_Ubi_Direc_Referencia" width="90%" tooltiptext="Atributo para registrar una referencia geográfica adicional que permita una fácil o precisa ubicación del domicilio de origen y/o destino de los bienes y/o mercancías que se trasladan en los distintos medios de transporte; por ejemplo, las coordenadas del GPS."/>
+																								</row>
+																								<row>
+																									<label value="Municipio"/>
+																									<textbox id="txt_CatPort_04_4_Ubi_Direc_Municipio" width="90%" tooltiptext="Atributo que sirve para registrar el municipio, delegación o alcaldía, condado o dato análogo del domicilio de origen y/o destino de los bienes y/o mercancías que se trasladan en los distintos medios de transporte, conforme con el catálogo c_Municipio publicado en el portal del SAT."/>
+																									<label value="Estado" style="color:red"/>
+																									<textbox id="txt_CatPort_04_4_Ubi_Direc_Estado" width="90%" tooltiptext="Atributo para registrar el estado, entidad, región, comunidad, o dato análogo en donde se encuentra ubicado el domicilio del origen y/o destino de los bienes y/o mercancías que se trasladan en los distintos medios de transporte, conforme con el catálogo publicado en el portal del SAT."/>
+																									<label value="Pais" style="color:red"/>
+																									<textbox id="txt_CatPort_04_4_Ubi_Direc_Pais" width="90%" tooltiptext="Atributo que sirve para registrar la clave del país en donde se encuentra ubicado el domicilio del origen y/o destino de los bienes y/o mercancías que se trasladan en los distintos medios de transporte, conforme con el catálogo de c_Pais del CFDI, publicado en el portal del SAT en Internet de acuerdo a la especificación ISO 3166-1."/>
+																								</row>
+																								<row>
+																									<label value="CodigoPostal" style="color:red"/>
+																									<textbox id="txt_CatPort_04_4_Ubi_Direc_CodigoPostal" width="90%" tooltiptext="Atributo para registrar el código postal en donde se encuentra el domicilio del origen y/o destino de los bienes y/o mercancías que se trasladan en los distintos medios de transporte, conforme con el catálogo c_CodigoPostal publicado en el portal del SAT."/>
+																									<space/>
+																									<space/>
+																									<space/>
+																									<space/>
+																								</row>
+																							</rows>
+																						</grid>
+																					</hbox>
+																				</groupbox>
+																			</row>
+																		</rows>
+																	</grid>
+																</hbox>
+																<groupbox>
+																	<caption>Total Items :
+																		<label id="itemUbicaCount"/>
+																	</caption>
+																	<listbox id="itemUbicaList" rows="5">
+																		<listhead>
+																			<listheader label="Ubicacion"/>
+																		</listhead>
+																	</listbox>
+																</groupbox>
+															</groupbox>
+														</row>
+														<row>
+															<groupbox id="gb_05_CP" mold="3d" width="100%">
+																<caption image="/images/imagenes/Icono/Carta_Porte/Mercancia_Gral.png" label="05 Carta Porte Mercancia General"/>
+																<hbox>
+																	<grid fixedLayout="true" style="border:0px">
+																		<columns>
+																			<column width="16%"/>
+																			<column width="17%"/>
+																			<column width="16%"/>
+																			<column width="17%"/>
+																			<column width="16%"/>
+																			<column width="17%"/>
+																		</columns>
+																		<rows>
+																			<row>
+																				<label value="PesoBrutoTotal" style="color:red"/>
+																				<textbox id="txt_CatPort_05_Merca_Gral_PesoBrutoTotal" width="90%" tooltiptext="Atributo para registrar la suma del peso bruto total estimado de los bienes y/o mercancías que se trasladan en los distintos medios de transporte."/>
+																				<label value="UnidadPeso" style="color:red"/>
+																				<textbox id="txt_CatPort_05_Merca_Gral_UnidadPeso" width="90%" tooltiptext="Atributo para registrar la clave de la unidad de medida estandarizada del peso de los bienes y/o mercancías que se trasladan a través de los distintos medios de transporte."/>
+																				<button id="btn_ClaveUnidadPeso" label="AGREGA" tooltiptext="Agrega la clave de unidad de medida estandarizada del peso de los bienes y/o mercancías que se trasladan a través de los distintos medios de transporte."/>
+																				<space/>
+																			</row>
+																			<row>
+																				<label value="PesoNetoTotal"/>
+																				<textbox id="txt_CatPort_05_Merca_Gral_PesoNetoTotal" width="90%" tooltiptext="Atributo para registrar la suma de los valores indicados en el atributo “PesoNeto” del nodo “DetalleMercancia”."/>
+																				<label value="NumTotalMercancias" style="color:red"/>
+																				<textbox id="txt_CatPort_05_Merca_Gral_NumTotalMercancias" width="90%" tooltiptext="Atributo para registrar el número total de los bienes y/o mercancías que se trasladan en los distintos medios de transporte, identificándose por cada nodo Mercancia registrado en el complemento."/>
+																				<label value="CargoPorTasacion"/>
+																				<textbox id="txt_CatPort_05_Merca_Gral_CargoPorTasacion" width="90%" tooltiptext="Atributo para expresar el monto del importe pagado por la tasación de los bienes y/o mercancías que se trasladan vía aérea."/>
+																			</row>
+																		</rows>
+																	</grid>
+																</hbox>
+																<hbox>
+																	<grid fixedLayout="true" style="border:0px">
+																		<columns>
+																			<column width="100%"/>
+																		</columns>
+																		<rows>
+																			<row>
+																				<groupbox id="gb_06_CP" mold="3d" width="100%">
+																					<caption image="/images/imagenes/Icono/Carta_Porte/Mercancia.png" label="06 Carta Porte Mercancia"/>
+																					<hbox>
+																						<grid fixedLayout="true" style="border:0px">
+																							<columns>
+																								<column width="8%"/>
+																								<column width="13%"/>
+																								<column width="10%"/>
+																								<column width="14%"/>
+																								<column width="10%"/>
+																								<column width="13%"/>
+																								<column width="9%"/>
+																								<column width="13%"/>
+																							</columns>
+																							<rows>
+																								<row>
+																									<label value="BienesTransp" style="color:red"/>
+																									<textbox id="txt_CatPort_06_Merca_BienesTransp" width="90%" tooltiptext="Atributo para registrar la clave de producto de los bienes y/o mercancías que se trasladan en los distintos medios de transporte."/>
+																									<label value="ClaveSTCC"/>
+																									<textbox id="txt_CatPort_06_Merca_ClaveSTCC" width="90%" tooltiptext="Atributo para expresar la clave de producto de la STCC (por sus siglas en inglés, Standard Transportation Commodity Code), cuando el medio de transporte utilizado para el traslado de los bienes y/o mercancías sea ferroviario."/>
+																									<button id="btn_ClaveProdSTCC" label="AGREGA" tooltiptext="Agrega la clave de producto conforme al catálogo de la STCC cuando el medio de transporte es ferroviario."/>
+																									<space/>
+																									<label value="Descripcion" style="color:red"/>
+																									<textbox id="txt_CatPort_06_Merca_Descripcion" width="90%" tooltiptext="Atributo para detallar las características de los bienes y/o mercancías que se trasladan en los distintos medios de transporte."/>
+																								</row>
+																								<row>
+																									<label value="Cantidad" style="color:red"/>
+																									<textbox id="txt_CatPort_06_Merca_Cantidad" width="90%" tooltiptext="Atributo para expresar la cantidad total de los bienes y/o mercancías que se trasladan a través de los distintos medios de transporte."/>
+																									<label value="ClaveUnidad" style="color:red"/>
+																									<textbox id="txt_CatPort_06_Merca_ClaveUnidad" width="90%" tooltiptext="Atributo para registrar la clave de la unidad de medida estandarizada aplicable para la cantidad de los bienes y/o mercancías que se trasladan en los distintos medios de transporte. La unidad debe corresponder con la descripción de los bienes y/o mercancías registrados."/>
+																									<button id="btn_ClaveUnidad" label="AGREGA" tooltiptext="Agrega la clave de la unidad de medida estandarizada aplicable para la cantidad de los bienes y/o mercancías que se trasladan en los distintos medios de transporte. La unidad debe corresponder con la descripción de los bienes y/o mercancías registrados."/>
+																									<space/>
+																									<label value="Unidad"/>
+																									<textbox id="txt_CatPort_06_Merca_Unidad" width="90%" tooltiptext="Atributo para registrar la unidad de medida propia para la cantidad de los bienes y/o mercancías que se trasladan a través de los distintos medios de transporte. La unidad debe corresponder con la descripción de los bienes y/o mercancías."/>
+																								</row>
+																								<row>
+																									<label value="Dimensiones"/>
+																									<textbox id="txt_CatPort_06_Merca_Dimensiones" width="90%" tooltiptext="Atributo para expresar las medidas del empaque de los bienes y/o mercancías que se trasladan en los distintos medios de transporte. Se debe registrar la longitud, la altura y la anchura en centímetros o en pulgadas, separados dichos valores con una diagonal, i.e. 30/40/30cm."/>
+																									<label value="CveMaterialPeligroso"/>
+																									<textbox id="txt_CatPort_06_Merca_CveMaterialPeligroso" width="90%" tooltiptext="Atributo para indicar la clave del tipo de material peligroso que se transporta de acuerdo a la NOM-002-SCT/2011."/>
+																									<button id="btn_ClaveMaterial" label="AGREGA" tooltiptext="Agrega la clave del tipo de material peligroso que se transporta."/>
+																									<space/>
+																									<label value="MaterialPeligroso"/>
+																									<textbox id="txt_CatPort_06_Merca_MaterialPeligroso" width="90%" tooltiptext="Atributo para precisar que los bienes y/o mercancías que se trasladan son considerados o clasificados como material peligroso."/>
+																								</row>
+																								<row>
+																									<label value="DescripEmbalaje"/>
+																									<textbox id="txt_CatPort_06_Merca_DescripEmbalaje" width="90%" tooltiptext="Atributo para expresar la descripción del embalaje de los bienes y/o mercancías que se trasladan y que se consideran material o residuo peligroso."/>
+																									<label value="Embalaje"/>
+																									<textbox id="txt_CatPort_06_Merca_Embalaje" width="90%" tooltiptext="Atributo para precisar la clave del tipo de embalaje que se requiere para transportar el material o residuo peligroso."/>
+																									<button id="btn_ClaveEmbalaje" label="AGREGA" tooltiptext="Agrega la clave del tipo de embalaje que se requiere para transportar el material o residuo peligroso."/>
+																									<space/>
+																									<label value="PesoEnKg" style="color:red"/>
+																									<textbox id="txt_CatPort_06_Merca_PesoEnKg" width="90%" tooltiptext="Atributo para indicar en kilogramos el peso estimado de los bienes y/o mercancías que se trasladan en los distintos medios de transporte."/>
+																								</row>
+																								<row>
+																									<label value="ValorMercancia"/>
+																									<textbox id="txt_CatPort_06_Merca_ValorMercancia" width="90%" tooltiptext="Atributo para expresar el monto del valor de los bienes y/o mercancías que se trasladan en los distintos medios de transporte, de acuerdo al valor mercado, al valor pactado en la contraprestación o bien al valor estimado que determine el contribuyente."/>
+																									<label value="Moneda"/>
+																									<textbox id="txt_CatPort_06_Merca_Moneda" width="90%" tooltiptext="Atributo para identificar la clave de la moneda utilizada para expresar el valor de los bienes y/o mercancías que se trasladan en los distintos medios de transporte. Cuando se usa moneda nacional se registra MXN, de acuerdo a la especificación ISO 4217."/>
+																									<label value="FraccionArancelaria"/>
+																									<textbox id="txt_CatPort_06_Merca_FraccionArancelaria" width="90%" tooltiptext="Atributo que sirve para expresar la clave de la fracción arancelaria que corresponde con la descripción de los bienes y/o mercancías que se trasladan en los distintos medios de transporte. Debe ser conforme con el catálogo c_FraccionArancelaria publicado en el portal del SAT en Internet."/>
+																									<label value="UUIDComercioExt"/>
+																									<textbox id="txt_CatPort_06_Merca_UUIDComercioExt" width="90%"/>
+																								</row>
+																								<row>
+																									<space/>
+																									<space/>
+																									<space/>
+																									<space/>
+																									<space/>
+																									<space/>
+																									<button id="Agreegar_Mercancia" label="Add Mercnacia"/>
+																									<button id="Borrar_Mercancia" label="Delete Mercancia"/>
+																								</row>
+																							</rows>
+																						</grid>
+																					</hbox>
+																					<hbox>
+																						<grid fixedLayout="true" style="border:0px">
+																							<columns>
+																								<column width="100%"/>
+																							</columns>
+																							<rows>
+																								<row>
+																									<groupbox id="gb_03_CP" mold="3d" width="100%">
+																										<caption image="/images/imagenes/Icono/Carta_Porte/Cantidad_Trans.png" label="03 Carta Porte Mercancia Pedimento"/>
+																										<hbox>
+																											<grid fixedLayout="true" style="border:0px">
+																												<columns>
+																													<column width="10%"/>
+																													<column width="40%"/>
+																													<column width="15%"/>
+																													<column width="13%"/>
+																												</columns>
+																												<rows>
+																													<row>
+																														<label value="Pedimento" style="color:red"/>
+																														<textbox id="txt_CatPort_03_Merca_Pedimento" width="90%" tooltiptext="Atributo para expresar el número de pedimento de importación que se encuentra asociado con el traslado de los bienes y/o mercancías de procedencia extranjera para acreditar la legal estancia y tenencia durante su traslado en territorio nacional, el cual se expresa en el siguiente formato: últimos 2 dígitos del año de validación seguidos por dos espacios, 2 dígitos de la aduana de despacho seguidos por dos spacios, 4 dígitos del número de la patente seguidos por dos espacios, 1 dígito que corresponde al último dígito del año en curso, salvo que se trate de un pedimento consolidado iniciado en el año inmediato anterior o del pedimento original de una rectificación, seguido de 6 dígitos de la numeración progresiva por aduana."/>
+																														<button id="Agreegar_Pedimento" label="Add Item"/>
+																														<button id="Borrar_Pedimento" label="Delete Item"/>
+																													</row>
+																												</rows>
+																											</grid>
+																										</hbox>
+																										<groupbox>
+																											<caption>Total Items :
+																												<label id="itemPediCount"/>
+																											</caption>
+																											<listbox id="itemPediList" rows="5">
+																												<listhead>
+																													<listheader label="Pedimentos"/>
+																												</listhead>
+																											</listbox>
+																										</groupbox>
+																									</groupbox>
+																									
+																								</row>
+																								<row>
+																									<groupbox id="gb_04_CP" mold="3d" width="100%">
+																										<caption image="/images/imagenes/Icono/Carta_Porte/Cantidad_Trans.png" label="04 Carta Porte Mercancia GuiasIdentificacion"/>
+																										<hbox>
+																											<grid fixedLayout="true" style="border:0px">
+																												<columns>
+																													<column width="10%"/>
+																													<column width="15%"/>
+																													<column width="10%"/>
+																													<column width="15%"/>
+																													<column width="10%"/>
+																													<column width="15%"/>
+																													<column width="10%"/>
+																													<column width="10%"/>
+																												</columns>
+																												<rows>
+																													<row>
+																														<label value="NumeroGuiaIdentificacion" style="color:red"/>
+																														<textbox id="txt_CatPort_04_Merca_NumeroGuiaIdentificacion" width="90%" tooltiptext="Atributo para expresar el número de guía de cada paquete que se encuentra asociado con el traslado de los bienes y/o mercancías en territorio nacional."/>
+																														<label value="DescripGuiaIdentificacion" style="color:red"/>
+																														<textbox id="txt_CatPort_04_Merca_DescripGuiaIdentificacion" width="90%" tooltiptext="Atributo para expresar la descripción del contenido del paquete o carga registrada en la guía, o en el número de identificación, que se encuentra asociado con el traslado de los bienes y/o mercancías dentro del territorio nacional."/>
+																														<label value="PesoGuiaIdentificacion" style="color:red"/>
+																														<textbox id="txt_CatPort_04_Merca_PesoGuiaIdentificacion" width="90%" tooltiptext="Atributo para indicar en kilogramos, el peso del paquete o carga que se está trasladando en territorio nacional y que se encuentra registrado en la guía o el número de identificación correspondiente."/>
+																														<button id="Agreegar_Guia" label="Add Item"/>
+																														<button id="Borrar_Guia" label="Delete Item"/>
+																													</row>
+																												</rows>
+																											</grid>
+																										</hbox>
+																										<groupbox>
+																											<caption>Total Items :
+																												<label id="itemGuiaCount"/>
+																											</caption>
+																											<listbox id="itemGuiaList" rows="5">
+																												<listhead>
+																													<listheader label="Guias de Identificacion"/>
+																												</listhead>
+																											</listbox>
+																										</groupbox>
+																									</groupbox>
+																									
+																								</row>
+																								<row>
+																									<groupbox id="gb_07_CP" mold="3d" width="100%">
+																										<caption image="/images/imagenes/Icono/Carta_Porte/Cantidad_Trans.png" label="07 Carta Porte Mercancia CantidadTransporta"/>
+																										<hbox>
+																											<grid fixedLayout="true" style="border:0px">
+																												<columns>
+																													<column width="10%"/>
+																													<column width="13%"/>
+																													<column width="10%"/>
+																													<column width="15%"/>
+																													<column width="10%"/>
+																													<column width="15%"/>
+																													<column width="10%"/>
+																													<column width="10%"/>
+																												</columns>
+																												<rows>
+																													<row>
+																														<label value="Cantidad" style="color:red"/>
+																														<textbox id="txt_CatPort_07_Merca_CantTrans_Cantidad" width="90%" tooltiptext="Atributo para expresar el número de bienes y/o mercancías que se trasladan en los distintos medios de transporte."/>
+																														<label value="IDOrigen" style="color:red"/>
+																														<textbox id="txt_CatPort_07_Merca_CantTrans_IDOrigen" width="90%" tooltiptext="Atributo para expresar la clave del identificador del origen de los bienes y/o mercancías que se trasladan por los distintos medios de transporte, de acuerdo al valor registrado en el atributo “IDUbicacion”, del nodo “Ubicacion”."/>
+																														<label value="IDDestino" style="color:red"/>
+																														<textbox id="txt_CatPort_07_Merca_CantTrans_IDDestino" width="90%" tooltiptext="Atributo para registrar la clave del identificador del destino de los bienes y/o mercancías que se trasladan a través de los distintos medios de transporte, de acuerdo al valor registrado en el atributo “IDUbicacion”, del nodo “Ubicacion”."/>
+																														<label value="CvesTransporte"/>
+																														<!--textbox id="txt_CatPort_07_Merca_CantTrans_CvesTransporte" width="90%" tooltiptext="Expresa la clave que identifica el medio por el cual se transportan los bienes o mercancÃ­as, dicha clave debe ser distinta a â€œ05â€� que corresponde a â€œDuctoâ€�."/-->
+																														<listbox id="lb_CatPort_07_Merca_CantTrans_CvesTransporte" mold="select" width="90%" tooltiptext="Atributo para indicar la clave a través de la cual se identifica el medio por el que se transportan los bienes y/o mercancías.">
+																															<listitem value="-1" label="SELECCIONE"/>
+																															<listitem value="1" label="01-Autotransporte Federal"/>
+																															<listitem value="2" label="02-Transporte Marítimo"/>
+																															<listitem value="3" label="03-Transporte Aéreo"/>
+																															<listitem value="4" label="04-Transporte Ferroviario"/>
+																															<listitem value="5" label="05-Ducto"/>
+																														</listbox>
+																													</row>
+																													
+																													<row>
+																														<space/>
+																														<space/>
+																														<space/>
+																														<space/>
+																														<space/>
+																														<space/>
+																														<button id="Agreegar_Cantidad" label="Add Item"/>
+																														<button id="Borrar_Cantidad" label="Delete Item"/>
+																													</row>
+																													
+																												</rows>
+																											</grid>
+																										</hbox>
+																										<groupbox>
+																											<caption>Total Items :
+																												<label id="itemCantidadCount"/>
+																											</caption>
+																											<listbox id="itemCantidadList" rows="5">
+																												<listhead>
+																													<listheader label="Cantidad Transporta"/>
+																												</listhead>
+																											</listbox>
+																										</groupbox>
+																									</groupbox>
+																									
+																								</row>
+																								<row>
+																									<groupbox id="gb_08_CP" mold="3d" width="100%">
+																										<caption image="/images/imagenes/Icono/Carta_Porte/Detalle_Mercancia.jpg" label="08 Carta Porte Mercancia DetalleMercancia"/>
+																										<hbox>
+																											<grid fixedLayout="true" style="border:0px">
+																												<columns>
+																													<column width="10%"/>
+																													<column width="13%"/>
+																													<column width="10%"/>
+																													<column width="15%"/>
+																													<column width="10%"/>
+																													<column width="5%"/>
+																													<column width="10%"/>
+																													<column width="10%"/>
+																												</columns>
+																												<rows>
+																													<row>
+																														<label value="UnidadPeso" style="color:red"/>
+																														<textbox id="txt_CatPort_08_Merca_DetaMerc_UnidadPeso" width="90%" tooltiptext="Atributo para registrar la clave de la unidad de medida estandarizada del peso de los bienes y/o mercancías que se trasladan en los distintos medios de transporte."/>
+																														<button id="btn_Deta_ClaveUnidadPeso" label="AGREGA" tooltiptext="Agrega la clave de la unidad de medida estandarizada del peso de los bienes y/o mercancías que se trasladan en los distintos medios de transporte."/>
+																														<space/>
+																														<label value="PesoBruto" style="color:red"/>
+																														<textbox id="txt_CatPort_08_Merca_DetaMerc_PesoBruto" width="90%" tooltiptext="Atributo para registrar la clave de la unidad de medida estandarizada del peso de los bienes y/o mercancías que se trasladan en los distintos medios de transporte."/>
+																														<label value="PesoNeto" style="color:red"/>
+																														<textbox id="txt_CatPort_08_Merca_DetaMerc_PesoNeto" width="90%" tooltiptext="Atributo para registrar el peso neto total de los bienes y/o mercancías que se trasladan en los distintos medios de transporte."/>
+																													</row>
+																													<row>
+																														<label value="PesoTara" style="color:red"/>
+																														<textbox id="txt_CatPort_08_Merca_DetaMerc_PesoTara" width="90%" tooltiptext="Atributo para registrar el peso bruto, menos el peso neto de los bienes y/o mercancías que se trasladan a través de los distintos medios de transporte."/>
+																														<label value="NumPiezas"/>
+																														<textbox id="txt_CatPort_08_Merca_DetaMerc_NumPiezas" width="90%" tooltiptext="Atributo para registrar el número de piezas de los bienes y/o mercancías que se trasladan en los distintos medios de transporte."/>
+																														<space/>
+																														<space/>
+																														<space/>
+																														<space/>
+																													</row>
+																												</rows>
+																											</grid>
+																										</hbox>
+																									</groupbox>
+																								</row>
+																							</rows>
+																						</grid>
+																					</hbox>
+																					<groupbox>
+																						<caption>Total Items :
+																							<label id="itemMercaCount"/>
+																						</caption>
+																						<listbox id="itemMercaList" rows="5">
+																							<listhead>
+																								<listheader label="Mercancia"/>
+																							</listhead>
+																						</listbox>
+																					</groupbox>
+																				</groupbox>
+																			</row>
+																			<row>
+																				<groupbox id="gb_09_CP" mold="3d" width="100%">
+																					<caption image="/images/imagenes/Icono/Carta_Porte/Terrestre.jpg" label="09 Carta Porte Mercancia AutotransporteFederal"/>
+																					<hbox>
+																						<grid fixedLayout="true" style="border:0px">
+																							<columns>
+																								<column width="10%"/>
+																								<column width="15%"/>
+																								<column width="10%"/>
+																								<column width="10%"/>
+																								<column width="15%"/>
+																								<column width="10%"/>
+																								<column width="15%"/>
+																							</columns>
+																							<rows>
+																								<row>
+																									<label value="PermSCT" style="color:red"/>
+																									<textbox id="txt_CatPort_09_Merca_AutoTransF_PermSCT" width="90%" tooltiptext="Atributo para registrar la clave del tipo de permiso proporcionado por la SCT o la autoridad análoga, el cual debe corresponder con el tipo de autotransporte utilizado para el traslado de los bienes y/o mercancías de acuerdo al catálogo correspondiente, Debe ser conforme con el catálogo c_TipoPermiso publicado en el portal del SAT en Internet."/>
+																									<button id="btn_09_PermSCT" label="AGREGA" tooltiptext="Agrega la clave del tipo de permiso proporcionado por la SCT o la autoridad análoga, el cual debe corresponder con el tipo de autotransporte utilizado para el traslado de los bienes y/o mercancías de acuerdo al catálogo correspondiente."/>
+																									<label value="NumPermisoSCT" style="color:red"/>
+																									<textbox id="txt_CatPort_09_Merca_AutoTransF_NumPermisoSCT" width="90%" tooltiptext="Atributo para registrar el número del permiso otorgado por la SCT o la autoridad correspondiente, al autotransporte utilizado para el traslado de los bienes y/o mercancías."/>
+																									<space/>
+																									<space/>
+																								</row>
+																							</rows>
+																						</grid>
+																					</hbox>
+																					<hbox>
+																						<grid fixedLayout="true" style="border:0px">
+																							<columns>
+																								<column width="100%"/>
+																							</columns>
+																							<rows>
+																								<row>
+																									<groupbox id="gb_10_CP" mold="3d" width="100%">
+																										<caption image="/images/imagenes/Icono/Carta_Porte/Identi_Vehiculo.png" label="10 Carta Porte Mercancia AutotransporteFederal IdentificacionVehicular"/>
+																										<hbox>
+																											<grid fixedLayout="true" style="border:0px">
+																												<columns>
+																													<column width="10%"/>
+																													<column width="15%"/>
+																													<column width="10%"/>
+																													<column width="10%"/>
+																													<column width="15%"/>
+																													<column width="10%"/>
+																													<column width="15%"/>
+																												</columns>
+																												<rows>
+																													<row>
+																														<label value="ConfigVehicular" style="color:red"/>
+																														<textbox id="txt_CatPort_10_Merca_AutoTransF_IdenOfi_ConfigVehicular" width="90%" tooltiptext="Atributo para expresar la clave de nomenclatura del autotransporte que es utilizado para transportar los bienes y/o mercancías."/>
+																														<button id="btn_ConfigVehicular" label="AGREGA" tooltiptext="Agrega la clave de nomenclatura del autotransporte que es utilizado para transportar los bienes y/o mercancías."/>
+																														<label value="PlacaVM" style="color:red"/>
+																														<textbox id="txt_CatPort_10_Merca_AutoTransF_IdenOfi_PlacaVM" width="90%" tooltiptext="Atributo para registrar solo los caracteres alfanuméricos, sin guiones ni espacios de la placa vehicular del autotransporte que es utilizado para transportar los bienes y/o mercancías."/>
+																														<label value="AnioModeloVM" style="color:red"/>
+																														<textbox id="txt_CatPort_10_Merca_AutoTransF_IdenOfi_AnioModeloVM" width="90%" tooltiptext="Atributo para registrar el año del autotransporte que es utilizado para transportar los bienes y/o mercancías."/>
+																													</row>
+																												</rows>
+																											</grid>
+																										</hbox>
+																									</groupbox>
+																								</row>
+																								<row>
+																									<groupbox id="gb_Seg_CP" mold="3d" width="100%">
+																										<caption image="/images/imagenes/Icono/Carta_Porte/Identi_Vehiculo.png" label="10 Carta Porte Mercancia AutotransporteFederal Seguros"/>
+																										<hbox>
+																											<grid fixedLayout="true" style="border:0px">
+																												<columns>
+																													<column width="10%"/>
+																													<column width="15%"/>
+																													<column width="10%"/>
+																													<column width="15%"/>
+																													<column width="10%"/>
+																													<column width="15%"/>
+																													<column width="10%"/>
+																													<column width="15%"/>
+																												</columns>
+																												<rows>
+																													<row>
+																														<label value="AseguraRespCivil" style="color:red"/>
+																														<textbox id="txt_CatPort_Seg_Merca_AutoTransF_AseguraRespCivil" width="90%" tooltiptext="Atributo para registrar el nombre de la aseguradora que cubre los riesgos por responsabilidad civil del autotransporte utilizado para el traslado de los bienes y/o mercancías."/>
+																														<label value="PolizaRespCivil" style="color:red"/>
+																														<textbox id="txt_CatPort_Seg_Merca_AutoTransF_PolizaRespCivil" width="90%" tooltiptext="Atributo para registrar el número de póliza asignado por la aseguradora, que cubre los riesgos por responsabilidad civil del autotransporte utilizado para el traslado de los bienes y/o mercancías."/>
+																														<label value="AseguraMedAmbiente"/>
+																														<textbox id="txt_CatPort_Seg_Merca_AutoTransF_AseguraMedAmbiente" width="90%" tooltiptext="Atributo para registrar el nombre de la aseguradora, que cubre los posibles daños al medio ambiente (aplicable para los transportistas de materiales, residuos o remanentes y desechos peligrosos)."/>
+																														<label value="PolizaMedAmbiente"/>
+																														<textbox id="txt_CatPort_Seg_Merca_AutoTransF_PolizaMedAmbiente" width="90%" tooltiptext="Atributo para registrar el número de póliza asignado por la aseguradora, que cubre los posibles daños al medio ambiente (aplicable para los transportistas de materiales, residuos o remanentes y desechos peligrosos)."/>
+																													</row>
+																													<row>
+																														<label value="AseguraCarga"/>
+																														<textbox id="txt_CatPort_Seg_Merca_AutoTransF_AseguraCarga" width="90%" tooltiptext="Atributo para registrar el nombre de la aseguradora que cubre los riesgos de la carga (bienes y/o mercancías) del autotransporte utilizado para el traslado."/>
+																														<label value="PolizaCarga"/>
+																														<textbox id="txt_CatPort_Seg_Merca_AutoTransF_PolizaCarga" width="90%" tooltiptext="Atributo para expresar el número de póliza asignado por la aseguradora que cubre los riesgos de la carga (bienes y/o mercancías) del autotransporte utilizado para el traslado."/>
+																														<label value="PrimaSeguro"/>
+																														<textbox id="txt_CatPort_Seg_Merca_AutoTransF_PrimaSeguro" width="90%" tooltiptext="Atributo para registrar el valor del importe por el cargo adicional convenido entre el transportista y el cliente, el cual será igual al valor de la prima del seguro contratado, conforme a lo establecido en la cláusula novena del Acuerdo por el que se homologa la Carta de Porte regulada por la Ley de Caminos, Puentes y Autotransporte Federal, con el complemento Carta Porte que debe acompañar al Comprobante Fiscal Digital por Internet (CFDI)."/>
+																														<space/>
+																														<space/>
+																													</row>
+																												</rows>
+																											</grid>
+																										</hbox>
+																									</groupbox>
+																								</row>
+																								<row>
+																									<groupbox id="gb_11_CP" mold="3d" width="100%">
+																										<caption image="/images/imagenes/Icono/Carta_Porte/Remolque.png" label="11 Carta Porte Mercancia AutotransporteFederal Remolque"/>
+																										<hbox>
+																											<grid fixedLayout="true" style="border:0px">
+																												<columns>
+																													<column width="10%"/>
+																													<column width="23%"/>
+																													<column width="8%"/>
+																													<column width="10%"/>
+																													<column width="23%"/>
+																													<column width="8%"/>
+																													<column width="8%"/>
+																												</columns>
+																												<rows>
+																													<row>
+																														<label value="SubTipoRem" style="color:red"/>
+																														<textbox id="txt_CatPort_11_Merca_AutoTransF_Remolque_SubTipoRem" width="90%" tooltiptext="Atributo para expresar la clave del subtipo de remolque o semirremolques que se emplean con el autotransporte para el traslado de los bienes y/o mercancías."/>
+																														<button id="btn_SubTipoRem" label="AGREGA" tooltiptext="Agrega la clave del subtipo de remolque o semirremolques que se emplean con el autotransporte para el traslado de los bienes y/o mercancías."/>
+																														<label value="Placa" style="color:red"/>
+																														<textbox id="txt_CatPort_11_Merca_AutoTransF_Remolque_Placa" width="90%" tooltiptext="Atributo para registrar los caracteres alfanuméricos, sin guiones ni espacios de la placa vehicular del remolque o semirremolque que es utilizado para transportar los bienes y/o mercancías."/>
+																														<!--button id="Agreegar_Remolque" label="Add Item"/>
+																														<button id="Borrar_Remolque" label="Delete Item"/-->
+																													</row>
+																												</rows>
+																											</grid>
+																										</hbox>
+																											<!--groupbox>
+																												<caption>Total Items :
+																													<label id="itemRemolqueCount"/>
+																												</caption>
+																												<listbox id="itemRemolqueList" rows="5">
+																													<listhead>
+																														<listheader label="Remolques"/>
+																													</listhead>
+																												</listbox>
+																											</groupbox-->
+																									</groupbox>
+																								</row>
+																							</rows>
+																						</grid>
+																					</hbox>
+																				</groupbox>
+																			</row>
+																			<row>
+																				<groupbox id="gb_12_CP" mold="3d" width="100%">
+																					<caption image="/images/imagenes/Icono/Carta_Porte/Maritimo.jpg" label="12 Carta Porte Mercancia TransporteMaritimo"/>
+																					<hbox>
+																						<grid fixedLayout="true" style="border:0px">
+																							<columns>
+																								<column width="10%"/>
+																								<column width="15%"/>
+																								<column width="10%"/>
+																								<column width="15%"/>
+																								<column width="10%"/>
+																								<column width="15%"/>
+																							</columns>
+																							<rows>
+																								<row>
+																									<label value="PermSCT"/>
+																									<textbox id="txt_CatPort_12_Merca_TransMaritimo_PermSCT" width="90%" tooltiptext="Atributo para registrar la clave del permiso proporcionado por la SCT, la cual debe corresponder con la embarcación que se está utilizando para el traslado de los bienes y/o mercancías, de acuerdo al catálogo correspondiente c_TipoPermiso publicado en el portal del SAT en Internet."/>
+																									<button id="btn_12_PermSCT" label="AGREGA" tooltiptext="Agrega la clave del permiso proporcionado por la SCT, la cual debe corresponder con la embarcación que se está utilizando para el traslado de los bienes y/o mercancías."/>
+																									<space/>
+																									<label value="NumPermisoSCT"/>
+																									<textbox id="txt_CatPort_12_Merca_TransMaritimo_NumPermisoSCT" width="90%" tooltiptext="Atributo para registrar el número del permiso otorgado por la SCT a la embarcación utilizada para el traslado de los bienes y/o mercancías."/>
+																								</row>
+																								<row>
+																									<label value="TipoEmbarcacion" style="color:red"/>
+																									<textbox id="txt_CatPort_12_Merca_TransMaritimo_TipoEmbarcacion" width="90%" tooltiptext="Atributo para registrar la clave de identificación del tipo de embarcación que es utilizado para trasladar los bienes y/o mercancías."/>
+																									<button id="btn_TipoEmbarcacion" label="AGREGA" tooltiptext="Agrega la clave de identificación del tipo de embarcación que es utilizado para trasladar los bienes y/o mercancías."/>
+																									<space/>
+																									<label value="NombreAseg"/>
+																									<textbox id="txt_CatPort_12_Merca_TransMaritimo_NombreAseg" width="90%" tooltiptext="Atributo para registrar el nombre de la aseguradora que cubre la protección e indemnización por responsabilidad civil de la embarcación en el traslado de los bienes y/o mercancías."/>
+																								</row>
+																								<row>
+																									<label value="NumPolizaSeguro"/>
+																									<textbox id="txt_CatPort_12_Merca_TransMaritimo_NumPolizaSeguro" width="90%" tooltiptext="Atributo para registrar el número de póliza asignada por la aseguradora que cubre la protección e indemnización por responsabilidad civil de la embarcación en el traslado de los bienes y/o mercancías."/>
+																									<label value="Matricula" style="color:red"/>
+																									<textbox id="txt_CatPort_12_Merca_TransMaritimo_Matricula" width="90%" tooltiptext="Atributo para registrar el número de la matrícula o registro de la embarcación que es utilizada para transportar los bienes y/o mercancías."/>
+																									<label value="NumeroOMI" style="color:red"/>
+																									<textbox id="txt_CatPort_12_Merca_TransMaritimo_NumeroOMI" width="90%" tooltiptext="Atributo para registrar el número de identificación asignado por la Organización Marítima Internacional, a la embarcación encargada de transportar los bienes y/o mercancías."/>
+																								</row>
+																								<row>
+																									<label value="AnioEmbarcacion"/>
+																									<textbox id="txt_CatPort_12_Merca_TransMaritimo_AnioEmbarcacion" width="90%" tooltiptext="Atributo para registrar el año de la embarcación en la que se transportan los bienes y/o mercancías."/>
+																									<label value="NombreEmbarc"/>
+																									<textbox id="txt_CatPort_12_Merca_TransMaritimo_NombreEmbarc" width="90%" tooltiptext="Atributo para registrar el nombre de la embarcación en la que se realiza el traslado de los bienes y/o mercancías."/>
+																									<label value="NacionalidadEmbarc" style="color:red"/>
+																									<textbox id="txt_CatPort_12_Merca_TransMaritimo_NacionalidadEmbarc" width="90%" tooltiptext="Atributo para registrar la clave del país correspondiente a la nacionalidad de la embarcación que transporta los bienes y/o mercancías."/>
+																								</row>
+																								<row>
+																									<label value="TipoCarga" style="color:red"/>
+																									<textbox id="txt_CatPort_12_Merca_TransMaritimo_TipoCarga" width="90%" tooltiptext="Atributo para especificar el tipo de carga en el cual se clasifican los bienes y/o mercancías que se transportan en la embarcación."/>
+																									<button id="btn_TipoCarga" label="AGREGA" tooltiptext="Agrega el tipo de carga bajo el cual se clasifican los bienes y/o mercancías que se transportan en la embarcación."/>
+																									<space/>
+																									<label value="UnidadesDeArqBruto" style="color:red"/>
+																									<textbox id="txt_CatPort_12_Merca_TransMaritimo_UnidadesDeArqBruto" width="90%" tooltiptext="Atributo para registrar el valor de las unidades de arqueo bruto conforme a las medidas internacionales definidas por el ITC para cada tipo de buque o embarcación en la que se transportan los bienes y/o mercancías."/>
+																								</row>
+																								<row>
+																									<label value="NumCertITC" style="color:red"/>
+																									<textbox id="txt_CatPort_12_Merca_TransMaritimo_NumCertITC" width="90%" tooltiptext="Atributo para registrar el número del certificado emitido por la ITC para la embarcación o buque que transporta los bienes y/o mercancías."/>
+																									<label value="Eslora"/>
+																									<textbox id="txt_CatPort_12_Merca_TransMaritimo_Eslora" width="90%" tooltiptext="Atributo para registrar la longitud de eslora, definida en pies, con la que cuenta la embarcación o el buque en el que se transportan los bienes y/o mercancías."/>
+																									<label value="Manga"/>
+																									<textbox id="txt_CatPort_12_Merca_TransMaritimo_Manga" width="90%" tooltiptext="Atributo para registrar la longitud de manga, definida en pies, con la que cuenta la embarcación o el buque en el que se transportan los bienes y/o mercancías."/>
+																								</row>
+																								<row>
+																									<label value="NumAutorizacionNaviero" style="color:red"/>
+																									<textbox id="txt_CatPort_12_Merca_TransMaritimo_NumAutorizacionNaviero" width="90%" tooltiptext="Atributo para expresar el número de la autorización como agente naviero consignatario emitida por la SCT."/>
+																									<button id="btn_NumAutoNav" label="AGREGA" tooltiptext="Agrega el número de la autorización como agente naviero consignatario emitida por la SCT."/>
+																									<space/>
+																									<label value="Calado"/>
+																									<textbox id="txt_CatPort_12_Merca_TransMaritimo_Calado" width="90%" tooltiptext="Atributo para registrar la longitud del calado, definida en pies, con la que cuenta la embarcación o el buque en el que se transportan los bienes y/o mercancías."/>
+																								</row>
+																								<row>
+																									<label value="LineaNaviera"/>
+																									<textbox id="txt_CatPort_12_Merca_TransMaritimo_LineaNaviera" width="90%" tooltiptext="Atributo para registrar el nombre de la línea naviera autorizada de gestionar el traslado de los bienes y/o mercancías por vía marítima."/>
+																									<label value="NombreAgenteNaviero" style="color:red"/>
+																									<textbox id="txt_CatPort_12_Merca_TransMaritimo_NombreAgenteNaviero" width="90%" tooltiptext="Atributo para registrar el nombre del agente naviero consignatario autorizado para gestionar el traslado de los bienes y/o mercancías por vía marítima."/>
+																									<label value="NumViaje"/>
+																									<textbox id="txt_CatPort_12_Merca_TransMaritimo_NumViaje" width="90%" tooltiptext="Atributo para registrar el número del viaje con el que se identifica el traslado de los bienes y/o mercancías en el buque o la embarcación."/>
+																								</row>
+																								<row>
+																									<label value="NumConocEmbarc"/>
+																									<textbox id="txt_CatPort_12_Merca_TransMaritimo_NumConocEmbarc" width="90%" tooltiptext="Atributo para registrar el número de conocimiento de embarque con el que se identifica el traslado de los bienes y/o mercancías."/>
+																									<space/>
+																									<space/>
+																									<space/>
+																									<space/>
+																								</row>
+																							</rows>
+																						</grid>
+																					</hbox>
+																					<hbox>
+																						<grid fixedLayout="true" style="border:0px">
+																							<columns>
+																								<column width="100%"/>
+																							</columns>
+																							<rows>
+																								<row>
+																									<groupbox id="gb_13_CP" mold="3d" width="100%">
+																										<caption image="/images/imagenes/Icono/Carta_Porte/Contenedor.jpg" label="13 Carta Porte Mercancia TransporteMaritimo Contenedor"/>
+																										<hbox>
+																											<grid fixedLayout="true" style="border:0px">
+																												<columns>
+																													<column width="8%"/>
+																													<column width="20%"/>
+																													<column width="8%"/>
+																													<column width="20%"/>
+																													<column width="8%"/>
+																													<column width="20%"/>
+																													<column width="8%"/>
+																													<column width="8%"/>
+																												</columns>
+																												<rows>
+																													<row>
+																														<label value="MatriculaContenedor" style="color:red"/>
+																														<textbox id="txt_CatPort_13_Merca_TransMaritimo_Cont_MatriculaContenedor" width="90%" tooltiptext="Atributo para registrar la matrícula o el número de identificación del contenedor marítimo en el que se transportan los bienes y/o mercancías, el cual está integrado por el código del propietario, el número de serie y el dígito de control correspondiente."/>
+																														<label value="TipoContenedor" style="color:red"/>
+																														<listbox id="lb_CatPort_13_Merca_TransMaritimo_Cont_TipoContenedor" mold="select" width="90%" tooltiptext="Atributo para registrar la matrícula o el número de identificación del contenedor marítimo en el que se transportan los bienes y/o mercancías, el cual está integrado por el código del propietario, el número de serie y el dígito de control correspondiente.">
+																															<listitem value="-1" label="SELECCIONE"/>
+																															<listitem value="1" label="CM001-Contenedores refrigerados de 20FT"/>
+																															<listitem value="2" label="CM002-Contenedores refrigerados de 40FT"/>
+																															<listitem value="3" label="CM003-Contenedores estandar de 8FT"/>
+																															<listitem value="4" label="CM004-Contenedores estandar de 10FT"/>
+																															<listitem value="5" label="CM005-Contenedores estandar de 20FT"/>
+																															<listitem value="6" label="CM006-Contenedores estandar de 40FT"/>
+																															<listitem value="7" label="CM007-Contenedores Open Side"/>
+																															<listitem value="8" label="CM008-Contenedor Isotanque"/>
+																															<listitem value="9" label="CM009-Contenedor flat racks"/>
+																														</listbox>
+																														<label value="NumPrecinto"/>
+																														<textbox id="txt_CatPort_13_Merca_TransMaritimo_Cont_NumPrecinto" width="90%" tooltiptext="Atributo para registrar el número del sello o precinto de los contenedores marítimos que son utilizados para trasladar los bienes y/o mercancías."/>
+																														<!--button id="Agreegar_Contenedor" label="Add Item"/>
+																														<button id="Borrar_Contenedor" label="Delete Item"/-->
+																													</row>
+																												</rows>
+																											</grid>
+																										</hbox>
+																											<!--groupbox>
+																												<caption>Total Items :
+																													<label id="itemContenedorCount"/>
+																												</caption>
+																												<listbox id="itemContenedorList" rows="5">
+																													<listhead>
+																														<listheader label="Contenedor"/>
+																													</listhead>
+																												</listbox>
+																											</groupbox-->
+																									</groupbox>
+																								</row>
+																							</rows>
+																						</grid>
+																					</hbox>
+																				</groupbox>
+																			</row>
+																			<row>
+																				<groupbox id="gb_14_CP" mold="3d" width="100%">
+																					<caption image="/images/imagenes/Icono/Carta_Porte/Aereo.jpg" label="14 Carta Porte Mercancia TransporteAereo"/>
+																					<hbox>
+																						<grid fixedLayout="true" style="border:0px">
+																							<columns>
+																								<column width="10%"/>
+																								<column width="13%"/>
+																								<column width="10%"/>
+																								<column width="15%"/>
+																								<column width="10%"/>
+																								<column width="5%"/>
+																								<column width="10%"/>
+																								<column width="10%"/>
+																							</columns>
+																							<rows>
+																								<row>
+																									<label value="PermSCT" style="color:red"/>
+																									<textbox id="txt_CatPort_14_Merca_TransAereo_PermSCT" width="90%" tooltiptext="Atributo para registrar la clave del permiso proporcionado por la SCT o la autoridad análoga, la cual debe corresponder con la aeronave que se está utilizando para realizar el traslado de los bienes y/o mercancías por vía aérea, de acuerdo al catálogo correspondiente, Debe ser conforme con el catálogo c_TipoPermiso publicado en el portal del SAT en Internet."/>
+																									<button id="btn_14_PermSCT" label="AGREGA" tooltiptext="Agrega la clave del permiso proporcionado por la SCT o la autoridad análoga, la cual debe corresponder con la aeronave que se está utilizando para realizar el traslado de los bienes y/o mercancías por vía aérea."/>
+																									<space/>
+																									<label value="NumPermisoSCT" style="color:red"/>
+																									<textbox id="txt_CatPort_14_Merca_TransAereo_NumPermisoSCT" width="90%" tooltiptext="Atributo para registrar el número de permiso o valor análogo proporcionado por la SCT o la autoridad análoga, según corresponda, para el transporte de bienes y/o mercancías por vía aérea."/>
+																									<label value="MatriculaAeronave"/>
+																									<textbox id="txt_CatPort_14_Merca_TransAereo_MatriculaAeronave" width="90%" tooltiptext="Atributo para registrar el número de la matrícula de la aeronave con la que se realiza el traslado de los bienes y/o mercancías en territorio nacional el cual tiene una longitud de 10 posiciones y se compone de valores alfanuméricos, más el carácter especial denominado guion medio “-“."/>
+																								</row>
+																								<row>
+																									<label value="NombreAseg"/>
+																									<textbox id="txt_CatPort_14_Merca_TransAereo_NombreAseg" width="90%" tooltiptext="Atributo para registrar el nombre de la aseguradora que cubre los riesgos de la aeronave con la que transportan los bienes y/o mercancías."/>
+																									<label value="NumPolizaSeguro"/>
+																									<textbox id="txt_CatPort_14_Merca_TransAereo_NumPolizaSeguro" width="90%" tooltiptext="Atributo para registrar el nombre de la aseguradora que cubre los riesgos de la aeronave con la que transportan los bienes y/o mercancías."/>
+																									<label value="NumeroGuia" style="color:red"/>
+																									<textbox id="txt_CatPort_14_Merca_TransAereo_NumeroGuia" width="90%" tooltiptext="Atributo para registrar el nombre de la aseguradora que cubre los riesgos de la aeronave con la que transportan los bienes y/o mercancías."/>
+																									<label value="LugarContrato"/>
+																									<textbox id="txt_CatPort_14_Merca_TransAereo_LugarContrato" width="90%" tooltiptext="Atributo para registrar el nombre de la aseguradora que cubre los riesgos de la aeronave con la que transportan los bienes y/o mercancías."/>
+																								</row>
+																								<row>
+																									<label value="CodigoTransportista" style="color:red"/>
+																									<textbox id="txt_CatPort_14_Merca_TransAereo_CodigoTransportista" width="90%" tooltiptext="Atributo para registrar el valor del código que tiene asignado el transportista el cual debe contener alguna de las claves contenidas en el catálogo correspondiente c_CodigoTransporteAereo publicado en el portal del SAT en Internet."/>
+																									<button id="btn_CodigoTransportista" label="AGREGA" tooltiptext="Agrega el valor del código que tiene asignado el transportista el cual debe contener alguna de las claves contenidas en el catálogo correspondiente."/>
+																									<space/>
+																									<label value="RFCEmbarcador"/>
+																									<textbox id="txt_CatPort_14_Merca_TransAereo_RFCEmbarcador" width="90%" tooltiptext="Atributo para registrar el RFC del embarcador de los bienes y/o mercancías que se trasladan."/>
+																									<label value="NumRegIdTribEmbarc"/>
+																									<textbox id="txt_CatPort_14_Merca_TransAereo_NumRegIdTribEmbarc" width="90%" tooltiptext="Atributo para incorporar el número de identificación o registro fiscal del país de residencia cuando el embarcador sea residente en el extranjero para los efectos fiscales correspondientes de los bienes y/o mercancías que se trasladan."/>
+																								</row>
+																								<row>
+																									<label value="ResidenciaFiscalEmbarc"/>
+																									<textbox id="txt_CatPort_14_Merca_TransAereo_ResidenciaFiscalEmbarc" width="90%" tooltiptext="Atributo para registrar la clave del país de residencia para efectos fiscales del embarcador de los bienes y/o mercancías."/>
+																									<label value="NombreEmbarcador"/>
+																									<textbox id="txt_CatPort_14_Merca_TransAereo_NombreEmbarcador" width="90%" tooltiptext="Atributo para registrar la clave del país de residencia para efectos fiscales del embarcador de los bienes y/o mercancías."/>
+																									<space/>
+																									<space/>
+																									<space/>
+																									<space/>
+																								</row>
+																							</rows>
+																						</grid>
+																					</hbox>
+																				</groupbox>
+																			</row>
+																			<row>
+																				<groupbox id="gb_15_CP" mold="3d" width="100%">
+																					<caption image="/images/imagenes/Icono/Carta_Porte/Ferroriario.jpg" label="15 Carta Porte Mercancia TransporteFerroviario"/>
+																					<hbox>
+																						<grid fixedLayout="true" style="border:0px">
+																							<columns>
+																								<column width="10%"/>
+																								<column width="15%"/>
+																								<column width="10%"/>
+																								<column width="15%"/>
+																								<column width="10%"/>
+																								<column width="15%"/>
+																								<column width="10%"/>
+																								<column width="15%"/>
+																							</columns>
+																							<rows>
+																								<row>
+																									<label value="TipoDeServicio" style="color:red"/>
+																									<!--textbox id="txt_CatPort_15_Merca_TransFerrov_TipoDeServicio" width="90%" tooltiptext="Registra la clave del tipo de servicio proporcionado para el traslado de los bienes o mercancÃ­as vÃ­a fÃ©rrea."/-->
+																									<listbox id="lb_CatPort_15_Merca_TransFerrov_TipoDeServicio" mold="select" width="90%" tooltiptext="Atributo para registrar la clave del tipo de servicio utilizado para el traslado de los bienes y/o mercancías por vía férrea.">
+																										<listitem value="-1" label="SELECCIONE"/>
+																										<listitem value="1" label="TS01-Carros Ferroviarios"/>
+																										<listitem value="2" label="TS02-Carros Ferroviarios intermodal"/>
+																										<listitem value="3" label="TS03-Tren unitario de carros ferroviarios"/>
+																										<listitem value="4" label="TS04-Tren unitario Intermodal"/>
+																									</listbox>
+																									<label value="NombreAseg"/>
+																									<textbox id="txt_CatPort_15_Merca_TransFerrov_NombreAseg" width="90%" tooltiptext="Atributo para registrar el nombre de la aseguradora que cubre los riesgos para el traslado de los bienes y/o mercancías por vía férrea."/>
+																									<label value="NumPolizaSeguro"/>
+																									<textbox id="txt_CatPort_15_Merca_TransFerrov_NumPolizaSeguro" width="90%" tooltiptext="Atributo para registrar el número de póliza asignada por la aseguradora para la protección e indemnización por responsabilidad civil en el traslado de los bienes y/o mercancías que se realiza por vía férrea."/>
+																									<label value="TipoDeTrafico" style="color:red"/>
+																									<textbox id="txt_CatPort_15_Merca_TransFerrov_TipoDeTrafico" width="90%" tooltiptext="Atributo para registrar la clave del tipo de tráfico (interrelación entre concesionarios) para realizar el traslado de los bienes y/o mercancías por vía férrea dentro del territorio nacional."/>
+																								</row>
+																							</rows>
+																						</grid>
+																					</hbox>
+																					<hbox>
+																						<grid fixedLayout="true" style="border:0px">
+																							<columns>
+																								<column width="100%"/>
+																							</columns>
+																							<rows>
+																								<row>
+																									<groupbox id="gb_16_CP" mold="3d" width="100%">
+																										<caption image="/images/imagenes/Icono/Carta_Porte/Derecho_paso_ferro.jpg" label="16 Carta Porte Mercancia TransporteFerroviario DerechosDePaso"/>
+																										<hbox>
+																											<grid fixedLayout="true" style="border:0px">
+																												<columns>
+																													<column width="10%"/>
+																													<column width="15%"/>
+																													<column width="10%"/>
+																													<column width="15%"/>
+																													<column width="10%"/>
+																													<column width="8%"/>
+																													<column width="8%"/>
+																												</columns>
+																												<rows>
+																													<row>
+																														<label value="TipoDerechoDePaso" style="color:red"/>
+																														<textbox id="txt_CatPort_16_Merca_TransFerrov_DerePso_TipoDerechoDePaso" width="90%" tooltiptext="Atributo para registrar la clave del derecho de paso pagado por el transportista en las vías férreas de las cuales no es concesionario o asignatario."/>
+																														<button id="btn_TipoDerechoDePaso" label="AGREGA" tooltiptext="Agrega la clave del derecho de paso pagado por el transportista en las vías férreas de las cuales no es concesionario o asignatario."/>
+																														<label value="KilometrajePagado" style="color:red"/>
+																														<textbox id="txt_CatPort_16_Merca_TransFerrov_DerePso_KilometrajePagado" width="90%" tooltiptext="Atributo para registrar el total de kilómetros pagados por el transportista en las vías férreas de las cuales no es concesionario o asignatario con el derecho de paso."/>
+																														<!--button id="Agreegar_Derechos" label="Add Item"/>
+																														<button id="Borrar_Derechos" label="Delete Item"/-->
+																													</row>
+																												</rows>
+																											</grid>
+																										</hbox>
+																											<!--groupbox>
+																												<caption>Total Items :
+																													<label id="itemDerechosCount"/>
+																												</caption>
+																												<listbox id="itemDerechosList" rows="5">
+																													<listhead>
+																														<listheader label="Derechos de Paso"/>
+																													</listhead>
+																												</listbox>
+																											</groupbox-->
+																									</groupbox>
+																								</row>
+																								<row>
+																									<groupbox id="gb_17_CP" mold="3d" width="100%">
+																										<caption image="/images/imagenes/Icono/Carta_Porte/Ferroriario.jpg" label="17 Carta Porte Mercancia TransporteFerroviario Carro"/>
+																										<hbox>
+																											<grid fixedLayout="true" style="border:0px">
+																												<columns>
+																													<column width="10%"/>
+																													<column width="15%"/>
+																													<column width="10%"/>
+																													<column width="15%"/>
+																													<column width="10%"/>
+																													<column width="15%"/>
+																													<column width="10%"/>
+																													<column width="10%"/>
+																												</columns>
+																												<rows>
+																													<row>
+																														<label value="TipoCarro" style="color:red"/>
+																														<!--textbox id="txt_CatPort_17_Merca_TransFerrov_Carro_TipoCarro" width="90%" tooltiptext="Registra la clave del tipo de carro utilizado para el traslado de los bienes o mercancÃ­as vÃ­a fÃ©rrea."/-->
+																														<listbox id="lb_CatPort_17_Merca_TransFerrov_Carro_TipoCarro" mold="select" width="90%" tooltiptext="Atributo para registrar la clave del tipo de carro utilizado para el traslado de los bienes y/o mercancías por vía férrea.">
+																															<listitem value="-1" label="SELECCIONE"/>
+																															<listitem value="1" label="TC01-Furgón"/>
+																															<listitem value="2" label="TC02-Góndola"/>
+																															<listitem value="3" label="TC03-Tolva"/>
+																															<listitem value="4" label="TC04-Tanque"/>
+																															<listitem value="5" label="TC05-Plataforma Intermodal"/>
+																															<listitem value="6" label="TC06-Plataforma Especializada"/>
+																															<listitem value="7" label="TC07-Plataforma Automotriz"/>
+																														</listbox>
+																														<label value="MatriculaCarro" style="color:red"/>
+																														<textbox id="txt_CatPort_17_Merca_TransFerrov_Carro_MatriculaCarro" width="90%" tooltiptext="Atributo para registrar el número de contenedor, carro de ferrocarril o número económico del vehículo en el que se trasladan los bienes y/o mercancías por vía férrea."/>
+																														<label value="GuiaCarro" style="color:red"/>
+																														<textbox id="txt_CatPort_17_Merca_TransFerrov_Carro_GuiaCarro" width="90%" tooltiptext="Atributo para registrar el número de guía asignado al contenedor, carro de ferrocarril o vehículo, en el que se trasladan los bienes y/o mercancías por vía férrea."/>
+																														<label value="ToneladasNetasCarro" style="color:red"/>
+																														<textbox id="txt_CatPort_17_Merca_TransFerrov_Carro_ToneladasNetasCarro" width="90%" tooltiptext="Atributo para registrar la cantidad de las toneladas netas depositadas en el contenedor, carro de ferrocarril o vehículo en el que se trasladan los bienes y/o mercancías por vía férrea."/>
+																													</row>
+																													<!--row>
+																														<space/>
+																														<space/>
+																														<space/>
+																														<space/>
+																														<space/>
+																														<space/>
+																														<button id="Agreegar_Carro" label="Add Item"/>
+																														<button id="Borrar_Carro" label="Delete Item"/>
+																													</row-->
+																												</rows>
+																											</grid>
+																												<!--groupbox>
+																													<caption>Total Items :
+																														<label id="itemCarroCount"/>
+																													</caption>
+																													<listbox id="itemCarroList" rows="5">
+																														<listhead>
+																															<listheader label="Carro"/>
+																														</listhead>
+																													</listbox>
+																												</groupbox-->
+																										</hbox>
+																										<hbox>
+																											<grid fixedLayout="true" style="border:0px">
+																												<columns>
+																													<column width="100%"/>
+																												</columns>
+																												<rows>
+																													<row>
+																														<groupbox id="gb_18_CP" mold="3d" width="100%">
+																															<caption image="/images/imagenes/Icono/Carta_Porte/Contenedor.jpg" label="18 Carta Porte Mercancia TransporteFerroviario Carro Contenedor"/>
+																															<hbox>
+																																<grid fixedLayout="true" style="border:0px">
+																																	<columns>
+																																		<column width="10%"/>
+																																		<column width="15%"/>
+																																		<column width="10%"/>
+																																		<column width="15%"/>
+																																		<column width="10%"/>
+																																		<column width="15%"/>
+																																	</columns>
+																																	<rows>
+																																		<row>
+																																			<label value="TipoContenedor" style="color:red"/>
+																																			<!--textbox id="txt_CatPort_18_Merca_TransFerrov_Carro_Cont_TipoContenedor" width="90%" tooltiptext="Registra la clave con las que se identifica el tipo de contenedor o vagÃ³n en el que se traslada los bienes o mercancÃ­as."/-->
+																																			<listbox id="lb_CatPort_18_Merca_TransFerrov_Carro_Cont_TipoContenedor" mold="select" width="90%" tooltiptext="Atributo para registrar la clave con la que se identifica al tipo de contenedor o el vagón en el que se realiza el traslado de los bienes y/o mercancías.">
+																																				<listitem value="-1" label="SELECCIONE"/>
+																																				<listitem value="1" label="TC01-20'	Contenedor de 6.1 Mts de longitud"/>
+																																				<listitem value="2" label="TC02-40'	Contenedor de 12.2 Mts de longitud"/>
+																																				<listitem value="3" label="TC03-45'	Contenedor de 13.7 Mts de longitud"/>
+																																				<listitem value="4" label="TC04-48'	Contenedor de 14.6 Mts de longitud"/>
+																																				<listitem value="5" label="TC05-53'	Contenedor de 16.1 Mts de longitud"/>
+																																			</listbox>
+																																			<label value="PesoContenedorVacio" style="color:red"/>
+																																			<textbox id="txt_CatPort_18_Merca_TransFerrov_Carro_Cont_PesoContenedorVacio" width="90%" tooltiptext="Atributo para registrar en kilogramos, el peso del contenedor vacío en el que se trasladan los bienes y/o mercancías."/>
+																																			<label value="PesoNetoMercancia" style="color:red"/>
+																																			<textbox id="txt_CatPort_18_Merca_TransFerrov_Carro_Cont_PesoNetoMercancia" width="90%" tooltiptext="Atributo para registrar en kilogramos, el peso del contenedor vacío en el que se trasladan los bienes y/o mercancías."/>
+																																		</row>
+																																		<!--row>
+																																			<space/>
+																																			<space/>
+																																			<space/>
+																																			<space/>
+																																			<button id="Agreegar_ContenedorFerro" label="Add Item"/>
+																																			<button id="Borrar_ContenedorFerro" label="Delete Item"/>
+																																		</row-->
+																																	</rows>
+																																</grid>
+																															</hbox>
+																																<!--groupbox>
+																																	<caption>Total Items :
+																																		<label id="itemContenedorFerroCount"/>
+																																	</caption>
+																																	<listbox id="itemContenedorFerroList" rows="5">
+																																		<listhead>
+																																			<listheader label="Contenedor"/>
+																																		</listhead>
+																																	</listbox>
+																																</groupbox-->
+																														</groupbox>
+																													</row>
+																												</rows>
+																											</grid>
+																										</hbox>
+																									</groupbox>
+																								</row>
+																							</rows>
+																						</grid>
+																					</hbox>
+																				</groupbox>
+																			</row>
+																		</rows>
+																	</grid>
+																</hbox>
+															</groupbox>
+														</row>
+														<row>
+															<groupbox id="gb_19_CP" mold="3d" width="100%">
+																<caption image="/images/imagenes/Icono/Carta_Porte/Figura_Trans.jpg" label="19 Carta Porte FiguraTransporte"/>
+																<hbox>
+																	<grid fixedLayout="true" style="border:0px">
+																		<columns>
+																			<column width="10%"/>
+																			<column width="87%"/>
+																		</columns>
+																		<rows/>
+																	</grid>
+																</hbox>
+																<hbox>
+																	<grid fixedLayout="true" style="border:0px">
+																		<columns>
+																			<column width="100%"/>
+																		</columns>
+																		<rows>
+																			<row>
+																				<groupbox id="gb_20_CP" mold="3d" width="100%">
+																					<caption image="/images/imagenes/Icono/Carta_Porte/Operador.png" label="20 Carta Porte FiguraTransporte TiposFigura"/>
+																					<hbox>
+																						<grid fixedLayout="true" style="border:0px">
+																							<columns>
+																								<column width="10%"/>
+																								<column width="15%"/>
+																								<column width="10%"/>
+																								<column width="15%"/>
+																								<column width="10%"/>
+																								<column width="15%"/>
+																							</columns>
+																							<rows>
+																								<row>
+																									<label value="TipoFigura" style="color:red"/>
+																									<textbox id="txt_CatPort_FigTrans_TipoFigura" width="90%" tooltiptext="Atributo para registrar la clave de la figura de transporte que interviene en el traslado de los bienes y/o mercancías."/>
+																									<label value="RFCFigura"/>
+																									<textbox id="txt_CatPort_FigTrans_RFCFigura" width="90%" tooltiptext="Atributo para registrar el RFC de la figura de transporte que interviene en el traslado de los bienes y/o mercancías."/>
+																									<label value="NumLicencia"/>
+																									<textbox id="txt_CatPort_FigTrans_NumLicencia" width="90%" tooltiptext="Atributo para expresar el número de la licencia o el permiso otorgado al operador del autotransporte de carga en el que realiza el traslado de los bienes y/o mercancías."/>
+																								</row>
+																								<row>
+																									<label value="NombreFigura"/>
+																									<textbox id="txt_CatPort_FigTrans_NombreFigura" width="90%" tooltiptext="Atributo para expresar el número de la licencia o el permiso otorgado al operador del autotransporte de carga en el que realiza el traslado de los bienes y/o mercancías."/>
+																									<label value="NumRegIdTribFigura"/>
+																									<textbox id="txt_CatPort_FigTrans_NumRegIdTribFigura" width="90%" tooltiptext="Atributo para registrar el número de identificación o registro fiscal del país de residencia de la figura de transporte que interviene en el traslado de los bienes y/o mercancías, cuando se trate de residentes en el extranjero para los efectos fiscales correspondientes."/>
+																									<label value="ResidenciaFiscalFigura"/>
+																									<textbox id="txt_CatPort_FigTrans_ResidenciaFiscalFigura" width="90%" tooltiptext="Atributo para registrar la clave del país de residencia de la figura de transporte que interviene en el traslado de los bienes y/o mercancías para los efectos fiscales correspondientes."/>
+																								</row>
+																							</rows>
+																						</grid>
+																					</hbox>
+																					<hbox>
+																						<grid fixedLayout="true" style="border:0px">
+																							<columns>
+																								<column width="100%"/>
+																							</columns>
+																							<rows>
+																								<row>
+																									<groupbox id="gb_PartesTransporte_CP" mold="3d" width="100%">
+																										<caption image="/images/imagenes/Icono/Carta_Porte/Domicilio.jpg" label="21 Carta Porte FiguraTransporte PartesTransporte"/>
+																										<hbox>
+																											<grid fixedLayout="true" style="border:0px">
+																												<columns>
+																													<column width="10%"/>
+																													<column width="15%"/>
+																													<column width="10%"/>
+																													<column width="15%"/>
+																													<column width="10%"/>
+																													<column width="15%"/>
+																												</columns>
+																												<rows>
+																													<row>
+																														<label value="ParteTransporte" style="color:red"/>
+																														<textbox id="txt_CatPort_FigTrans_ParteTransporte" width="90%" tooltiptext="Atributo para registrar información de la parte del transporte de la cual el emisor del comprobante es distinto al dueño de la misma, por ejemplo: vehículos, máquinas, contenedores, plataformas, etc; que se utilicen para el traslado de los bienes y/o mercancías."/>
+																														<space/>
+																														<space/>
+																														<space/>
+																														<space/>
+																													</row>
+																												</rows>
+																											</grid>
+																										</hbox>
+																										<hbox>
+																											<grid fixedLayout="true" style="border:0px">
+																												<columns>
+																													<column width="100%"/>
+																												</columns>
+																												<rows>
+																													<row>
+																														<groupbox id="gb_21_CP" mold="3d" width="100%">
+																															<caption image="/images/imagenes/Icono/Carta_Porte/Domicilio.jpg" label="21 Carta Porte FiguraTransporte Domicilio"/>
+																															<hbox>
+																																<grid fixedLayout="true" style="border:0px">
+																																	<columns>
+																																		<column width="10%"/>
+																																		<column width="15%"/>
+																																		<column width="10%"/>
+																																		<column width="15%"/>
+																																		<column width="10%"/>
+																																		<column width="15%"/>
+																																	</columns>
+																																	<rows>
+																																		<row>
+																																			<label value="Calle"/>
+																																			<textbox id="txt_CatPort_21_FigTrans_Oper_Domi_Calle" width="90%" tooltiptext="Atributo que sirve para registrar la calle en la que está ubicado el domicilio del(los) tipo(s) de figura transporte."/>
+																																			<label value="NumeroExterior"/>
+																																			<textbox id="txt_CatPort_21_FigTrans_Oper_Domi_NumeroExterior" width="90%" tooltiptext="Atributo que sirve para registrar el número exterior en donde se ubica el domicilio del(los) tipo(s) de figura transporte."/>
+																																			<label value="NumeroInterior"/>
+																																			<textbox id="txt_CatPort_21_FigTrans_Oper_Domi_NumeroInterior" width="90%" tooltiptext="Atributo que sirve para registrar el número exterior en donde se ubica el domicilio del(los) tipo(s) de figura transporte."/>
+																																		</row>
+																																		<row>
+																																			<label value="Colonia"/>
+																																			<textbox id="txt_CatPort_21_FigTrans_Oper_Domi_Colonia" width="90%" tooltiptext="Atributo que sirve para registrar el número exterior en donde se ubica el domicilio del(los) tipo(s) de figura transporte."/>
+																																			<label value="Localidad"/>
+																																			<textbox id="txt_CatPort_21_FigTrans_Oper_Domi_Localidad" width="90%" tooltiptext="Atributo que sirve para registrar el número exterior en donde se ubica el domicilio del(los) tipo(s) de figura transporte."/>
+																																			<label value="Referencia"/>
+																																			<textbox id="txt_CatPort_21_FigTrans_Oper_Domi_Referencia" width="90%" tooltiptext="Atributo para registrar una referencia geográfica adicional que permita una fácil o precisa ubicación del domicilio del(los) tipo(s) de figura transporte; por ejemplo, las coordenadas del GPS."/>
+																																		</row>
+																																		<row>
+																																			<label value="Municipio"/>
+																																			<textbox id="txt_CatPort_21_FigTrans_Oper_Domi_Municipio" width="90%" tooltiptext="Atributo para registrar la clave del municipio, delegación o alcaldía, condado o dato análogo en donde se encuentra ubicado el domicilio del(los) tipo(s) de figura transporte."/>
+																																			<label value="Estado" style="color:red"/>
+																																			<textbox id="txt_CatPort_21_FigTrans_Oper_Domi_Estado" width="90%" tooltiptext="Atributo para registrar el estado, entidad, región, comunidad, o dato análogo en donde se encuentra ubicado el domicilio del(los) tipo(s) de figura transporte."/>
+																																			<label value="Pais" style="color:red"/>
+																																			<textbox id="txt_CatPort_21_FigTrans_Oper_Domi_Pais" width="90%" tooltiptext="Atributo que sirve para registrar la clave del país en donde se encuentra ubicado el domicilio del(los) tipo(s) de figura transporte, conforme al catálogo c_Pais del CFDI publicado en el portal del SAT en Internet de acuerdo a la especificación ISO 3166-1."/>
+																																		</row>
+																																		<row>
+																																			<label value="CodigoPostal" style="color:red"/>
+																																			<textbox id="txt_CatPort_21_FigTrans_Oper_Domi_CodigoPostal" width="90%" tooltiptext="Atributo para registrar el código postal en donde se encuentra ubicado el domicilio del(los) tipo(s) de figura transporte."/>
+																																			<space/>
+																																			<space/>
+																																			<space/>
+																																			<space/>
+																																		</row>
+																																	</rows>
+																																</grid>
+																															</hbox>
+																														</groupbox>
+																													</row>
+																												</rows>
+																											</grid>
+																										</hbox>
+																									</groupbox>
+																								</row>
+																							</rows>
+																						</grid>
+																					</hbox>
+																				</groupbox>
+																			</row>
+																		</rows>
+																	</grid>
+																</hbox>
+															</groupbox>
+														</row>
+													</rows>
+												</grid>
+											</hbox>
+										</groupbox>
+										
+									</div>
+								</tabpanel>
+								
+							</tabpanels>
+						</tabbox>
+					</center>
+					<east border="none"/>
+					<west border="none"/>
+					<south border="none"/>
+				</borderlayout>
+			</panelchildren>
+		</panel>
+	</window>
+</zk>

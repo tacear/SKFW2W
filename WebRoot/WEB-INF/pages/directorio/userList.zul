@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+
+<zk xmlns="http://www.zkoss.org/2005/zul"
+	xmlns:h="http://www.w3.org/1999/xhtml"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+
+	<window id="userListWindow" use="mx.com.hunkabann.skf.frontent.directorio.UsuarioListCtrl" border="none" height="100%"
+		width="100%" >
+
+		<style>
+			body { padding: 0 0; /* 0 padding on top and bottom and 0
+			padding on right and left */ }
+			
+			 
+		</style>
+		
+		<borderlayout id="borderLayout_secUserList" width="100%" height="555px">
+		<center border="none" autoscroll="true">
+<div width="100%" height="55%" >
+		<div style=" border:none; background-size:100% 100%; width: 100%; height: 170px; ">
+		<hbox>
+		<panel width="95%" height="40%" style="margin-top:50px; margin-left:40px;  border: none;">
+		
+						<panelchildren style="border: none;">
+						<grid style="border: none;">
+							<columns sizable="true" height="20px" style="border: none;">
+		
+								<column width="59%" align="left" style="border: none;"/>
+								<column width="33%" align="right" />
+								
+								
+								
+								
+							</columns>
+							<rows style="border: none; ">
+									<row style="border: none; ">
+									
+									<!--image id="button_UserList_NewUser" src="/images/Img_Rolex/botones/NUEVO/NUEVO.png" width="71px" height="30px" /-->
+									
+									<button id="button_UserList_NewUser"
+										label="Nuevo"/>
+										
+										<!--image id="btnClose" src="/images/Img_Rolex/botones/salir/Salirpixel.png" width="71px" height="30px" /-->
+										
+										<button id="btnClose"
+										label="Salir"/>
+										
+<!--										<button id="btnLogout"
+										label="Salir"
+										tooltiptext="${c:l('btnLogout.tooltiptext')}" visible="true"/> -->
+										<space/>
+								
+									</row>
+								</rows>
+						</grid>
+						
+							<grid fixedLayout="true" style="border:0px" width="100%">
+								<columns width="100%">
+							<column width="5%"/>
+							<column width="6%" align="left"/>
+							<column width="10%"/>
+							<column width="9%" align="left"/>
+							<column width="10%"/>
+							<column width="11%" align="left"/>
+							<column width="10%" align="left"/>
+							<column width="10%" align="left"/>
+						</columns>
+						<rows>
+							<row height="30px" style="border: none; ">
+							<checkbox id="checkbox_UserList_ShowAll"
+									label="Todos" tooltiptext="Mostrar Todos"/>
+								<!--label id="label_UserList_Empleado"
+										value="Usuario" />
+									<textbox id="tb_usuario_username" width="96%" /-->
+									
+									<label id="label_UserList_Nombre"
+										value="Nombre" />									
+									<textbox id="tb_SecUser_Nombre" width="96%" />
+									
+									<label id="label_UserList_Lastname"
+										value="Apellido Paterno" />									
+									<textbox id="tb_SecUser_Lastname" width="96%" />
+									<label id="label_UserList_Materno"
+										value="Apellido Materno" />									
+									<textbox id="tb_SecUser_Materno" width="96%" />
+									
+									<space/>
+						
+						</row>
+													
+						<row height="30px" style="border: none; ">	
+						<space></space>		
+						<label id="label_Rol"
+										value="Rol" />
+									<listbox id="lb_ClienteRol" mold="select" width="96%"/>
+									
+						<label id="label_UserList_usu"
+										value="Usuario" />									
+									<textbox id="tb_SecUser_usu" width="96%" />
+						
+						<label id="label_UserList_Razon"
+										value="Razon Social" visible="false"/>									
+									<textbox id="tb_SecUser_Razon" width="96%" visible="false"/>
+									
+						
+									
+						<!--image id="button_UserList_Search" src="/images/Img_Rolex/botones/buscar/buscarpixel.png" width="71px" height="30px" /-->
+						
+						<button id="button_UserList_Search"
+										label="Buscar"/>
+									
+							</row>
+							
+						</rows>
+							</grid>
+							
+							
+						</panelchildren>
+					</panel>	
+			
+			
+		</hbox>
+	</div>
+	
+	<div style="border:none; width: 100%; height: 500px; padding-top: 3%;">
+	
+	
+							<listbox id="listBoxUser" vflex="true" width="93%"
+					tooltiptext="${c:l('listbox.tooltiptext')}" height="60%"
+					multiple="false" style="margin-left:40px; overflow:auto;" >
+							<listhead>
+								
+								<listheader
+									id="listheader_UserList_usrLoginname"
+									sort="none" width="70%"
+									label="Usuario" style="margin-top:30px; margin-left:90px; font-size:15px;"/>
+								<listheader width="30%" id="listheader_descarga"
+									sort="none" 
+									label="Estatus" style="margin-top:30px; margin-left:90px; font-size:15px;"/>
+														
+								
+							</listhead>
+						</listbox>
+	<div height="20px" width="93%">
+	<paging id="paging_UserList"  width="100%" style="margin-left:40px; font-size:15px;"/>
+		</div>
+				
+		
+	</div>
+	
+	</div>
+
+	</center>
+</borderlayout>
+		
+
+		<!-- value="Account &#10;&#13; none&#10;&#13; expired" width="85%" -->
+
+
+	</window>
+</zk>
+

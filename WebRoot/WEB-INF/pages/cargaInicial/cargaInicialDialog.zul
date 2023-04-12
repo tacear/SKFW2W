@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<zk xmlns="http://www.zkoss.org/2005/zul" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+	<window id="CargaInicialDialogWindow" border="none" use="mx.com.hunkabann.skf.frontent.cargaInicial.CargaInicialDialogCtrl" closable="true" width="90%" sizable="false">
+		<style>body { padding: 0 0; /* 0 padding on top and bottom and 0 padding on right and left */ } .pageWindowTitle .z-window-embedded-header {color: #FF0000; font-weight:bold; }</style>
+		<panel title="CARGA INICIAL" height="650px" style="margin-top:50px; margin-left:40px;  border: none;">
+			<panelchildren>
+				<borderlayout id="borderlayoutUser">
+					<north border="none" margins="0,0,0,0">
+						<grid>
+							<columns sizable="true" height="20px">
+								<!-- CRUD Buttons -->
+								<column align="right">
+									<hbox spacing="5px" style="padding:1px" align="end">
+										
+										<button id="btn_Cerrar" height="20" label="Cerrar" tooltiptext="Cerrar" style="margin-rigth:20px"/>
+									</hbox>
+								</column>
+							</columns>
+						</grid>
+					</north>
+					<center flex="true" border="none" margins="0,0,0,0" style="overflow:auto">
+						<tabbox id="tb" height="640px" >
+							<tabs id="tabs">
+								<tab id="A" label="CARGA INICIAL"/>								
+							</tabs>
+							<tabpanels>
+								<tabpanel style="overflow:auto">
+									<div id="divCenterDatos">
+										
+												<grid fixedLayout="true" style="border:0px">
+													<columns>
+														<column width="60%"/>
+														<column width="40%"/>														
+													</columns>
+													<rows>
+														<row height="50px">
+															<label value="CARGA LOS USUARIOS" style="font-size:13pt"/>
+															<button id="btnCargaUsers"
+																label="CARGA USUARIOS"
+																tooltiptext="CARGA USUARIOS" visible="true" /> 
+														</row>
+														<row height="50px">
+															<label value="CARGA LOS PRODUCTOS DE MATERIA PRIMA" style="font-size:13pt"/>
+															<button id="btnCargaProd"
+																label="CARGA PRODUCTOS"
+																tooltiptext="CARGA PRODUCTOS" visible="true" /> 
+														</row>
+														<row height="50px">
+															<label value="CARGA LOS PRODUCTOS TERMINADOS" style="font-size:13pt"/>
+															<button id="btnCargaProdTerm"
+																label="CARGA PRODUCTOS TERMINADOS"
+																tooltiptext="CARGA PRODUCTOS TERMINADOS" visible="true" /> 
+														</row>
+														<row height="50px">
+															<label value="CARGA LA UBICACION DELOS PRODUCTOS DE MATERIA PRIMA" style="font-size:13pt"/>
+															<button id="btnCargaUbicaMP"
+																label="CARGA UBICACION MATERIA PRIMA"
+																tooltiptext="CARGA UBICACION MATERIA PRIMA" visible="true" /> 
+															
+														</row>
+														<row height="50px">
+															<label value="CARGA LA UBICACION DE LOS PRODUCTOS TERMINADOS" style="font-size:13pt"/>
+															<button id="btnCargaUbicaPT"
+																label="CARGA UBICACION PRODUCTO TERMINADO"
+																tooltiptext="CARGA UBICACION PRODUCTO TERMINADO" visible="true" /> 
+														</row>
+														<row height="50px">
+															<label value="CARGA EL CATALOGO DE HOUSE PARA LOS PRODUCTOS DE MATERIA PRIMA" style="font-size:13pt"/>
+															<button id="btnCargaCatHouse"
+																label="CARGA CATALOGO HOUSE"
+																tooltiptext="CARGA CATALOGO HOUSE" visible="true" /> 
+														</row>
+														<row height="50px">
+															<label value="CARGA EL CATALOGO DE EMPAQUE PARA LOS PRODUCTOS TERMINADOS" style="font-size:13pt"/>
+															<button id="btnCargaCatEmpaque"
+																label="CARGA CATALOGO EMPAQUE"
+																tooltiptext="CARGA CATALOGO EMPAQUE" visible="true" /> 
+															
+														</row>
+														
+														<row height="50px">
+															<label value="CARGA DETALLE MP XA" style="font-size:13pt"/>
+															<button id="btnCargaMPXA"
+																label="CARGA DETALLE MP XA"
+																tooltiptext="CARGA DETALLE MATERIA PRIMA XA" visible="true" /> 
+															
+														</row>
+														<row height="50px">
+															<label value="CARGA DETALLE PT XA" style="font-size:13pt"/>
+															<button id="btnCargaPTXA"
+																label="CARGA DETALLE PT XA"
+																tooltiptext="CARGA DETALLE PRODUCTO TERMINADO XA" visible="true" /> 
+															
+														</row>
+														
+													</rows>
+												</grid>																				
+									</div>
+								</tabpanel>
+							</tabpanels>
+						</tabbox>
+					</center>
+					<east border="none"/>
+					<west border="none"/>
+					<south border="none"/>
+				</borderlayout>
+			</panelchildren>
+		</panel>
+	</window>
+</zk>

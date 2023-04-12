@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?page id="loginZul" title="PORTAL DE PROVEEDORES"?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<!--
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+-->
+
+<zk xmlns="http://www.zkoss.org/2005/zul"
+	xmlns:h="http://www.w3.org/1999/xhtml"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+
+	<window id="puestoListWindow" use="mx.com.hunkabann.skf.frontent.catalogos.perfil.PerfilListCtrl" border="none" width="100%">
+
+		<style>
+			body { padding: 0 0; /* 0 padding on top and bottom and 0
+			padding on right and left */ }
+		</style>
+
+		<panel title="PERFIL" border="none" />
+
+		<toolbar>
+			<button id="button_PuestoList_NewPuesto"
+				image="/images/icons/btn_new2_16x16.gif"
+				tooltiptext="Agregar Puesto" />
+			
+		</toolbar>
+
+
+		<hbox style="padding: 3px">
+			<space />
+			<checkbox id="checkbox_Puesto_ShowAll" label="Todos" tooltiptext="Mostrar Todos" />
+			<separator bar="true" orient="vertical" />
+
+			<label value="Nombre Puesto"/>
+			<textbox id="tb_CatNombrePuesto"/>
+			
+			<label value="Descripción"/>
+			<textbox id="tb_CatDescPuesto"/>
+			
+			<label value="Status" />
+			<listbox id="cb_CatPuestoActivo" mold="select" >
+				<listitem value="-1" label="TODOS"/>
+				<listitem value="1" label="ACTIVOS"/>
+				<listitem value="0" label="NO ACTIVOS"/>
+			</listbox>
+			
+			<button id="button_SearchPuesto"
+				image="/images/icons/search.gif"
+				label="Buscar"
+				tooltiptext="Buscar" />			
+			
+			
+		</hbox>
+
+
+		<borderlayout id="borderLayout_Puesto">
+
+			<north border="none" height="26px">
+				<paging id="paging_Puesto" />
+			</north>
+
+			<center border="normal">
+
+				<listbox id="listBoxPuesto" vflex="true" width="99.5%"
+					tooltiptext="${c:l('listbox.tooltiptext')}" height="100%"
+					multiple="false">
+					<listhead sizable="true">
+						<listheader id="listheader_Puesto"
+							sort="none" width="30%"
+							label="Nombre" />
+						<listheader id="listheader_PuestoDesc"
+							sort="none" width="60%"
+							label="Descripción" />
+						<listheader id="listheader_PuestoActivo"
+						sort="none" width="10%"
+						label="Activo" align="center"/>
+					</listhead>
+				</listbox>
+
+			</center>
+
+			<south border="none">
+				<separator />
+			</south>
+
+		</borderlayout>
+
+		<!-- value="Account &#10;&#13; none&#10;&#13; expired" width="85%" -->
+
+
+	</window>
+</zk>
+
