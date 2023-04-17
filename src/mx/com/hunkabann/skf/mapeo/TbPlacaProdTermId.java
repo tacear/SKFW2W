@@ -1,79 +1,75 @@
 package mx.com.hunkabann.skf.mapeo;
 
+
+
 /**
  * TbPlacaProdTermId entity. @author MyEclipse Persistence Tools
  */
 
-public class TbPlacaProdTermId implements java.io.Serializable {
+public class TbPlacaProdTermId  implements java.io.Serializable {
 
-	// Fields
 
-	private Integer nukIdPlacaProdTerm;
-	private Integer nukIdProdTerm;
+    // Fields    
 
-	// Constructors
+     private Integer nukIdPlacaProdTerm;
+     private Integer nukIdProdTerm;
 
-	/** default constructor */
-	public TbPlacaProdTermId() {
-	}
 
-	/** full constructor */
-	public TbPlacaProdTermId(Integer nukIdPlacaProdTerm, Integer nukIdProdTerm) {
-		this.nukIdPlacaProdTerm = nukIdPlacaProdTerm;
-		this.nukIdProdTerm = nukIdProdTerm;
-	}
+    // Constructors
 
-	// Property accessors
+    /** default constructor */
+    public TbPlacaProdTermId() {
+    }
 
-	public Integer getNukIdPlacaProdTerm() {
-		return this.nukIdPlacaProdTerm;
-	}
+    
+    /** full constructor */
+    public TbPlacaProdTermId(Integer nukIdPlacaProdTerm, Integer nukIdProdTerm) {
+        this.nukIdPlacaProdTerm = nukIdPlacaProdTerm;
+        this.nukIdProdTerm = nukIdProdTerm;
+    }
 
-	public void setNukIdPlacaProdTerm(Integer nukIdPlacaProdTerm) {
-		this.nukIdPlacaProdTerm = nukIdPlacaProdTerm;
-	}
+   
+    // Property accessors
 
-	public Integer getNukIdProdTerm() {
-		return this.nukIdProdTerm;
-	}
+    public Integer getNukIdPlacaProdTerm() {
+        return this.nukIdPlacaProdTerm;
+    }
+    
+    public void setNukIdPlacaProdTerm(Integer nukIdPlacaProdTerm) {
+        this.nukIdPlacaProdTerm = nukIdPlacaProdTerm;
+    }
 
-	public void setNukIdProdTerm(Integer nukIdProdTerm) {
-		this.nukIdProdTerm = nukIdProdTerm;
-	}
+    public Integer getNukIdProdTerm() {
+        return this.nukIdProdTerm;
+    }
+    
+    public void setNukIdProdTerm(Integer nukIdProdTerm) {
+        this.nukIdProdTerm = nukIdProdTerm;
+    }
+   
 
-	public boolean equals(Object other) {
-		if ((this == other))
-			return true;
-		if ((other == null))
-			return false;
-		if (!(other instanceof TbPlacaProdTermId))
-			return false;
-		TbPlacaProdTermId castOther = (TbPlacaProdTermId) other;
 
-		return ((this.getNukIdPlacaProdTerm() == castOther
-				.getNukIdPlacaProdTerm()) || (this.getNukIdPlacaProdTerm() != null
-				&& castOther.getNukIdPlacaProdTerm() != null && this
-				.getNukIdPlacaProdTerm().equals(
-						castOther.getNukIdPlacaProdTerm())))
-				&& ((this.getNukIdProdTerm() == castOther.getNukIdProdTerm()) || (this
-						.getNukIdProdTerm() != null
-						&& castOther.getNukIdProdTerm() != null && this
-						.getNukIdProdTerm()
-						.equals(castOther.getNukIdProdTerm())));
-	}
 
-	public int hashCode() {
-		int result = 17;
+   public boolean equals(Object other) {
+         if ( (this == other ) ) return true;
+		 if ( (other == null ) ) return false;
+		 if ( !(other instanceof TbPlacaProdTermId) ) return false;
+		 TbPlacaProdTermId castOther = ( TbPlacaProdTermId ) other; 
+         
+		 return ( (this.getNukIdPlacaProdTerm()==castOther.getNukIdPlacaProdTerm()) || ( this.getNukIdPlacaProdTerm()!=null && castOther.getNukIdPlacaProdTerm()!=null && this.getNukIdPlacaProdTerm().equals(castOther.getNukIdPlacaProdTerm()) ) )
+ && ( (this.getNukIdProdTerm()==castOther.getNukIdProdTerm()) || ( this.getNukIdProdTerm()!=null && castOther.getNukIdProdTerm()!=null && this.getNukIdProdTerm().equals(castOther.getNukIdProdTerm()) ) );
+   }
+   
+   public int hashCode() {
+         int result = 17;
+         
+         result = 37 * result + ( getNukIdPlacaProdTerm() == null ? 0 : this.getNukIdPlacaProdTerm().hashCode() );
+         result = 37 * result + ( getNukIdProdTerm() == null ? 0 : this.getNukIdProdTerm().hashCode() );
+         return result;
+   }   
 
-		result = 37
-				* result
-				+ (getNukIdPlacaProdTerm() == null ? 0 : this
-						.getNukIdPlacaProdTerm().hashCode());
-		result = 37
-				* result
-				+ (getNukIdProdTerm() == null ? 0 : this.getNukIdProdTerm()
-						.hashCode());
-		return result;
-	}
+
+
+
 
 }

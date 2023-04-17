@@ -9,7 +9,9 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 import javax.sql.rowset.serial.SerialException;
@@ -19,9 +21,15 @@ import mx.com.hunkabann.skf.frontent.util.GFCBaseCtrl;
 import mx.com.hunkabann.skf.frontent.util.GFCBaseListCtrl;
 import mx.com.hunkabann.skf.frontent.util.MultiLineMessageBox;
 import mx.com.hunkabann.skf.frontent.util.pagging.PagedListWrapper;
+import mx.com.hunkabann.skf.mapeo.DetalleRol;
+import mx.com.hunkabann.skf.mapeo.TbPerfil;
+import mx.com.hunkabann.skf.mapeo.TbPersona;
+import mx.com.hunkabann.skf.mapeo.TbRol;
+import mx.com.hunkabann.skf.mapeo.TbUsuario;
 import net.sf.jasperreports.engine.JRException;
 
 import org.apache.log4j.Logger;
+import org.springframework.security.core.context.SecurityContext;
 import org.zkoss.util.media.Media;
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Executions;
@@ -124,7 +132,6 @@ public class PrincipalCtrl extends GFCBaseCtrl implements Serializable {
 	protected transient Listheader listheader_uuid;
 	String Rfc = "";
 	String Nombre = "";
-	String Usuario = "";
 	String Administrador = "";
 	String FechaInicial = "";
 	String FechaFinal = "";
@@ -138,6 +145,8 @@ public class PrincipalCtrl extends GFCBaseCtrl implements Serializable {
 	byte[] blobAsBytespdf2;
 	byte[] blobAsBytespdf;
 	byte[] blobAsBytesxml;
+	
+	String Usuario = "";
 	
 	
 	
@@ -161,10 +170,12 @@ public class PrincipalCtrl extends GFCBaseCtrl implements Serializable {
 	
 //	TbDetalleComprobante detaCompro = new TbDetalleComprobante();
 	
-//	SimpleSession s = (SimpleSession) Executions.getCurrent().getDesktop().getSession();
-	
 	SimpleSession s = (SimpleSession) Executions.getCurrent().getDesktop().getSession();
-    HttpSession session = (HttpSession) s.getNativeSession();
+	
+//	SimpleSession s = (SimpleSession) Executions.getCurrent().getDesktop().getSession();
+//    HttpSession session = (HttpSession) s.getNativeSession();
+	
+	HttpSession session = (HttpSession) s.getNativeSession();	
 	
 	String Sesion_User = "";
     
@@ -184,13 +195,86 @@ public class PrincipalCtrl extends GFCBaseCtrl implements Serializable {
 
 	public void onCreate$IndexPrincipalWindow(Event event) throws Exception {
 		
+			
+//		Usuario = ((SecurityContext)session.getAttribute("SPRING_SECURITY_CONTEXT")).getAuthentication().getName();
+		
 		
 //		Usuario = ((SecurityContext)session.getAttribute("SPRING_SECURITY_CONTEXT")).getAuthentication().getName();
 		
 		if (logger.isDebugEnabled()) {
 			logger.debug("--> " + event.toString());
 		}
-		doOnCreateCommon(IndexPrincipalWindow); // do the autowire
+		
+		try {
+			((SecurityContext) session.getAttribute("SPRING_SECURITY_CONTEXT")).getAuthentication().getName();
+			
+			if(((SecurityContext)session.getAttribute("SPRING_SECURITY_CONTEXT")).getAuthentication().getName() != null){
+//				loginwin.onClose();
+//				MultiLineMessageBox.show("YA HAY UNA SESION ACTIVA, FAVOR DE CERRARLA PARA PODER ENTRAR CON OTRO USUARIO", "I N F O R M A C I O N ", MultiLineMessageBox.OK, "I N F O R M A C I O N", true);
+				
+				Usuario = ((SecurityContext)session.getAttribute("SPRING_SECURITY_CONTEXT")).getAuthentication().getName();
+				TbUsuario anuser = usuarioService.getUserByUsername(Usuario);
+				id_user = usuarioService.getIdByUserName(Usuario);
+				
+				TbPerfil perfil = usuarioService.gettbPerfil(anuser.getTbPerfil().getNukIdPerfil());
+				
+//				tbperfi
+				
+				TbPersona Persona = usuarioService.getPersona(anuser);
+				
+//				List<TbRol> listaDetalleMahle = new ArrayList<TbRol>();
+//				
+//				listaDetalleMahle = usuarioService.getRoles(anuser.getTbPerfil().getNukIdPerfil());
+				
+				for (DetalleRol game: usuarioService.getRoles(anuser.getTbPerfil().getNukIdPerfil())) {
+					System.out.println("Clave: " + game.getClave() +"  Nombre: "+ game.getNombre());
+					
+										
+					
+                    
+                    if(game.getNombre().equals("ORDEN MANUFACTURA")){
+                 	   hbox_OrdenManu.setVisible(true);
+                    }
+                    if(game.getNombre().equals("TRAZABILIDAD")){
+                 	   hbox_Trazabilidad.setVisible(true);               	   
+					   }
+                    if(game.getNombre().equals("REPORTES")){
+                 	   hbox_Reporte.setVisible(true); 
+                    }
+                    if(game.getNombre().equals("OPERACION")){
+                 	   hbox_Operacion.setVisible(true);
+                    }
+                    if(game.getNombre().equals("ENTREGA RECEPCION")){
+                 	   hbox_EntregaRecepcion.setVisible(true);
+                    }
+                    
+                    hbox_Salir.setVisible(true);
+				}
+				
+				String Empleado = "Empleado: "+ Persona.getChNombre().toUpperCase()+" "+Persona.getChApPaterno().toUpperCase()+" "+Persona.getChApMaterno().toUpperCase() +" / ROL: "+ perfil.getChNombre() ;
+				System.out.println("Empleado--------------->> " +Empleado);
+				label_User.setVisible(true);
+				
+				label_User.setValue(Empleado);
+				
+				System.out.println("label_User--------------->> " +label_User.getValue());
+				
+				doOnCreateCommon(IndexPrincipalWindow); // do the autowire
+				
+//				return;
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			
+			label_User.setVisible(false);
+			hbox_Salir.setVisible(false);
+			
+			doOnCreateCommon(IndexPrincipalWindow); // do the autowire
+			
+		}
+		
+		
+		
 		
 		/**
 		 * Calculate how many rows have been place in the listbox. Get the
@@ -215,15 +299,16 @@ public class PrincipalCtrl extends GFCBaseCtrl implements Serializable {
 //		hbox_ComparaXaMp.setVisible(false);
 //		hbox_ComparaXaPt.setVisible(false);
 		
-		System.out.println("----------------------------------------->>>> " +session.getAttribute("SesionesSKF"));
-		System.out.println("----------------------------------------->>>> " +session.getAttribute("Empleado"));
-		
-		if(session.getAttribute("Empleado") != null){
-			System.out.println("Valor de la Sesion: "+ session.getAttribute("SesionesSKF"));
-			System.out.println("Valor de la Sesion: "+ session.getAttribute("Empleado"));
-			
-			label_User.setVisible(true);
-			label_User.setValue(session.getAttribute("Empleado").toString());
+//		System.out.println("Usuario ----------------------------------------->>>> " +((SecurityContext)session.getAttribute("SPRING_SECURITY_CONTEXT")).getAuthentication().getName());
+//		System.out.println("----------------------------------------->>>> " +session.getAttribute("SesionesSKF"));
+//		System.out.println("----------------------------------------->>>> " +session.getAttribute("Empleado"));
+//		
+//		if(session.getAttribute("Empleado") != null){
+//			System.out.println("Valor de la Sesion: "+ session.getAttribute("SesionesSKF"));
+//			System.out.println("Valor de la Sesion: "+ session.getAttribute("Empleado"));
+//			
+//			label_User.setVisible(true);
+//			label_User.setValue(session.getAttribute("Empleado").toString());
 			
 			
 
@@ -257,7 +342,7 @@ public class PrincipalCtrl extends GFCBaseCtrl implements Serializable {
 //			hbox_Salir.setVisible(true);
 //			
 //			hbox_OrdenManu.setVisible(true);
-		}
+//		}
 //		if(anuser.getIdCorporativo() != null){
 //		
 //		id_Corporativo = anuser.getIdCorporativo();
@@ -282,7 +367,12 @@ public class PrincipalCtrl extends GFCBaseCtrl implements Serializable {
 		if (logger.isDebugEnabled()) {
 			logger.debug("--> " + event.toString());
 		}
-		showWelcomePageUsuario();
+		
+		
+			showWelcomePageUsuario();
+		
+		
+		
 	}
 	
 	public void onClick$button_Usuario(Event event) throws JRException, SQLException, IOException, InterruptedException {
@@ -294,7 +384,34 @@ public class PrincipalCtrl extends GFCBaseCtrl implements Serializable {
 		if (logger.isDebugEnabled()) {
 			logger.debug("--> " + event.toString());
 		}
-		showWelcomePageLoguin();
+		
+		if(session.getAttribute("SPRING_SECURITY_CONTEXT") == null){
+			System.out.println("session.getAttribute(SPRING_SECURITY_CONTEXT) = null -------------" + session.getAttribute("SPRING_SECURITY_CONTEXT"));
+		}
+		
+		try {
+			((SecurityContext) session.getAttribute("SPRING_SECURITY_CONTEXT")).getAuthentication().getName();
+			
+			if(((SecurityContext)session.getAttribute("SPRING_SECURITY_CONTEXT")).getAuthentication().getName() != null){
+//				loginwin.onClose();
+				MultiLineMessageBox.show("YA HAY UNA SESION ACTIVA, FAVOR DE CERRARLA PARA PODER ENTRAR CON OTRO USUARIO", "I N F O R M A C I O N ", MultiLineMessageBox.OK, "I N F O R M A C I O N", true);
+				
+				return;
+			}else{
+				showWelcomePageLoguin();
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("Esta Vacio");
+			showWelcomePageLoguin();
+			
+		}
+		
+		
+			
+		
+		
+		
 		
 		
 	}

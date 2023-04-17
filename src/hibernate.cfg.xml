@@ -99,8 +99,8 @@
 		<mapping resource="mx/com/hunkabann/skf/mapeo/TbPlaca.hbm.xml" />
 		<mapping
 			resource="mx/com/hunkabann/skf/mapeo/TbProdTermMatPrim.hbm.xml" />
-		<mapping
-			resource="mx/com/hunkabann/skf/mapeo/TbComponentes.hbm.xml" />
+		<!--<mapping
+			resource="mx/com/hunkabann/skf/mapeo/TbComponentes.hbm.xml" />-->
 		<mapping
 			resource="mx/com/hunkabann/skf/mapeo/TbTipoPlaca.hbm.xml" />
 		<mapping
@@ -111,8 +111,8 @@
 			resource="mx/com/hunkabann/skf/mapeo/TbCatCodigoFtq.hbm.xml" />
 		<mapping
 			resource="mx/com/hunkabann/skf/mapeo/TbProductoTerminado.hbm.xml" />
-		<mapping
-			resource="mx/com/hunkabann/skf/mapeo/TbComponentesMateriaPrima.hbm.xml" />
+		<!-- mapping
+			resource="mx/com/hunkabann/skf/mapeo/TbComponentesMateriaPrima.hbm.xml" /> -->
 		<mapping
 			resource="mx/com/hunkabann/skf/mapeo/TbPlacaProdTerm.hbm.xml" />
 		<mapping

@@ -70,7 +70,7 @@ public class EstadisticaCtrl extends GFCBaseCtrl {
 	
     String Sesion_User = "";
     
-    Charts chart;
+//    Charts chart;
 
 
 	/**
@@ -134,38 +134,38 @@ public class EstadisticaCtrl extends GFCBaseCtrl {
 //				u.focus(); // set the focus on UserName
 				
 				
-				chart.setPlotBackgroundColor((Color) null);
-		        chart.setPlotBorderWidth(null);
-		        chart.setPlotShadow(false);
-
-		        chart.getTooltip().setPointFormat("{series.name}: <b>{point.percentage:.1f}%</b>");
-
-		        chart.getAccessibility().getPoint().setValueSuffix("%");
-
-		        Title title = chart.getTitle();
-		        title.setText("Ordenes<br>Manufactura<br>Abril<br>2023");
-		        title.setAlign("center");
-		        title.setVerticalAlign("middle");
-		        title.setY(60);
-		        
-
-		        PiePlotOptions poltOptions = chart.getPlotOptions().getPie();
-		        
-		        DataLabels dataLabels = poltOptions.getDataLabels();
-		        dataLabels.setEnabled(true);
-		        dataLabels.setDistance(-50);
-		        dataLabels.setStyle("fontWeight: 'bold'; color: 'white';");
-		        poltOptions.setStartAngle(-90);
-		        poltOptions.setEndAngle(90);
-		        poltOptions.setCenter("50%", "75%");
-		        poltOptions.setSize("110%");
-
-//		        Series series = chart.getSeries();
-//		        series.setName("Browser share");
-//		        series.setType("pie");
-//		        series.setInnerSize("50%");
-
-		        chart.setModel(PieSemiCircleData.getPieModel());
+//				chart.setPlotBackgroundColor((Color) null);
+//		        chart.setPlotBorderWidth(null);
+//		        chart.setPlotShadow(false);
+//
+//		        chart.getTooltip().setPointFormat("{series.name}: <b>{point.percentage:.1f}%</b>");
+//
+//		        chart.getAccessibility().getPoint().setValueSuffix("%");
+//
+//		        Title title = chart.getTitle();
+//		        title.setText("Ordenes<br>Manufactura<br>Abril<br>2023");
+//		        title.setAlign("center");
+//		        title.setVerticalAlign("middle");
+//		        title.setY(60);
+//		        
+//
+//		        PiePlotOptions poltOptions = chart.getPlotOptions().getPie();
+//		        
+//		        DataLabels dataLabels = poltOptions.getDataLabels();
+//		        dataLabels.setEnabled(true);
+//		        dataLabels.setDistance(-50);
+//		        dataLabels.setStyle("fontWeight: 'bold'; color: 'white';");
+//		        poltOptions.setStartAngle(-90);
+//		        poltOptions.setEndAngle(90);
+//		        poltOptions.setCenter("50%", "75%");
+//		        poltOptions.setSize("110%");
+//
+////		        Series series = chart.getSeries();
+////		        series.setName("Browser share");
+////		        series.setType("pie");
+////		        series.setInnerSize("50%");
+//
+//		        chart.setModel(PieSemiCircleData.getPieModel());
 
 //		        series.getData().get(series.getData().size() - 1).getDataLabels().setEnabled(false);
 				

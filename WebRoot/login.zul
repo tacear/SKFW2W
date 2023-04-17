@@ -29,6 +29,17 @@
 
 
 
+		<groupbox if="${not empty param.login_error}">
+			<label style="color:red" value="No se pudo ingresar" />
+			<!--<h:br />
+			<label style="color:red"
+				value="Razón: ${sessionScope.SPRING_SECURITY_LAST_EXCEPTION.message}" />-->
+			<h:br />
+			<label style="color:red"
+				value="Razón: ${param.login_error}" />
+			<h:br />
+		</groupbox>
+
 		<groupbox>
 			<caption>Login</caption>
 
@@ -51,7 +62,10 @@
 			</div>
 
 			<div>
-				
+				<!-- ### Spring Security action-url = j_spring_security_check  ### -->
+				<!--          http://www.zkoss.org/smalltalks/zkspringsec1/        -->
+				<h:form id="f" name="f" action="j_spring_security_check"
+					method="POST">
 
 					<grid fixedLayout="true" style="border:0px">
 						<columns>
@@ -79,10 +93,12 @@
 							<row align="center" spans="2">
 								<hbox>
 								    
-									
-									<button id="btnEntrar" label="Entrar" height="22px"/>
+									<!--h:input type="submit" width="300px" height="100px"  value="                                       " 
+									style="background-image: url('images/Img_Rolex/botones/entrar/entrarpixel.png'); border:none; background-size:100% 100%; width: 100px; height: 30px; ">
+									</h:input-->
+									<h:input type="submit" width="300px" height="100px"  value="ENTRAR" >
+									</h:input>
 									<button onClick="limpiar()" label="Limpiar" height="22px"/>
-									<button id="btnCerrar" label="Cerrar" height="22px"/>
 									<!--image src="/images/Img_Rolex/botones/LIMPIAR/LimpiarPixel.png" width="100px" height="30px" onClick="limpiar()" /-->
 									
 									<!--button id="btnRegenera" label="Regenera Pwd" height="22px"/-->
@@ -108,7 +124,7 @@
 							
 						</rows>
 					</grid>
-				
+				</h:form>
 			</div>
 
 		</groupbox>

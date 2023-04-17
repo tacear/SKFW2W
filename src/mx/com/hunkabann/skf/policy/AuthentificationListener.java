@@ -6,12 +6,16 @@ import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import mx.com.hunkabann.skf.backend.UsuarioService;
+import mx.com.hunkabann.skf.mapeo.TbUsuario;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.http.SimpleSession;
 
 public class AuthentificationListener implements AuthenticationFailureHandler{
 	
@@ -23,8 +27,9 @@ public class AuthentificationListener implements AuthenticationFailureHandler{
 			HttpServletResponse response, AuthenticationException exception)
 			throws IOException, ServletException {
 		
-//		TbUsuario usuario = null;
+		TbUsuario usuario = null;
 		String codRet = "";
+		
 		
 		
 		
@@ -34,8 +39,9 @@ public class AuthentificationListener implements AuthenticationFailureHandler{
 		
 		try {
 			
-//			usuario = usuarioService.getUserByUsername(user.getName());
-//			System.out.println("usuario -------->>>> " +usuario.getUsername() + "    Estatus: " + usuario.getStatus() );
+			usuario = usuarioService.getUserByUsername(user.getName());
+			System.out.println("usuario -------->>>> " +usuario.getChUsuario() + "    Estatus: " + usuario.getNuActivo() );
+			
 			
 		} catch (Exception e) {
 			
@@ -46,40 +52,44 @@ public class AuthentificationListener implements AuthenticationFailureHandler{
 				codRet = "Credenciales Invalidas";
 				
 				
+				
 			}else{
 			
 //			throw new UsernameNotFoundException(e.getMessage());
-			if(e.getMessage().equals("Cannot open connection"))
+			if(e.getMessage().equals("Cannot open connection")){
 				codRet = "No se pudo hacer conexion con la BD";
-			else
+				
+			}else
 				codRet = e.getMessage();
 			}
 		}
 		
-//		if(codRet.equals(""))
-//		{
-//			if(usuario == null || usuario.getUsername() == null || usuario.getPassword() == null)
-//			{
-//				//System.out.println("usuario no valido -----------");
-////				throw new UsernameNotFoundException("Invalid User");
-//				codRet = "Usuario no Valido";
-//				
-//			}
-//		}
-//		
-//		if(codRet.equals(""))
-//		{
-//			System.out.println(!usuario.getStatus().equals(1));
-//			System.out.println(usuario.getStatus() == null);
-//			if(usuario.getStatus() == null || !usuario.getStatus().equals(1) )
-////				if(usuario.getActivo() == null || !usuario.getActivo().equals("1") )
-//			{
-//				//System.out.println("usuario no activo -----------");
-////				throw new UsernameNotFoundException("Usuario no activo");
-//				codRet = "Usuario no Activo";
-//			}
-//		}
-//		
+		if(codRet.equals(""))
+		{
+			if(usuario == null || usuario.getChUsuario() == null || usuario.getChPassword() == null)
+			{
+				//System.out.println("usuario no valido -----------");
+//				throw new UsernameNotFoundException("Invalid User");
+				codRet = "Usuario no Valido";
+				
+				
+			}
+		}
+		
+		if(codRet.equals(""))
+		{
+			System.out.println(!usuario.getNuActivo().equals(true));
+			System.out.println(usuario.getNuActivo() == null);
+			if(usuario.getNuActivo() == null || !usuario.getNuActivo().equals(true) )
+//				if(usuario.getActivo() == null || !usuario.getActivo().equals("1") )
+			{
+				//System.out.println("usuario no activo -----------");
+//				throw new UsernameNotFoundException("Usuario no activo");
+				codRet = "Usuario no Activo";
+				
+			}
+		}
+		
 //		if(codRet.equals(""))
 //		{
 //			if(usuario.getPwdExpire() == null || usuario.getPwdExpire().getTime() < (new Date()).getTime())
@@ -112,8 +122,9 @@ public class AuthentificationListener implements AuthenticationFailureHandler{
 		{
 			UsuarioService service= new UsuarioService();
 			try {
-//				service.setUserInactiveByUserName(user.getName());
+				service.setUserInactiveByUserName(user.getName());
 				codRet = "Se excedio el Maximo de Intentos Permitidos";
+				
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -124,6 +135,7 @@ public class AuthentificationListener implements AuthenticationFailureHandler{
 		if(codRet.equals(""))
 		{
 			codRet = "Datos invalidos, favor de Verificarlos";
+			
 		}
 		
 		//System.out.println("codRet: " + codRet);

@@ -32,7 +32,7 @@
 		<!--      Further the page after a successfully login.      -->
 		<!-- ====================================================== -->
 			<!--  authentication-failure-url="/AuthenticationFailureServlet"-->
-		<form-login login-page="/indexPrincipal.zul"
+		<form-login login-page="/login.zul"
 			authentication-failure-handler-ref="authErrorHandler"
 			default-target-url="/" />
 		<!-- ====================================================== -->

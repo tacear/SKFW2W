@@ -17,7 +17,7 @@
             <column name="nukIdProdTerm" />
         </many-to-one>
         <property name="nuCantidad" type="java.lang.Double">
-            <column name="nuCantidad"  precision="53" scale="0" />
+            <column name="nuCantidad" precision="53" scale="0" />
         </property>
         <property name="chObservaciones" type="java.lang.String">
             <column name="chObservaciones" length="500" />

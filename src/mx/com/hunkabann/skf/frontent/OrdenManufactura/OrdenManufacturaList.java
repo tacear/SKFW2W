@@ -25,6 +25,7 @@ import javax.sql.rowset.serial.SerialException;
 //import mx.com.hunkabann.saas.frontent.util.GFCBaseListCtrl;
 //import mx.com.hunkabann.saas.mapeo.TbUsuario;
 import mx.com.hunkabann.skf.backend.UsuarioService;
+import mx.com.hunkabann.skf.frontent.OrdenManufactura.cargaexcel.CargaExcelOrdenManufactura;
 import mx.com.hunkabann.skf.frontent.principal.model.PrincipalListModelItemRenderer;
 import mx.com.hunkabann.skf.frontent.util.GFCBaseCtrl;
 import mx.com.hunkabann.skf.frontent.util.GFCBaseListCtrl;
@@ -378,6 +379,8 @@ public class OrdenManufacturaList extends GFCBaseListCtrl<TbOrdenManufactura> im
 		System.out.println("Si Funciono el Onclic");
 		
 //		CargaExcelCatHouse caExcel = new CargaExcelCatHouse();
+		
+		CargaExcelOrdenManufactura caExcel = new CargaExcelOrdenManufactura();
         try {
         	House_mediaArchivo = Fileupload.get("Seleccione un Excel para Cargar", "Cargar Excel");
             if (House_mediaArchivo == null) {
@@ -387,7 +390,7 @@ public class OrdenManufacturaList extends GFCBaseListCtrl<TbOrdenManufactura> im
             House_Ruta_mediaArchivo = saveFile(House_mediaArchivo, House_mediaArchivo.getName());
             MultiLineMessageBox.show("Iniciando la Carga del Documento", "¡ Información !", 1, "");
 //            this.SignCFD();
-//            caExcel.procesaExcelCatHouse(House_Ruta_mediaArchivo);
+            caExcel.procesaExcelOrdenManufactura(House_Ruta_mediaArchivo);
             
             Thread.sleep(10000);
         }

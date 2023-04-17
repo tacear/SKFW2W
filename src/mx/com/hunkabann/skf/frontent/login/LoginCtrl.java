@@ -6,7 +6,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.StringReader;
-import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -14,10 +13,11 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.json.Json;
-import javax.json.JsonObject;
-import javax.json.JsonReader;
+//import javax.json.Json;
+//import javax.json.JsonObject;
+//import javax.json.JsonReader;
 import javax.servlet.http.HttpSession;
+
 
 import mx.com.hunkabann.skf.backend.UsuarioService;
 import mx.com.hunkabann.skf.frontent.util.FDDateFormat;
@@ -25,6 +25,8 @@ import mx.com.hunkabann.skf.frontent.util.GFCBaseCtrl;
 import mx.com.hunkabann.skf.frontent.util.MultiLineMessageBox;
 
 import org.apache.log4j.Logger;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContext;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.SuspendNotAllowedException;
 import org.zkoss.zk.ui.event.Event;
@@ -52,29 +54,18 @@ public class LoginCtrl extends GFCBaseCtrl {
 	protected Window loginwin; // autowired
 	protected Label lbl_ServerTime; // autowired
 	protected Textbox u; // autowired
-	protected Textbox p;
 	protected Image btnRegenera;
 	protected Label label_Rege;
-	protected transient Listbox lb_Corporativo; // autowired
-	protected Label label_User;
+//	protected transient Listbox lb_Corporativo; // autowired
 	
-	
-	protected transient Hbox hbox_Salir;
-	protected transient Hbox hbox_OrdenManu;
-	protected transient Hbox hbox_EntregaRecepcion;
-	protected transient Hbox hbox_Operacion;
-	protected transient Hbox hbox_Reporte;
-	protected transient Hbox hbox_Trazabilidad;
+	String Usuario = "";
 	
 	//Servicio
 	UsuarioService UserServ = new UsuarioService();
 	
 	
 	SimpleSession s = (SimpleSession) Executions.getCurrent().getDesktop().getSession();
-    HttpSession session = (HttpSession) s.getNativeSession();
-	
-    String Sesion_User = "";
-
+	HttpSession session = (HttpSession) s.getNativeSession();	
 
 	/**
 	 * default constructor. <br>
@@ -89,90 +80,66 @@ public class LoginCtrl extends GFCBaseCtrl {
 
 	public void onCreate$loginwin(Event event) throws Exception {
 		
-
+//		Usuario = ((SecurityContext)session.getAttribute("SPRING_SECURITY_CONTEXT")).getAuthentication().getName();
 		if (logger.isDebugEnabled()) {
 			logger.debug("--> " + event.toString());
 		}
 		
-		//System.out.println("ATC  Valor del Usuario -------------->>>>" + session.getAttribute("SesionesSKF"));
-		
-		if(session != null){
-			if(session.getAttribute("SesionesSKF") != null){
-				if(!session.getAttribute("SesionesSKF").equals("")){
-					loginwin.onClose();
-					MultiLineMessageBox.show("YA HAY UNA SESION ACTIVA, FAVOR DE CERRARLA PARA PODER ENTRAR CON OTRO USUARIO", "I N F O R M A C I O N ", MultiLineMessageBox.OK, "I N F O R M A C I O N", true);
-					
-					return;
-				}
-			}else{
-				
-				Map<String, Object> args = getCreationArgsMap(event);
-				
-				if (args.containsKey("label_User"))
-					label_User = (Label) args.get("label_User");
-				
-				if (args.containsKey("Sesion_User"))
-					Sesion_User = (String) args.get("Sesion_User");
-				
-				if (args.containsKey("hbox_Salir"))
-					hbox_Salir = (Hbox) args.get("hbox_Salir");
-				
-				if (args.containsKey("hbox_OrdenManu"))
-					hbox_OrdenManu = (Hbox) args.get("hbox_OrdenManu");
-				
-				if (args.containsKey("hbox_EntregaRecepcion"))
-					hbox_EntregaRecepcion = (Hbox) args.get("hbox_EntregaRecepcion");
-				
-				if (args.containsKey("hbox_Operacion"))
-					hbox_Operacion = (Hbox) args.get("hbox_Operacion");
-				
-				if (args.containsKey("hbox_Reporte"))
-					hbox_Reporte = (Hbox) args.get("hbox_Reporte");
-				
-				if (args.containsKey("hbox_Trazabilidad"))
-					hbox_Trazabilidad = (Hbox) args.get("hbox_Trazabilidad");
-				
-				doOnCreateCommon(loginwin); // do the autowire
-//				lb_Corporativo.focus();
-				u.focus(); // set the focus on UserName
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				loginwin.doModal();
-				
-				
-			}
-			
-			
-			
-			
-		}
-		
-		
-		
-		
-		
-		
-		
+//		SecurityContextHolder.getContext().getAuthentication().getName();
 		
 //		HttpServletRequest request = null;
-		
-//		AuthenticationException exception = null;
-//		HttpServletRequest req = null;
+//		HttpSession session = request.getSession(); //sessionCreated() is executed
 //		  session.setAttribute("url", "mkyong.com"); 
 //		  session.invalidate();  //sessionDestroyed() is executed
 		
 		
+//		System.out.println(session);
+//		System.out.println(session.getAttribute("SPRING_SECURITY_CONTEXT"));
+//		System.out.println(((SecurityContext)session.getAttribute("SPRING_SECURITY_CONTEXT")).getAuthentication().getName());
+		
 
 		
+//		if(session != null){
+//			if(session.getAttribute("SesionesSKF") != null){
+//				if(!session.getAttribute("SesionesSKF").equals("")){
+//					loginwin.onClose();
+//					MultiLineMessageBox.show("YA HAY UNA SESION ACTIVA, FAVOR DE CERRARLA PARA PODER ENTRAR CON OTRO USUARIO", "I N F O R M A C I O N ", MultiLineMessageBox.OK, "I N F O R M A C I O N", true);
+//					
+//					return;
+//				}else{
+					doOnCreateCommon(loginwin); // do the autowire
+					//		lb_Corporativo.focus();
+							u.focus(); // set the focus on UserName
+							
+					//		lb_Corporativo.setModel(new ListModelList(UserServ.getCorporativo()));
+					//		lb_Corporativo.setItemRenderer(new ComboFactoryModelItemRenderer());
+							
+							System.out.println(u.getText() +" ------ "+ u.getValue());
+							
+					//		
+							
+							loginwin.doModal();
+//				}
+//			}
+//			else{
+//		
+//				doOnCreateCommon(loginwin); // do the autowire
+//		//		lb_Corporativo.focus();
+//				u.focus(); // set the focus on UserName
+//				
+//		//		lb_Corporativo.setModel(new ListModelList(UserServ.getCorporativo()));
+//		//		lb_Corporativo.setItemRenderer(new ComboFactoryModelItemRenderer());
+//				
+//				System.out.println(u.getText() +" ------ "+ u.getValue());
+//				session.setAttribute("SesionesSKF", u.getText());
+//		//		
+//				
+//				loginwin.doModal();
+//				
+//				
+////		
+//			}
+//		}
 
 	}
 
@@ -213,140 +180,30 @@ public class LoginCtrl extends GFCBaseCtrl {
 		
 	}	// onClick$button_ZKLoginDialog_ServerTime
 	
-	/**
-	 * when the "getServerTime" button is clicked. <br>
-	 * 
-	 * @throws IOException
-	 */
-	public void onClick$btnCerrar() throws IOException {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> Boton Cerrar loguin");
-		}
-
-		loginwin.onClose();
-		
-	}	// onClick$button_ZKLoginDialog_ServerTime0
-	
-	/**
-	 * when the "getServerTime" button is clicked. <br>
-	 * 
-	 * @throws IOException
-	 * @throws InterruptedException 
-	 */
-	public void onClick$btnEntrar() throws IOException, InterruptedException {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> Boton Cerrar loguin");
-			
-			
-		}
-		
-//		String codRet = "";
+//	public void onSelect$lb_Corporativo(Event event) throws InterruptedException
+//	{
+//		TbCorporativo corp = new TbCorporativo();
+//		UsuarioService usServ = new UsuarioService();
+//		if (logger.isDebugEnabled()) {
+//			logger.debug("--> " + event.toString());
+//		}
 //		
-//		SecurityContextHolder.getContext().getAuthentication().getName();
-		
-		
-		
-		//clienteWs.loguin(u.getValue(), p.getValue());
-		
-		System.out.println(loguin(u.getValue(), p.getValue()));
-
-//		UsernamePasswordAuthenticationToken user = new UsernamePasswordAuthenticationToken(
-//			      u.getValue(), p.getValue());
-//			  
+////		if(lb_Corporativo.getSelectedIndex() < 0){
+////			Messagebox.show("Selecciona la empresa con la cual quieres iniciar sesion", "¡ Información !", org.zkoss.zul.Messagebox.OK, "");
+////			return;
+////		}else{
+////			
+////			corp =usServ.getTbCorporativoId(lb_Corporativo.getSelectedItem().getLabel());
+////			
+////			System.out.println("lb_Corporativo.getSelectedIndex(): "+ corp.getIdCorporativo());
+////			System.out.println("lb_Corporativo.getSelectedIndex(): "+ lb_Corporativo.getSelectedItem().getLabel());
+////
+////			session.setAttribute("idCorp", corp.getIdCorporativo());
+////		}
 //
-//		System.out.println("Nombre "+ user.getName());
-//		
-//		if(codRet.equals(""))
-//		{
-//			if(u.equals("") || !u.getValue().equals("admon"))
-//			{
-//				//System.out.println("usuario no valido -----------");
-////				throw new UsernameNotFoundException("Invalid User");
-//				codRet = "Usuario no Valido";
-//				MultiLineMessageBox.show(codRet, "Error", MultiLineMessageBox.OK, "ERROR", true);
-//				return;
-//			}
-//		}
-//		
-//		if(codRet.equals(""))
-//		{
-//			if(p.equals("") || !p.getValue().equals("admon"))
-//			{
-//				//System.out.println("usuario no valido -----------");
-////				throw new UsernameNotFoundException("Invalid User");
-//				codRet = "Usuario no Valido";
-//				MultiLineMessageBox.show(codRet, "Error", MultiLineMessageBox.OK, "ERROR", true);
-//				return;
-//			}
-//		}
-		
-//		int intentos = 0;
-//		
-//		if(session.getAttribute(user.getName()) == null)
-//		{
-//			intentos = 1;
-//		}
-//		else
-//		{
-//			intentos = Integer.parseInt(session.getAttribute(user.getName()).toString());
-//			intentos++;
-//			 
-//		}
 //		
 //		
-//		 
-//		session.setAttribute(user.getName(), intentos + "");
-//		 
-//		if(intentos > 2)
-//		{
-//			UsuarioService service= new UsuarioService();
-//			try {
-////				service.setUserInactiveByUserName(user.getName());
-//				codRet = "Se excedio el Maximo de Intentos Permitidos";
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//			}
-//			
-//			MultiLineMessageBox.show(codRet, "Error", MultiLineMessageBox.OK, "ERROR", true);
-//			
-//			session.removeAttribute(user.getName());
-//			return; 
-//		}
-		
-//		if(codRet.equals(""))
-//		{
-//			codRet = "Datos invalidos, favor de Verificarlos";
-//			
-//			MultiLineMessageBox.show(codRet, "Error", MultiLineMessageBox.OK, "ERROR", true);
-//			return;
-//		}
-		
-		loginwin.onClose();
-		
-		
-		
-		
-//		if(!User.equals("")){
-			
-//		}
-//		HashMap<String, Object> map = new HashMap<String, Object>();
-//		map.put("usuario", "Gerardo Perez Carbajal");
-//		/*
-//		 * we can additionally handed over the listBox, so we have in the dialog
-//		 * access to the listbox Listmodel. This is fine for synchronizing the
-//		 * data in the userListbox from the dialog when we do a delete, edit or
-//		 * insert a user.
-//		 */
-////		map.put("listBoxOrden", null);
-//		// call the zul-file and put it in the center layout area
-//		Executions.createComponents("/indexSKF.zul", null, map);
-		
-//		System.out.println("login.zul?login_error=" + codRet);	
-		
-	}	// onClick$button_ZKLoginDialog_ServerTime
-	
+//	}
 	
 	public void onClick$label_Rege(Event event)
 	{
@@ -389,204 +246,6 @@ public class LoginCtrl extends GFCBaseCtrl {
 		}
 
 		
-	}
-	
-	public String loguin(String Usuario, String pass) throws IOException, InterruptedException{
-		
-		hbox_Salir.setVisible(false);
-		hbox_OrdenManu.setVisible(false);
-		hbox_EntregaRecepcion.setVisible(false);
-		hbox_Operacion.setVisible(false);
-		hbox_Reporte.setVisible(false);
-		hbox_Trazabilidad.setVisible(false);
-		
-		String Res ="";
-		
-		System.out.println("SKF - Cliente de ejemplo para API ");
-
-		try {
-			URL url = new URL("http://localhost:5000/api/Login");
-			HttpURLConnection con = (HttpURLConnection) url.openConnection();
-			con.setRequestMethod("POST");
-			con.setRequestProperty("Content-Type", "application/json");
-			con.setRequestProperty("Accept", "*/*");
-			con.setDoOutput(true);
-
-			//String jsonInputString = "{\"username\":\"GPCarbajal\",\"password\":\"Gerardo24\"}";
-			String jsonInputString = "{\"username\":\"" + Usuario + "\",\"password\":\"" + pass+ "\"}";
-
-			
-				OutputStream os = con.getOutputStream();
-				byte[] input = jsonInputString.getBytes("utf-8");
-				os.write(input, 0, input.length);
-			
-
-			int responseCode = con.getResponseCode();
-			System.out.println("POST Response Code :: " + responseCode);
-
-			if (responseCode == 200) {
-				
-				
-				
-//					BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream(), "utf-8"));
-//					StringBuilder response = new StringBuilder();
-//					String responseLine = null;
-//					while ((responseLine = br.readLine()) != null) {
-//						response.append(responseLine.trim());
-//					}
-//					System.out.println(response.toString());
-//
-//					Gson g = new Gson();                                             
-//					                                                                 
-//					Response objResponse = g.fromJson(response.toString(), Response.class);
-//					if (!objResponse.success) {
-//						 System.out.println("información obtenida con Gson");
-//						 System.out.println(objResponse.message);
-//						 MultiLineMessageBox.show(objResponse.message, "Error", MultiLineMessageBox.OK, "ERROR", true);
-//						 return objResponse.message;
-//						 }
-//					else {
-//					System.out.println("informacón obtenida con Gson");
-//					System.out.println(objResponse.data.name);
-//					label_User.setVisible(true);
-//					
-//					String Empleado = "Empleado: "+ objResponse.data.name.toUpperCase() +" / ROL: " +objResponse.data.perfil.descripcion;
-//					label_User.setValue(Empleado);
-//					session.setAttribute("Empleado",Empleado);
-//					
-//					System.out.println("*****roles");
-//					Iterator itr=objResponse.data.roles.iterator();
-//
-//	                while(itr.hasNext()){
-//
-//	                        Object e = itr.next();
-//
-//	                        CatalogoBase s=(CatalogoBase)e;
-//
-//	                        System.out.println("Valor de Id: " + s.id);
-//
-//	                        System.out.println("Valor Descripción: " + s.descripcion);
-//	                        
-//	                        
-//	                        hbox_Salir.setVisible(true);
-//							
-//							
-//							
-//							
-//							
-//	                        
-//	                           if(s.descripcion.equals("ORDEN MANUFACTURA")){
-//	                        	   hbox_OrdenManu.setVisible(true);
-//		                       }
-//		                       if(s.descripcion.equals("TRAZABILIDAD")){
-//		                    	   hbox_Trazabilidad.setVisible(true);               	   
-//							   }
-//		                       if(s.descripcion.equals("REPORTES")){
-//		                    	   hbox_Reporte.setVisible(true); 
-//		                       }
-//		                       if(s.descripcion.equals("OPERACION")){
-//		                    	   hbox_Operacion.setVisible(true);
-//		                       }
-//		                       if(s.descripcion.equals("ENTREGA RECEPCION")){
-//		                    	   hbox_EntregaRecepcion.setVisible(true);
-//		                       }
-//		                       
-//		                       hbox_Salir.setVisible(true);
-//
-//	                }
-//					
-//	                System.out.println("*****perfil");
-//					System.out.println(objResponse.data.perfil.id);
-//					System.out.println(objResponse.data.perfil.descripcion);
-//					}
-//					System.out.println("información obtenida con Json");
-////					System.out.println(ExtractResponse(response.toString()));
-//					
-//					Res =response.toString();
-//				                        
-////					return ExtractResponse(response.toString()).toString();
-//					
-////					if(Usuario.equals("GPCarbajal")){
-////						label_User.setVisible(true);
-////						label_User.setValue("Empleado: "+ "Gerardo Perez Carbajal");
-////						
-////						hbox_Salir.setVisible(true);
-////						hbox_OrdenManu.setVisible(true);
-////						hbox_EntregaRecepcion.setVisible(true);
-////						hbox_Operacion.setVisible(true);
-////						hbox_Reporte.setVisible(true);
-////						hbox_Trazabilidad.setVisible(true);
-////					}
-////					if(Usuario.equals("IDBarcenas")){
-////						label_User.setVisible(true);
-////						label_User.setValue("Empleado: "+ "Ivan Daniel Barcenas Gomez");
-////						
-////						hbox_Salir.setVisible(true);
-////						hbox_OrdenManu.setVisible(false);
-////						hbox_EntregaRecepcion.setVisible(true);
-////						hbox_Operacion.setVisible(true);
-////						hbox_Reporte.setVisible(false);
-////						hbox_Trazabilidad.setVisible(false);
-////					}
-////					if(Usuario.equals("VAOrtega")){
-////						label_User.setVisible(true);
-////						label_User.setValue("Empleado: "+ "Victor Alfonso Alfaro Ortega");
-////						
-////						hbox_Salir.setVisible(true);
-////						hbox_OrdenManu.setVisible(true);
-////						hbox_EntregaRecepcion.setVisible(false);
-////						hbox_Operacion.setVisible(false);
-////						hbox_Reporte.setVisible(true);
-////						hbox_Trazabilidad.setVisible(false);
-////					}
-//					
-//					
-//					
-//					
-//					
-//					
-////					Sesion_User =  ((SecurityContext)session.getAttribute("SPRING_SECURITY_CONTEXT")).getAuthentication().getName();
-//					 session.setAttribute("SesionesSKF",Usuario);
-					 
-				
-			} else {
-				InputStream errorstream = con.getErrorStream();
-				String response = "";
-				String responseLine = null;
-				BufferedReader br = new BufferedReader(new InputStreamReader(errorstream));
-				while ((responseLine = br.readLine()) != null) {
-					response += responseLine;
-				}
-				System.out.println("Response: " + response);
-				
-				Res = response;
-				MultiLineMessageBox.show(response, "Error", MultiLineMessageBox.OK, "ERROR", true);
-//				return response;
-//				return response;
-				
-			}
-
-		} catch (MalformedURLException e2) {
-			e2.printStackTrace();
-		}
-		
-		return Res;
-		
-	}
-
-	public static JsonObject ExtractResponse(String response) {
-
-		JsonReader reader = Json.createReader(new StringReader(response));
-
-		JsonObject jsonObject = reader.readObject();
-
-		boolean isValid = jsonObject.getBoolean("success");
-		if (!isValid)
-			return null;
-
-		JsonObject infoUsuario = jsonObject.getJsonObject("data");
-
-		return infoUsuario;
 	}
 	
 	public void onClick$btnRegenera(Event event)

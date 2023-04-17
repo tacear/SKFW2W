@@ -8,11 +8,16 @@ import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
+
+import javax.servlet.http.HttpSession;
 
 import jxl.Workbook;
 import jxl.format.Colour;
@@ -22,14 +27,27 @@ import jxl.write.WritableFont;
 import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
 import mx.com.hunkabann.skf.frontent.util.ComboFactory;
+import mx.com.hunkabann.skf.mapeo.DetalleRol;
+import mx.com.hunkabann.skf.mapeo.TbCanal;
 import mx.com.hunkabann.skf.mapeo.TbCatCodigoDownTime;
 import mx.com.hunkabann.skf.mapeo.TbCatCodigoScrap;
 import mx.com.hunkabann.skf.mapeo.TbCatStatus;
 import mx.com.hunkabann.skf.mapeo.TbCatUm;
+import mx.com.hunkabann.skf.mapeo.TbEmpleado;
+import mx.com.hunkabann.skf.mapeo.TbMaquinaDispositivo;
 import mx.com.hunkabann.skf.mapeo.TbMateriaPrima;
+import mx.com.hunkabann.skf.mapeo.TbOrdenManufactura;
+import mx.com.hunkabann.skf.mapeo.TbPerfil;
+import mx.com.hunkabann.skf.mapeo.TbPersona;
 import mx.com.hunkabann.skf.mapeo.TbPlaca;
+import mx.com.hunkabann.skf.mapeo.TbPlacaOm;
+import mx.com.hunkabann.skf.mapeo.TbPlanControl;
 import mx.com.hunkabann.skf.mapeo.TbProdTermMatPrim;
 import mx.com.hunkabann.skf.mapeo.TbProductoTerminado;
+import mx.com.hunkabann.skf.mapeo.TbRol;
+import mx.com.hunkabann.skf.mapeo.TbSubArea;
+import mx.com.hunkabann.skf.mapeo.TbUbicacionProcesoOm;
+import mx.com.hunkabann.skf.mapeo.TbUsuario;
 import mx.com.hunkabann.skf.util.HibernateUtil;
 
 import org.apache.log4j.Logger;
@@ -37,8 +55,11 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
+import org.zkoss.zk.ui.http.SimpleSession;
+import org.zkoss.zul.Hbox;
 import org.zkoss.zul.Messagebox;
 
 
@@ -50,6 +71,16 @@ public class UsuarioService  {
 	private String userName = "";
 	private String email = "";
 	private String newPwd = "";
+	
+	protected transient Hbox hbox_Salir;
+	protected transient Hbox hbox_OrdenManu;
+	protected transient Hbox hbox_EntregaRecepcion;
+	protected transient Hbox hbox_Operacion;
+	protected transient Hbox hbox_Reporte;
+	protected transient Hbox hbox_Trazabilidad;
+	
+//	SimpleSession s = (SimpleSession) Executions.getCurrent().getDesktop().getSession();
+//	HttpSession session = (HttpSession) s.getNativeSession();	
 	
 	public TbProductoTerminado getPRoductoTerm(Integer p_stUsername)
 {
@@ -177,6 +208,28 @@ public class UsuarioService  {
 		return rol;
 	}
 	
+	public TbPlanControl getPlanControl(String p_stUsername)
+	{
+
+		Session s = null;
+		TbPlanControl rol = new TbPlanControl();
+		try
+		{
+			s = HibernateUtil.currentSession();
+			rol = (TbPlanControl) s.createQuery("from TbPlanControl p where p.chNumParte=" + p_stUsername ).uniqueResult();
+		}
+		catch (HibernateException e) {
+
+			logger.error(e.getMessage());
+		}
+		finally
+		{
+			if(s!=null)
+				HibernateUtil.closeSession();
+		}
+		return rol;
+	}
+	
 //	public TbProdTermMatPrim getProdTermMatePrim(Integer p_stUsername)
 //	{
 //
@@ -227,99 +280,145 @@ public class UsuarioService  {
 //		
 //	}	//getUserByLoginname
 	
-//	public TbProdTermMatPrim getProdTermMatePrim(Integer SKU) 
-//	{
-//		Session s = null;
-//		Statement stm = null;
-//		ResultSet rs = null;
-//		boolean valor_Registro = false;
-//		TbProdTermMatPrim uso = new TbProdTermMatPrim();
-//		try {
-//			s = HibernateUtil.currentSession();
-//
-//
-//			stm = s.connection().createStatement();
-//
-//				rs = stm.executeQuery("select nuCantidad from Tb_ProdTerm_MatPrim where nukIdProdTerm =" +SKU+"");
-//				
-//				
-//				
-//
-//				while (rs.next()) {
+	public TbRol getrol(Integer SKU) 
+	{
+		
+		
+		Session s = null;
+		Statement stm = null;
+		ResultSet rs = null;
+		boolean valor_Registro = false;
+		TbRol uso = new TbRol();
+		try {
+			s = HibernateUtil.currentSession();
+
+
+			stm = s.connection().createStatement();
+
+				rs = stm.executeQuery("select rol.nukIdRol, rol.chClave, rol.chNombre , rol.chDescripcion from tb_rol as rol, tb_perfil as per, Tb_Perfil_Rol as pr where per.nukIdPerfil = pr.nukIdPerfil and rol.nukIdRol = pr.nukIdRol and per.nukIdPerfil= " +SKU);
+				
+				
+				
+
+				while (rs.next()) {
 //					System.out.println("VAlor del Qry: " + rs.getDouble(1));
-//					uso.setNuCantidad(rs.getDouble(1));
-////					if(uso.getNuCantidad() == 0){
-////						valor_Registro = false;
-////					}else{
-////						valor_Registro = true;
-////					}
-//					
-//				}
-//		} catch (Exception e) {
-//			logger.error("" + e.getMessage());
-//			e.printStackTrace();
-//		} finally {
-//			if(s!=null)
-//				HibernateUtil.closeSession();
-//		}
-//		return uso;
-//	}
+					uso.setNukIdRol(rs.getInt(1));
+					uso.setChClave(rs.getString(2));
+					uso.setChNombre(rs.getString(3));
+					uso.setChDescripcion(rs.getString(4));
+//					if(uso.getNuCantidad() == 0){
+//						valor_Registro = false;
+//					}else{
+//						valor_Registro = true;
+//					}
+					
+				}
+		} catch (Exception e) {
+			logger.error("" + e.getMessage());
+			e.printStackTrace();
+		} finally {
+			if(s!=null)
+				HibernateUtil.closeSession();
+		}
+		return uso;
+	}
+	
+	public TbUsuario getUsuario(Integer SKU) 
+	{
+		
+		
+		Session s = null;
+		Statement stm = null;
+		ResultSet rs = null;
+		boolean valor_Registro = false;
+		TbUsuario uso = new TbUsuario();
+		try {
+			s = HibernateUtil.currentSession();
+
+
+			stm = s.connection().createStatement();
+
+				rs = stm.executeQuery("select nukIdUsuario from Tb_Usuario where nukIdPersona = " +SKU);
+				
+				
+				
+
+				while (rs.next()) {
+//					System.out.println("VAlor del Qry: " + rs.getDouble(1));
+					uso.setNukIdUsuario(rs.getInt(1));
+					
+//					if(uso.getNuCantidad() == 0){
+//						valor_Registro = false;
+//					}else{
+//						valor_Registro = true;
+//					}
+					
+				}
+		} catch (Exception e) {
+			logger.error("" + e.getMessage());
+			e.printStackTrace();
+		} finally {
+			if(s!=null)
+				HibernateUtil.closeSession();
+		}
+		return uso;
+	}
 
 	
-//	public TbUsuario getUserByUsername(String p_stUsername) throws Exception
-//	{
-//		TbUsuario l_return = null;
-//		Session l_sesion = null;
-//		String l_stQry = "";
-//		
-//		HibernateUtil hibernate = new HibernateUtil();
-//		
-//		try
-//		{
-//			l_sesion = hibernate.currentSession();
-//			
-//			// por fecha
-////			l_stQry = "from Usuarios u " +
-////					" where u.username = :username " +
-////					" and u.pwdExpire > :hoy" +
-////					" and u.activo = :activo";
-////			l_return = (Usuarios)l_sesion.createQuery(l_stQry)
-////						.setParameter("username", p_stUsername)
-////						.setTimestamp("hoy", new Date())
-////						.setParameter("activo", "1")
-////						.uniqueResult();
-//			
-//			// solo usuarios activos
-////			l_stQry = "from Usuarios u " +
-////					" where u.username = :username " +
-////					" and u.activo = :activo";
-////			l_return = (Usuarios)l_sesion.createQuery(l_stQry)
-////				.setParameter("username", p_stUsername)
-////				.setParameter("activo", "1")
-////				.uniqueResult();
-//			
-//			
-//			l_stQry = "from TbUsuario u " +
-//					" where u.username = :username ";
-//			l_return = (TbUsuario)l_sesion.createQuery(l_stQry)
+	public TbUsuario getUserByUsername(String p_stUsername) throws Exception
+	{
+		TbUsuario l_return = null;
+		Session l_sesion = null;
+		String l_stQry = "";
+		
+		HibernateUtil hibernate = new HibernateUtil();
+		
+		try
+		{
+			l_sesion = hibernate.currentSession();
+			
+			// por fecha
+//			l_stQry = "from Usuarios u " +
+//					" where u.username = :username " +
+//					" and u.pwdExpire > :hoy" +
+//					" and u.activo = :activo";
+//			l_return = (Usuarios)l_sesion.createQuery(l_stQry)
+//						.setParameter("username", p_stUsername)
+//						.setTimestamp("hoy", new Date())
+//						.setParameter("activo", "1")
+//						.uniqueResult();
+			
+			// solo usuarios activos
+//			l_stQry = "from Usuarios u " +
+//					" where u.username = :username " +
+//					" and u.activo = :activo";
+//			l_return = (Usuarios)l_sesion.createQuery(l_stQry)
 //				.setParameter("username", p_stUsername)
+//				.setParameter("activo", "1")
 //				.uniqueResult();
-//			
-//			
-//		}
-//		catch(Exception e)
-//		{
-//			
-//			throw e;
-//		}
-//		finally
-//		{
-//			hibernate.closeSession();
-//		}
-//		
-//		return l_return;
-//		
-//	}	// getUserByUsername
+			
+			
+			l_stQry = "from TbUsuario u " +
+					" where u.chUsuario = :username ";
+			l_return = (TbUsuario)l_sesion.createQuery(l_stQry)
+				.setParameter("username", p_stUsername)
+				.uniqueResult();
+			
+			
+		}
+		catch(Exception e)
+		{
+			
+			throw e;
+		}
+		finally
+		{
+			hibernate.closeSession();
+		}
+		
+		return l_return;
+		
+	}	// getUserByUsername
 //	
 //	@SuppressWarnings("unchecked")
 //	public TbUsuario getUserByLoginname(String p_stLogin)
@@ -482,34 +581,53 @@ public class UsuarioService  {
 //	
 //	
 //	
-//	public List<Integer> getRightsByUser(TbUsuario p_user) throws Exception
-//	{
-//		List<Integer> l_return = null;
-//		Session l_sesion = null;
-//		String l_stQry = "";
-//		
-//		try
-//		{
-//			l_sesion = HibernateUtil.currentSession();
-//			l_stQry = "Select u.idUsuario from TbUsuario u where u.idUsuario = " + p_user.getIdUsuario();
-//			System.out.println(l_stQry);
-//			l_return = l_sesion.createQuery(l_stQry).list();
+	public List<Integer> getRightsByUser(TbUsuario p_user) throws Exception
+	{
+		List<Integer> l_return = null;
+//		TbUsuario LreturnUser = new TbUsuario();
+		Session l_sesion = null;
+		String l_stQry = "";
+		
+		Collection<Integer>  rights;
+		
+		try
+		{
+			l_sesion = HibernateUtil.currentSession();
+			l_stQry = "Select u.nukIdUsuario from TbUsuario u where u.nukIdUsuario = " + p_user.getNukIdUsuario();
+			System.out.println(l_stQry);
+			l_return = l_sesion.createQuery(l_stQry).list();
+//			LreturnUser= (TbUsuario) l_sesion.createQuery(l_stQry).list();
+			
+		}
+		catch(Exception e)
+		{
+			throw e;
+		}
+		finally
+		{
+			HibernateUtil.closeSession();
+		}
+		
+		rights = l_return;
+		
+		
+//		if (rights.size() == 0) {
+////			throw new UsernameNotFoundException("Invalid User");
+//			session.setAttribute("SesionesSKF","");
+//		}else{
+//			
+//			session.setAttribute("SesionesSKF", LreturnUser.getNukIdUsuario());
 //			
 //		}
-//		catch(Exception e)
-//		{
-//			throw e;
-//		}
-//		finally
-//		{
-//			HibernateUtil.closeSession();
-//		}
-//		
-//		
-//		return l_return;
-//		
-//		
-//	}	// getRightsByUser
+		
+			
+		
+		
+		
+		return l_return;
+		
+		
+	}	// getRightsByUser
 //	
 //	
 //	
@@ -718,41 +836,41 @@ public class UsuarioService  {
 //	}	// actualizaPwd
 //	
 //	
-//	public void setUserInactiveByUserName(String p_stUserName) throws Exception
-//	{
-//		Session l_session = null;
-//		Transaction tx = null;
-//		TbUsuario user = null;
-//		
-//		user = getUserByUsername(p_stUserName);
-//		
-//		try
-//		{
-//			l_session = HibernateUtil.currentSession();
-//			tx = l_session.beginTransaction();
-//			
-////			user.setActivo("0");
+	public void setUserInactiveByUserName(String p_stUserName) throws Exception
+	{
+		Session l_session = null;
+		Transaction tx = null;
+		TbUsuario user = null;
+		
+		user = getUserByUsername(p_stUserName);
+		
+		try
+		{
+			l_session = HibernateUtil.currentSession();
+			tx = l_session.beginTransaction();
+			
+//			user.setActivo("0");
 //			double estatus = Double.parseDouble("0");
-//			user.setStatus(0);
-//			l_session.update(user);
-//			
-//			tx.commit();
-//			
-//		}
-//		catch(Exception e)
-//		{
-//			tx.rollback();
-//			throw e;
-//			
-//		}
-//		finally
-//		{
-//			HibernateUtil.closeSession();
-//			
-//		}
-//		
-//		
-//	}	// setUserInactineByUserName
+			user.setNuActivo(false);
+			l_session.update(user);
+			
+			tx.commit();
+			
+		}
+		catch(Exception e)
+		{
+			tx.rollback();
+			throw e;
+			
+		}
+		finally
+		{
+			HibernateUtil.closeSession();
+			
+		}
+		
+		
+	}	// setUserInactineByUserName
 //	
 //	/**
 //	 * Obtiene el id del usuario
@@ -830,34 +948,34 @@ public class UsuarioService  {
 //		
 //		return idUsuario;
 //	}
-//	/**
-//	 * Obtiene el id del usuario
-//	 * @param idUser
-//	 * @return
-//	 */
-//	public Integer getIdByUserName(String Name) {
-//		Session s = null;
-//		Integer idUsuario = null;
-//		try
-//		{
-//			s = HibernateUtil.currentSession();
-//			idUsuario = (Integer) s.createQuery("select c.idUsuario from TbUsuario c where username = '"+Name+"'").uniqueResult();
-//			
-//			if(idUsuario==null)
-//				return -1;
-//
-//		}
-//		catch (Exception e) {
-//			e.printStackTrace();
-//		} finally {
-//			if(s!=null)
-//				HibernateUtil.closeSession();
-//		}
-//		
-//		
-//		
-//		return idUsuario;
-//	}
+	/**
+	 * Obtiene el id del usuario
+	 * @param idUser
+	 * @return
+	 */
+	public Integer getIdByUserName(String Name) {
+		Session s = null;
+		Integer idUsuario = null;
+		try
+		{
+			s = HibernateUtil.currentSession();
+			idUsuario = (Integer) s.createQuery("select c.nukIdUsuario from TbUsuario c where chUsuario = '"+Name+"'").uniqueResult();
+			
+			if(idUsuario==null)
+				return -1;
+
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(s!=null)
+				HibernateUtil.closeSession();
+		}
+		
+		
+		
+		return idUsuario;
+	}
 //	
 //	/**
 //	 * Obtiene el id del Rol
@@ -1029,42 +1147,77 @@ public class UsuarioService  {
 //		
 //	}	// save
 //	
-//	public synchronized Integer saveProdTerm(TbProductosTerminados anUser) throws Exception 
-//	{
-//		Session l_session = null;
-//		Transaction tx = null;
-//		Integer l_id = null;
-//		
-//		try
-//		{
-//			l_session = HibernateUtil.currentSession();
-//			tx = l_session.beginTransaction();
-//
-//			// cuando se ingresa una tabla por primera vez el total de 
-//			// registros que tiene es cero.
-////			p_UserName.setNuindex(0);
-//			l_session.save(anUser);
-//			
-//			tx.commit();
-//			
-//			l_id = anUser.getNukIdProductosTerminados();
-//		}
-//		catch (Exception e) {
-//			tx.rollback();
-//			throw new Exception(this.getClass().getName() + " - " + e.getMessage());
-//		}
-//		finally
-//		{
-//			if(l_session != null)
-//				HibernateUtil.closeSession();
-//			
-//			tx = null;
-//		}
-//		
-//		
-//		return l_id;
-//		
-//	}	// save
+	public synchronized Integer saveOrdenManu(TbOrdenManufactura anUser) throws Exception 
+	{
+		Session l_session = null;
+		Transaction tx = null;
+		Integer l_id = null;
+		
+		try
+		{
+			l_session = HibernateUtil.currentSession();
+			tx = l_session.beginTransaction();
+
+
+			l_session.save(anUser);
+			
+			tx.commit();
+			
+			l_id = anUser.getNukIdOrdenManufactura();
+		}
+		catch (Exception e) {
+			tx.rollback();
+			throw new Exception(this.getClass().getName() + " - " + e.getMessage());
+		}
+		finally
+		{
+			if(l_session != null)
+				HibernateUtil.closeSession();
+			
+			tx = null;
+		}
+		
+		
+		return l_id;
+		
+	}	// save
+	
+	public synchronized Integer savePlacaOm(TbPlacaOm anUser) throws Exception 
+	{
+		Session l_session = null;
+		Transaction tx = null;
+		Integer l_id = null;
+		
+		try
+		{
+			l_session = HibernateUtil.currentSession();
+			tx = l_session.beginTransaction();
+
+			// cuando se ingresa una tabla por primera vez el total de 
+			// registros que tiene es cero.
+//			p_UserName.setNuindex(0);
+			l_session.save(anUser);
+			
+			tx.commit();
+			
+			l_id = anUser.getTbPlaca().getNukIdPlaca();
+		}
+		catch (Exception e) {
+			tx.rollback();
+			throw new Exception(this.getClass().getName() + " - " + e.getMessage());
+		}
+		finally
+		{
+			if(l_session != null)
+				HibernateUtil.closeSession();
+			
+			tx = null;
+		}
+		
+		
+		return l_id;
+		
+	}	// save
 //	
 //	public synchronized Integer saveUbiMp(TbUbicacionMateriaPrim anUser) throws Exception 
 //	{
@@ -2026,30 +2179,343 @@ public class UsuarioService  {
 //		}
 //		
 //		
-//		/**
-//		 * verifica si ya existe el usuario en la bd
-//		 */
-//		public boolean existeProdTerm (String campo, String valor) {
-//			boolean existe = false;
-//			Session s = null;
-//			String where = "";
-//			TbProductosTerminados user =new TbProductosTerminados();
-//			
-//			try {
-//				s = HibernateUtil.currentSession();
-//				where = "where s." + campo + "='" +valor + "'";
-//				user = (TbProductosTerminados) s.createQuery("from TbProductosTerminados s " + where).uniqueResult();
-//				if (user.getNukIdProductosTerminados()!= null)
-//					existe =true;
-//				
-//			} catch (Exception e) {
-//				logger.error(e.getMessage());
-//			} finally {
-//				if(s!=null)
-//					HibernateUtil.closeSession();
-//			}
-//			return existe;
-//		}
+		/**
+		 * verifica si ya existe el usuario en la bd
+		 */
+		public boolean existeIsla(String valor) {
+			boolean existe = false;
+			Session s = null;
+			String where = "";
+			TbSubArea user =new TbSubArea();
+			
+			try {
+				s = HibernateUtil.currentSession();
+				where = "where s.chNombre ='" +valor + "'";
+				user = (TbSubArea) s.createQuery("from TbSubArea s " + where).uniqueResult();
+				if (user.getNukIdSubArea()!= null)
+					existe =true;
+				
+			} catch (Exception e) {
+				logger.error(e.getMessage());
+			} finally {
+				if(s!=null)
+					HibernateUtil.closeSession();
+			}
+			return existe;
+		}
+		
+		/**
+		 * verifica si ya existe el usuario en la bd
+		 */
+		public TbSubArea getIsla(String valor) {
+			boolean existe = false;
+			Session s = null;
+			String where = "";
+			TbSubArea user =new TbSubArea();
+			
+			try {
+				s = HibernateUtil.currentSession();
+				where = "where s.chNombre ='" +valor + "'";
+				user = (TbSubArea) s.createQuery("from TbSubArea s " + where).uniqueResult();
+				if (user.getNukIdSubArea()!= null)
+					existe =true;
+				
+			} catch (Exception e) {
+				logger.error(e.getMessage());
+			} finally {
+				if(s!=null)
+					HibernateUtil.closeSession();
+			}
+			return user;
+		}
+		
+		public boolean existeEmpleado(String valor) {
+			boolean existe = false;
+			Session s = null;
+			String where = "";
+			TbEmpleado user =new TbEmpleado();
+			
+			try {
+				s = HibernateUtil.currentSession();
+				where = "where s.chNumEmpleado ='" +valor + "'";
+				user = (TbEmpleado) s.createQuery("from TbEmpleado s " + where).uniqueResult();
+				if (user.getNukIdEmpleado()!= null)
+					existe =true;
+				
+			} catch (Exception e) {
+				logger.error(e.getMessage());
+			} finally {
+				if(s!=null)
+					HibernateUtil.closeSession();
+			}
+			return existe;
+		}
+		
+		public TbEmpleado getEmpleado(String valor) {
+			boolean existe = false;
+			Session s = null;
+			String where = "";
+			TbEmpleado user =new TbEmpleado();
+			
+			try {
+				s = HibernateUtil.currentSession();
+				where = "where s.chNumEmpleado ='" +valor + "'";
+				user = (TbEmpleado) s.createQuery("from TbEmpleado s " + where).uniqueResult();
+				if (user.getNukIdEmpleado()!= null)
+					existe =true;
+				
+			} catch (Exception e) {
+				logger.error(e.getMessage());
+			} finally {
+				if(s!=null)
+					HibernateUtil.closeSession();
+			}
+			return user;
+		}
+		
+		public boolean existeMaquina(String valor) {
+			boolean existe = false;
+			Session s = null;
+			String where = "";
+			TbMaquinaDispositivo user =new TbMaquinaDispositivo();
+			
+			try {
+				s = HibernateUtil.currentSession();
+				where = "where s.chNombre ='" +valor + "'";
+				user = (TbMaquinaDispositivo) s.createQuery("from TbMaquinaDispositivo s " + where).uniqueResult();
+				if (user.getNukIdMaquinaDisp()!= null)
+					existe =true;
+				
+			} catch (Exception e) {
+				logger.error(e.getMessage());
+			} finally {
+				if(s!=null)
+					HibernateUtil.closeSession();
+			}
+			return existe;
+		}
+		
+		public TbMaquinaDispositivo getMaquina(String valor) {
+			boolean existe = false;
+			Session s = null;
+			String where = "";
+			TbMaquinaDispositivo user =new TbMaquinaDispositivo();
+			
+			try {
+				s = HibernateUtil.currentSession();
+				where = "where s.chNombre ='" +valor + "'";
+				user = (TbMaquinaDispositivo) s.createQuery("from TbMaquinaDispositivo s " + where).uniqueResult();
+				if (user.getNukIdMaquinaDisp()!= null)
+					existe =true;
+				
+			} catch (Exception e) {
+				logger.error(e.getMessage());
+			} finally {
+				if(s!=null)
+					HibernateUtil.closeSession();
+			}
+			return user;
+		}
+		
+		public boolean existeCanal(String valor) {
+			boolean existe = false;
+			Session s = null;
+			String where = "";
+			TbCanal user =new TbCanal();
+			
+			try {
+				s = HibernateUtil.currentSession();
+				where = "where s.chNombre ='" +valor + "'";
+				user = (TbCanal) s.createQuery("from TbCanal s " + where).uniqueResult();
+				if (user.getNukIdCanal()!= null)
+					existe =true;
+				
+			} catch (Exception e) {
+				logger.error(e.getMessage());
+			} finally {
+				if(s!=null)
+					HibernateUtil.closeSession();
+			}
+			return existe;
+		}
+		
+		public TbCanal getCanal(String valor) {
+			boolean existe = false;
+			Session s = null;
+			String where = "";
+			TbCanal user =new TbCanal();
+			
+			try {
+				s = HibernateUtil.currentSession();
+				where = "where s.chNombre ='" +valor + "'";
+				user = (TbCanal) s.createQuery("from TbCanal s " + where).uniqueResult();
+				if (user.getNukIdCanal()!= null)
+					existe =true;
+				
+			} catch (Exception e) {
+				logger.error(e.getMessage());
+			} finally {
+				if(s!=null)
+					HibernateUtil.closeSession();
+			}
+			return user;
+		}
+		
+		public boolean existePlaca(String valor) {
+			boolean existe = false;
+			Session s = null;
+			String where = "";
+			TbPlaca user =new TbPlaca();
+			
+			try {
+				s = HibernateUtil.currentSession();
+				where = "where s.chPlaca ='" +valor + "'";
+				user = (TbPlaca) s.createQuery("from TbPlaca s " + where).uniqueResult();
+				if (user.getNukIdPlaca()!= null)
+					existe =true;
+				
+			} catch (Exception e) {
+				logger.error(e.getMessage());
+			} finally {
+				if(s!=null)
+					HibernateUtil.closeSession();
+			}
+			return existe;
+		}
+		
+		public TbPlaca getPlaca(String valor) {
+			boolean existe = false;
+			Session s = null;
+			String where = "";
+			TbPlaca user =new TbPlaca();
+			
+			try {
+				s = HibernateUtil.currentSession();
+				where = "where s.chPlaca ='" +valor + "'";
+				user = (TbPlaca) s.createQuery("from TbPlaca s " + where).uniqueResult();
+				if (user.getNukIdPlaca()!= null)
+					existe =true;
+				
+			} catch (Exception e) {
+				logger.error(e.getMessage());
+			} finally {
+				if(s!=null)
+					HibernateUtil.closeSession();
+			}
+			return user;
+		}
+		
+		public boolean existeProductoTerm(String valor) {
+			boolean existe = false;
+			Session s = null;
+			String where = "";
+			TbProductoTerminado user =new TbProductoTerminado();
+			
+			try {
+				s = HibernateUtil.currentSession();
+				where = "where s.chSku ='" +valor + "'";
+				user = (TbProductoTerminado) s.createQuery("from TbProductoTerminado s " + where).uniqueResult();
+				if (user.getNukIdProdTerm()!= null)
+					existe =true;
+				
+			} catch (Exception e) {
+				logger.error(e.getMessage());
+			} finally {
+				if(s!=null)
+					HibernateUtil.closeSession();
+			}
+			return existe;
+		}
+		
+		public boolean existeProductoTermMatPrim(int valor) {
+			boolean existe = false;
+			Session s = null;
+			String where = "";
+			TbProdTermMatPrim user =new TbProdTermMatPrim();
+			
+			try {
+				s = HibernateUtil.currentSession();
+				where = "where s.tbProductoTerminado.nukIdProdTerm =" +valor ;
+				user = (TbProdTermMatPrim) s.createQuery("from TbProdTermMatPrim s " + where).uniqueResult();
+				if (user.getNukIdProdTermProdMatPrim()!= null)
+					existe =true;
+				
+			} catch (Exception e) {
+				logger.error(e.getMessage());
+			} finally {
+				if(s!=null)
+					HibernateUtil.closeSession();
+			}
+			return existe;
+		}
+		
+		public boolean existeUbicaOM(int IdSubarea,int IdCanal,int IdMAquinaDisp) {
+			boolean existe = false;
+			Session s = null;
+			String where = "";
+			TbUbicacionProcesoOm user =new TbUbicacionProcesoOm();
+			
+			try {
+				s = HibernateUtil.currentSession();
+				where = "where s.tbSubArea.nukIdSubArea =" +IdSubarea + " and s.tbCanal.nukIdCanal " +IdCanal + " and s.tbMaquinaDispositivo.nukIdMaquinaDisp= "+IdMAquinaDisp;
+				user = (TbUbicacionProcesoOm) s.createQuery("from TbUbicacionProcesoOm s " + where).uniqueResult();
+				if (user.getNukIdUbicaProcessOm()!= null)
+					existe =true;
+				
+			} catch (Exception e) {
+				logger.error(e.getMessage());
+			} finally {
+				if(s!=null)
+					HibernateUtil.closeSession();
+			}
+			return existe;
+		}
+		
+		public TbUbicacionProcesoOm getUbicaOM(int IdSubarea,int IdCanal,int IdMAquinaDisp) {
+			boolean existe = false;
+			Session s = null;
+			String where = "";
+			TbUbicacionProcesoOm user =new TbUbicacionProcesoOm();
+			
+			try {
+				s = HibernateUtil.currentSession();
+				where = "where s.tbSubArea.nukIdSubArea =" +IdSubarea + " and s.tbCanal.nukIdCanal " +IdCanal + " and s.tbMaquinaDispositivo.nukIdMaquinaDisp= "+IdMAquinaDisp;
+				user = (TbUbicacionProcesoOm) s.createQuery("from TbUbicacionProcesoOm s " + where).uniqueResult();
+				if (user.getNukIdUbicaProcessOm()!= null)
+					existe =true;
+				
+			} catch (Exception e) {
+				logger.error(e.getMessage());
+			} finally {
+				if(s!=null)
+					HibernateUtil.closeSession();
+			}
+			return user;
+		}
+		
+		
+		
+		public boolean existeOrdenManu(String OrdenManu) {
+			boolean existe = false;
+			Session s = null;
+			String where = "";
+			TbOrdenManufactura user =new TbOrdenManufactura();
+			
+			try {
+				s = HibernateUtil.currentSession();
+				where = "where s.chOrdenManufactura ='" +OrdenManu+"'";
+				user = (TbOrdenManufactura) s.createQuery("from TbOrdenManufactura s " + where).uniqueResult();
+				if (user.getNukIdOrdenManufactura()!= null)
+					existe =true;
+				
+			} catch (Exception e) {
+				logger.error(e.getMessage());
+			} finally {
+				if(s!=null)
+					HibernateUtil.closeSession();
+			}
+			return existe;
+		}
 //	
 //		
 //		/**
@@ -2156,29 +2622,29 @@ public class UsuarioService  {
 ////			return existe;
 ////		}
 ////	
-////		public TbPersona getPersona(TbUsuario cliente) {
-////
-////			Session s = null;
-////			TbPersona persona = new TbPersona();
-////			try
-////			{
-////				s = HibernateUtil.currentSession();
-////				System.out.println("-------------------cliente.getIdUsuario() = "+ cliente.getUsername());
-////				System.out.println("cliente.getIdUsuario() = "+ cliente.getIdUsuario());
-////				System.out.println("Usuario = cliente.getIdUsuario(): "+ cliente.getIdUsuario());
-////				persona = (TbPersona) s.createQuery("from TbPersona p where p.tbUsuario.idUsuario="+cliente.getIdUsuario()+" and status= 1").uniqueResult();
-////			}
-////			catch (HibernateException e) {
-////
-////				logger.error(e.getMessage());
-////			}
-////			finally
-////			{
-////				if(s!=null)
-////					HibernateUtil.closeSession();
-////			}
-////			return persona;
-////		}
+		public TbPersona getPersona(TbUsuario cliente) {
+
+			Session s = null;
+			TbPersona persona = new TbPersona();
+			try
+			{
+				s = HibernateUtil.currentSession();
+				System.out.println("-------------------cliente.getIdUsuario() = "+ cliente.getChUsuario());
+				System.out.println("cliente.getIdUsuario() = "+ cliente.getNukIdUsuario());
+				System.out.println("Usuario = cliente.getIdUsuario(): "+ cliente.getTbPersona().getNukIdPersona());
+				persona = (TbPersona) s.createQuery("from TbPersona p where p.nukIdPersona="+cliente.getNukIdUsuario()+" and nuActivo= 1").uniqueResult();
+			}
+			catch (HibernateException e) {
+
+				logger.error(e.getMessage());
+			}
+			finally
+			{
+				if(s!=null)
+					HibernateUtil.closeSession();
+			}
+			return persona;
+		}
 ////		
 ////		public TbPersona getPersonaEmail(TbUsuario cliente,String Email) {
 ////
@@ -2269,26 +2735,26 @@ public class UsuarioService  {
 ////			return persona;
 ////		}
 ////		
-////		public TbPerfil gettbPerfil(Integer id_perfil) {
-////
-////			Session s = null;
-////			TbPerfil persona = new TbPerfil();
-////			try
-////			{
-////				s = HibernateUtil.currentSession();
-////				persona = (TbPerfil) s.createQuery("from TbPerfil p where p.idPerfil="+id_perfil+"").uniqueResult();
-////			}
-////			catch (HibernateException e) {
-////
-////				logger.error(e.getMessage());
-////			}
-////			finally
-////			{
-////				if(s!=null)
-////					HibernateUtil.closeSession();
-////			}
-////			return persona;
-////		}
+		public TbPerfil gettbPerfil(Integer id_perfil) {
+
+			Session s = null;
+			TbPerfil persona = new TbPerfil();
+			try
+			{
+				s = HibernateUtil.currentSession();
+				persona = (TbPerfil) s.createQuery("from TbPerfil p where p.nukIdPerfil="+id_perfil+"").uniqueResult();
+			}
+			catch (HibernateException e) {
+
+				logger.error(e.getMessage());
+			}
+			finally
+			{
+				if(s!=null)
+					HibernateUtil.closeSession();
+			}
+			return persona;
+		}
 ////		
 ////		public TbRol gettbRol(Integer id_perfil) {
 ////
@@ -3008,41 +3474,58 @@ public class UsuarioService  {
 ////			return RolCliente;
 ////		}
 //		
-//		public List<String> getUserIds(String name)
-//		{
-//			Session s = null;
-//			Statement stm = null;
-//			ResultSet rs = null;
-//			
-//			List<String> RolCliente = new ArrayList<String>();
-//			try {
-//				s = HibernateUtil.currentSession();
-//
-//
-//				
-//
-//				stm = s.connection().createStatement();
-//
-//
-//					
-//					rs = stm.executeQuery("select id_Usuario from Tb_Usuario where username like '%" + name+ "%'");
-//
-//
-//					while (rs.next()) {
-//						RolCliente.add(rs.getInt(1)+"");
-//
-//					}
-//
-//
-//			} catch (Exception e) {
-//				logger.error("" + e.getMessage());
-//				e.printStackTrace();
-//			} finally {
-//				if(s!=null)
-//					HibernateUtil.closeSession();
-//			}
-//			return RolCliente;
-//		}
+		public List<DetalleRol> getRoles(Integer SKU)
+		{
+			Session s = null;
+			Statement stm = null;
+			ResultSet rs = null;
+			TbRol rol = new TbRol();
+
+			Map<String, DetalleRol> mapa = new HashMap<String, DetalleRol>();
+			List<DetalleRol> response = new ArrayList<DetalleRol>();
+			try {
+				s = HibernateUtil.currentSession();
+
+
+				
+
+				stm = s.connection().createStatement();
+
+
+					
+					rs = stm.executeQuery("select rol.nukIdRol, rol.chClave, rol.chNombre , rol.chDescripcion from tb_rol as rol, tb_perfil as per, Tb_Perfil_Rol as pr where per.nukIdPerfil = pr.nukIdPerfil and rol.nukIdRol = pr.nukIdRol and per.nukIdPerfil= " +SKU);
+					int i= 0;
+					
+					while (rs.next()) {
+						
+						rol.setNukIdRol(rs.getInt(1));
+						System.out.println("rol.getNukIdRol( ----->>>> " + rol.getNukIdRol());
+						rol.setChClave(rs.getString(2));
+						System.out.println("rol.getChClave()( ----->>>> " + rol.getChClave());
+						rol.setChNombre(rs.getString(3));
+						System.out.println("rol.getChNombre()( ----->>>> " + rol.getChNombre());
+						rol.setChDescripcion(rs.getString(4));
+						System.out.println("rol.getChDescripcion()( ----->>>> " + rol.getChDescripcion());
+						
+						DetalleRol d = new DetalleRol(i,rol.getChClave(), rol.getChNombre(), rol.getChDescripcion());
+						
+						mapa.put(rol.getNukIdRol()+"", d);
+						i++;
+
+					}
+					
+					response.addAll(mapa.values());
+					
+
+			} catch (Exception e) {
+				logger.error("" + e.getMessage());
+				e.printStackTrace();
+			} finally {
+				if(s!=null)
+					HibernateUtil.closeSession();
+			}
+			return response;
+		}
 //		
 //		public List<String> getComprobantesIds(String name)
 //		{
@@ -4094,41 +4577,43 @@ public class UsuarioService  {
 //			return valor_Registro;
 //		}
 //		
-//		public boolean getProdSKU_PT(String SKU) 
-//		{
-//			Session s = null;
-//			Statement stm = null;
-//			ResultSet rs = null;
-//			boolean valor_Registro = false;
-//			try {
-//				s = HibernateUtil.currentSession();
-//
-//
-//				stm = s.connection().createStatement();
-//
-//					rs = stm.executeQuery("select count(nukIdProductosTerminados) from Tb_Productos_Terminados where nustatus= 1 and chSKU ='" +SKU+"'");
-//					
-//					
-//					TbProductosTerminados uso = new TbProductosTerminados();
-//
-//					while (rs.next()) {
-//						uso.setNukIdProductosTerminados(rs.getInt(1));
-//						if(uso.getNukIdProductosTerminados() == 0){
-//							valor_Registro = false;
-//						}else{
+		public int getProdSKU_PT(String SKU) 
+		{
+			Session s = null;
+			Statement stm = null;
+			ResultSet rs = null;
+			boolean valor_Registro = false;
+			int ValorId = 0;
+			try {
+				s = HibernateUtil.currentSession();
+
+
+				stm = s.connection().createStatement();
+
+					rs = stm.executeQuery("select nukIdProdTerm from Tb_Producto_Terminado where nuActivo= 1 and chSKU ='" +SKU+"'");
+					
+					
+					TbProductoTerminado uso = new TbProductoTerminado();
+
+					while (rs.next()) {
+						uso.setNukIdProdTerm(rs.getInt(1));
+						ValorId = uso.getNukIdProdTerm();
+//						if(uso.getNukIdProdTerm() != 0){
 //							valor_Registro = true;
+//						}else{
+//							valor_Registro = false;
 //						}
-//						
-//					}
-//			} catch (Exception e) {
-//				logger.error("" + e.getMessage());
-//				e.printStackTrace();
-//			} finally {
-//				if(s!=null)
-//					HibernateUtil.closeSession();
-//			}
-//			return valor_Registro;
-//		}
+						
+					}
+			} catch (Exception e) {
+				logger.error("" + e.getMessage());
+				e.printStackTrace();
+			} finally {
+				if(s!=null)
+					HibernateUtil.closeSession();
+			}
+			return ValorId;
+		}
 //		
 //		public boolean getUbiSKU_MP(String SKU) 
 //		{
@@ -6769,6 +7254,8 @@ public class UsuarioService  {
 //			return detalles;
 //		}
 		
+	
+
 	public List<ComboFactory> getCatScrap()
 	{
 		Session s = null;

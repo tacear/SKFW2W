@@ -40,5 +40,8 @@
         <property name="nuCantidadRecibe" type="java.lang.Integer">
             <column name="nuCantidadRecibe" />
         </property>
+        <property name="chObservaciones" type="java.lang.String">
+            <column name="chObservaciones" length="500" />
+        </property>
     </class>
 </hibernate-mapping>

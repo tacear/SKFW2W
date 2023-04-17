@@ -53,21 +53,21 @@
 			<west border="none" margins="0,0,0,0" style="background-image: url('images/skf/images/Menu.png'); border:none; background-size:100% 100%; width: 250px; height: 80px; " flex="true" splittable="true" collapsible="true">
 				<div id="divWest">
 					<!-- WEST -->
-					<hbox id="hbox_OrdenManu" spacing="5px" style="padding:1px; margin-top:40px; margin-left:20px; cursor:pointer;" align="center" visible="true">
+					<hbox id="hbox_OrdenManu" spacing="5px" style="padding:1px; margin-top:40px; margin-left:20px; cursor:pointer;" align="center" visible="false">
 						
 						<image id="img_OrdenMan" src="/images/skf/menu/OM_00.png" width="200px" height="50px"/>
 					</hbox>
-					<hbox id="hbox_EntregaRecepcion" spacing="5px" style="padding:1px; margin-top:5px; margin-left:20px; cursor:pointer;" align="center" visible="true">
+					<hbox id="hbox_EntregaRecepcion" spacing="5px" style="padding:1px; margin-top:5px; margin-left:20px; cursor:pointer;" align="center" visible="false">
 						
 						<image id="img_EntregaRecepcion" src="/images/skf/menu/ER_00.png" width="200px" height="50px"/>
 					</hbox>
 					
-					<hbox id="hbox_Operacion" spacing="5px" style="padding:1px; margin-top:5px; margin-left:20px; cursor:pointer;" align="center" visible="true">
+					<hbox id="hbox_Operacion" spacing="5px" style="padding:1px; margin-top:5px; margin-left:20px; cursor:pointer;" align="center" visible="false">
 						
 						<image id="img_Operacion" src="/images/skf/menu/Operacion00.png" width="200px" height="50px"/>
 					</hbox>
 					
-					<hbox id="hbox_Reporte" spacing="5px" style="padding:1px; margin-top:5px; margin-left:20px; cursor:pointer;" align="center" visible="true">
+					<hbox id="hbox_Reporte" spacing="5px" style="padding:1px; margin-top:5px; margin-left:20px; cursor:pointer;" align="center" visible="false">
 						
 						<image id="img_Reporte" src="/images/skf/menu/Reporte00.png" width="200px" height="50px"/>
 					</hbox>

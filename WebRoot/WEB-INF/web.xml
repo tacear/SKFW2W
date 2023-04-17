@@ -93,6 +93,7 @@
   <!-- welcome-file>/WEB-INF/pages/directorio/userList.zul</welcome-file> -->
 	<!-- welcome-file>/WEB-INF/pages/NominaList.zul</welcome-file> -->
 	<welcome-file>/indexPrincipal.zul</welcome-file>
+	 <welcome-file>login.zul</welcome-file>
 	
     <!--  welcome-file>login.zul</welcome-file>
     <welcome-file>/WEB-INF/pages/directorio/userList.zul</welcome-file-->
