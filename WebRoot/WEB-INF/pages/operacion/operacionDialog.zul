@@ -66,8 +66,10 @@
 																					
 																			</row>
 																			<row style="border: none; ">
-																				
-																					<textbox id="tb_sku_Prod" width="85%" height="25px"/>
+																					<listbox id="lb_UbicaOrden" width="90%" mold="select" rows="1" height="25px" style="font-size:16px; padding:1px;  font-weight: bold;">
+																													<listitem value="-1" label="SELECCIONE"/>
+																												</listbox>
+																					
 																			</row>
 																			<row style="border: none; ">
 																				
@@ -133,7 +135,9 @@
 																				</row>
 																				
 																				<row style="border: none; ">
-																					<space/>
+																					
+																					
+																					<image id="button_Rechazar" src="/images/skf/botones/Avion.png" width="63px" height="63px" style=" margin-left:90px; padding:1px;  cursor:pointer;" align="center"/>
 																					<space/>
 																				</row>
 																				

@@ -10,6 +10,7 @@ import java.util.HashMap;
 import javax.servlet.http.HttpSession;
 
 import mx.com.hunkabann.skf.backend.UsuarioService;
+import mx.com.hunkabann.skf.frontent.util.ComboFactoryModelItemRenderer;
 import mx.com.hunkabann.skf.frontent.util.FDDateFormat;
 import mx.com.hunkabann.skf.frontent.util.GFCBaseCtrl;
 
@@ -21,6 +22,7 @@ import org.zkoss.zk.ui.http.SimpleSession;
 import org.zkoss.zul.Hbox;
 import org.zkoss.zul.Image;
 import org.zkoss.zul.Label;
+import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
@@ -54,6 +56,8 @@ public class EntregaRecepcionCtrl extends GFCBaseCtrl {
 	protected transient Hbox hbox_Operacion;
 	protected transient Hbox hbox_Reporte;
 	protected transient Hbox hbox_Trazabilidad;
+	
+	protected transient Listbox lb_UBICA_SubArea;
 	
 	//Servicio
 	UsuarioService UserServ = new UsuarioService();
@@ -120,6 +124,9 @@ public class EntregaRecepcionCtrl extends GFCBaseCtrl {
 //				
 //				if (args.containsKey("hbox_Trazabilidad"))
 //					hbox_Trazabilidad = (Hbox) args.get("hbox_Trazabilidad");
+		
+		lb_UBICA_SubArea.setModel(new ListModelList(UserServ.getSubArea()));
+		lb_UBICA_SubArea.setItemRenderer(new ComboFactoryModelItemRenderer());
 				
 				doOnCreateCommon(EntregaRecepListWindow); // do the autowire
 //				lb_Corporativo.focus();

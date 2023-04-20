@@ -53,6 +53,13 @@
 												<label id="label_OM" value="ORDEN MANUFACTURA" style="font-size:20px; padding:1px;  font-weight: bold;"/>
 												<textbox id="tb_OM" width="30%" height="25px"/>
 											</row>
+											<row style="border: none; ">												
+												<label id="label_UBICA" value="UBICACION RECIBE" style="font-size:20px; padding:1px;  font-weight: bold;"/>
+												<listbox id="lb_UBICA_SubArea" width="90%" mold="select" rows="1" height="25px" style="font-size:20px; padding:1px;  font-weight: bold;">
+													<listitem value="-1" label="SELECCIONE"/>
+												</listbox>
+												
+											</row>
 										</rows>
 									</grid>
 									<grid style="border: none; "  width="100%">
@@ -109,9 +116,11 @@
 												
 											</row>
 											<row height="30px" style="border: none; ">
-												<button id="button_Aceptar" label="ACEPTAR"/>
-												<button id="button_Rechazar" label="RECHAZAR"/>
-												<label id="label_Observaciones" value="OBSERVACIONES"/>
+												<image id="button_Aceptar" src="/images/skf/botones/Aceptar.png" width="150px" height="40px" style="padding:1px;  cursor:pointer;" align="center"/>
+												<!--button id="button_Aceptar" label="ACEPTAR"/-->
+												<image id="button_Rechazar" src="/images/skf/botones/RECHAZAR.png" width="150px" height="40px" style="padding:1px;  cursor:pointer;" align="center"/>
+												<!--button id="button_Rechazar" label="RECHAZAR"/-->
+												<label id="label_Observaciones" value="OBSERVACIONES" style="font-size:20px; padding:1px;  font-weight: bold;"/>
 												<textbox id="tb_Observaciones" width="80%" rows="6"/>
 												
 											</row>

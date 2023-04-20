@@ -46,6 +46,7 @@ import mx.com.hunkabann.skf.mapeo.TbProdTermMatPrim;
 import mx.com.hunkabann.skf.mapeo.TbProductoTerminado;
 import mx.com.hunkabann.skf.mapeo.TbRol;
 import mx.com.hunkabann.skf.mapeo.TbSubArea;
+import mx.com.hunkabann.skf.mapeo.TbUbicacionOM;
 import mx.com.hunkabann.skf.mapeo.TbUbicacionProcesoOm;
 import mx.com.hunkabann.skf.mapeo.TbUsuario;
 import mx.com.hunkabann.skf.util.HibernateUtil;
@@ -7320,6 +7321,118 @@ public class UsuarioService  {
 
 		return PerfilCliente;
 
+	}
+	
+	
+	public List<ComboFactory> getSubArea()
+	{
+		Session s = null;
+		Query q = null;
+		TbSubArea gc;
+		List<ComboFactory> PerfilCliente = new ArrayList<ComboFactory>();
+		PerfilCliente.add(new ComboFactory(0, "SELECCIONE"));
+		try
+		{
+			s = HibernateUtil.currentSession();
+			q = s.createQuery("from TbSubArea g where g.nuActivo=1 " +
+					"order by chNombre");
+			List exQ= q.list();
+			if(exQ.size()>0)
+				for(int i=0;i<exQ.size();i++)
+				{
+					gc = (TbSubArea)exQ.get(i);
+					PerfilCliente.add(new ComboFactory(gc.getNukIdSubArea(), gc.getChClave()+" - "+ gc.getChNombre()));
+				}
+		}
+		catch (HibernateException e) {
+			logger.error("" + e.getMessage());
+		}
+		finally
+		{
+			if(s!=null)
+				HibernateUtil.closeSession();
+		}
+
+		return PerfilCliente;
+
+	}
+	
+//	public List<ComboFactory> getMaquinaDisp()
+//	{
+//		Session s = null;
+//		Query q = null;
+//		TbSubArea gc;
+//		List<ComboFactory> PerfilCliente = new ArrayList<ComboFactory>();
+//		PerfilCliente.add(new ComboFactory(0, "SELECCIONE"));
+//		try
+//		{
+//			s = HibernateUtil.currentSession();
+//			q = s.createQuery("from TbSubArea g where g.nuActivo=1 " +
+//					"order by chNombre");
+//			List exQ= q.list();
+//			if(exQ.size()>0)
+//				for(int i=0;i<exQ.size();i++)
+//				{
+//					gc = (TbSubArea)exQ.get(i);
+//					PerfilCliente.add(new ComboFactory(gc.getNukIdSubArea(), gc.getChClave()+" - "+ gc.getChNombre()));
+//				}
+//		}
+//		catch (HibernateException e) {
+//			logger.error("" + e.getMessage());
+//		}
+//		finally
+//		{
+//			if(s!=null)
+//				HibernateUtil.closeSession();
+//		}
+//
+//		return PerfilCliente;
+//
+//	}
+	
+	public List<ComboFactory> getMaquinaDisp() 
+	{
+		
+		
+		Session s = null;
+		Statement stm = null;
+		ResultSet rs = null;
+		boolean valor_Registro = false;
+		TbUbicacionOM uso = new TbUbicacionOM();
+		List<ComboFactory> PerfilCliente = new ArrayList<ComboFactory>();
+		PerfilCliente.add(new ComboFactory(0, "SELECCIONE"));
+		try {
+			s = HibernateUtil.currentSession();
+
+
+			stm = s.connection().createStatement();
+
+				rs = stm.executeQuery("select UPOM.nukIdUbicaProcessOM, UPOM.nukIdMaquinaDisp, MD.chNombre, UPOM.nukIdCanal,C.chNombre,  UPOM.nukIdSubArea,SA.chNombre from Tb_Ubicacion_Proceso_OM UPOM, Tb_Canal C, Tb_Maquina_Dispositivo MD,Tb_SubArea SA where UPOM.nukIdCanal =  c.nukIdCanal and UPOM.nukIdMaquinaDisp = MD.nukIdMaquinaDisp and UPOM.nukIdSubArea = SA.nukIdSubArea");
+				
+				
+				
+
+				while (rs.next()) {
+					uso.setIdUbicaOM(rs.getInt(1));
+					uso.setIdMaquinaDisp(rs.getInt(2));
+					uso.setChNombreMAquina(rs.getString(3));
+					uso.setIdcanal(rs.getInt(4));
+					uso.setChNombrecanal(rs.getString(5));
+					uso.setIdsubArea(rs.getInt(6));
+					uso.setChNombreSubArea(rs.getString(7));
+					
+					
+					PerfilCliente.add(new ComboFactory(uso.getIdUbicaOM(), uso.getChNombreMAquina()+" CH "+ uso.getChNombrecanal() +" "+uso.getChNombreSubArea()));
+					
+				}
+		} catch (Exception e) {
+			logger.error("" + e.getMessage());
+			e.printStackTrace();
+		} finally {
+			if(s!=null)
+				HibernateUtil.closeSession();
+		}
+		return PerfilCliente;
 	}
 
 }	// end of class

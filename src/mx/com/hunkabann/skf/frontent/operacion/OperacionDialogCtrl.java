@@ -125,6 +125,8 @@ public class OperacionDialogCtrl extends GFCBaseListCtrl<TbOrdenManufactura> imp
 	protected transient Listbox lb_CatScrap; // aurowired
 	protected transient Listbox lb_CatTiempoMuerto; // aurowired
 	
+	protected transient Listbox lb_UbicaOrden;
+	
 	
 	
 	
@@ -430,6 +432,8 @@ public class OperacionDialogCtrl extends GFCBaseListCtrl<TbOrdenManufactura> imp
 		lb_CatTiempoMuerto.setModel(new ListModelList(usuarioService.getCatTiempoMuerto()));
 		lb_CatTiempoMuerto.setItemRenderer(new ComboFactoryModelItemRenderer());
 		
+		lb_UbicaOrden.setModel(new ListModelList(usuarioService.getMaquinaDisp()));
+		lb_UbicaOrden.setItemRenderer(new ComboFactoryModelItemRenderer());
 		
 		
 
